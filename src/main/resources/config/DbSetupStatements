@@ -1,0 +1,60 @@
+// Create the Database
+
+CREATE DATABASE climatemonitoring;
+
+//Create Database Tables
+
+CREATE TABLE OperatoriRegistrati(
+    userid VARCHAR(30) PRIMARY KEY NOT NULL,
+    name VARCHAR(30) NOT NULL,
+    surname VARCHAR(30) NOT NULL,
+    email VARCHAR(80) UNIQUE NOT NULL,
+    fiscalcode VARCHAR(16) NOT NULL,
+    hashedpassword VARCHAR(256) NOT NULL,
+    centerid INTEGER NOT NULL REFERENCES CentriMonitoraggio(centerid)
+);
+
+CREATE TABLE CentriMonitoraggio(
+    centerid SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    address VARCHAR(50) NOT NULL,
+    addressnumber NUMERIC(5, 0) NOT NULL,
+    cap NUMERIC(5, 0) NOT NULL,
+    city VARCHAR(30) NOT NULL,
+    province VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE CoordinateMonitoraggio(
+    poi_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    country VARCHAR(100) NOT NULL,
+    latitude NUMERIC(8,5) NOT NULL,
+    longitude NUMERIC(8,5) NOT NULL
+);
+
+CREATE TABLE ParametriClimatici(
+    dataid SERIAL PRIMARY KEY,
+    poi_id INTEGER NOT NULL REFERENCES CoordinateMonitoraggio(poi_id),
+    centerid INTEGER NOT NULL REFERENCES CentriMonitoraggio(centerid),
+    timestamp TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    wind INTEGER NOT NULL CHECK (wind IN (1,2,3,4,5)),
+    humidity INTEGER NOT NULL CHECK (wind IN (1,2,3,4,5)),
+    pressure INTEGER NOT NULL CHECK (wind IN (1,2,3,4,5)),
+    temperature INTEGER NOT NULL CHECK (wind IN (1,2,3,4,5)),
+    precipitation INTEGER NOT NULL CHECK (wind IN (1,2,3,4,5)),
+    glacial_altitude INTEGER NOT NULL CHECK (wind IN (1,2,3,4,5)),
+    glacial_mass INTEGER NOT NULL CHECK (wind IN (1,2,3,4,5)),
+    wind_notes VARCHAR(256),
+    humidity_notes VARCHAR(256),
+    pressure_notes VARCHAR(256),
+    temperature_notes VARCHAR(256),
+    precipitation_notes VARCHAR(256),
+    glacial_altitude_notes VARCHAR(256),
+    glacial_mass_notes VARCHAR(256)
+);
+
+CREATE TABLE Coordinate_Centri (
+    centerid INTEGER REFERENCES CentriMonitoraggio(centerid) ON DELETE CASCADE,
+    poi_id INTEGER REFERENCES CoordinateMonitoraggio(poi_id) ON DELETE CASCADE,
+    PRIMARY KEY (centerid, poi_id)
+);
