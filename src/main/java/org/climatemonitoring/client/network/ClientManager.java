@@ -15,33 +15,33 @@ import java.util.Locale;
 import static java.lang.Math.*;
 import static java.lang.Math.sqrt;
 
-public class ClientController {
+public class ClientManager {
 
     private final String defaultServerIpAddress = "localhost";
     private RemoteDatabaseServiceInterface rmiService;
 
-    public ClientController(){
+    public ClientManager(){
         try {
             Registry registry = LocateRegistry.getRegistry(defaultServerIpAddress, 1099);
             this.rmiService = (RemoteDatabaseServiceInterface) registry.lookup("RemoteDatabaseService");
         }catch (RemoteException e){
-            System.err.println("RemoteException in ClientController contructor");
+            System.err.println("RemoteException in ClientManager constructor");
             e.printStackTrace();
         } catch (NotBoundException e) {
-            System.err.println("NotBoundException in ClientController contructor");
+            System.err.println("NotBoundException in ClientManager constructor");
             e.printStackTrace();
         }
     }
 
-    public ClientController(String serverIpAddress) {
+    public ClientManager(String serverIpAddress) {
         try {
             Registry registry = LocateRegistry.getRegistry(serverIpAddress, 1099);
             this.rmiService = (RemoteDatabaseServiceInterface) registry.lookup("RemoteDatabaseService");
         }catch (RemoteException e){
-            System.err.println("RemoteException in ClientController contructor");
+            System.err.println("RemoteException in ClientManager constructor");
             e.printStackTrace();
         } catch (NotBoundException e) {
-            System.err.println("NotBoundException in ClientController contructor");
+            System.err.println("NotBoundException in ClientManager constructor");
             e.printStackTrace();
         }
     }

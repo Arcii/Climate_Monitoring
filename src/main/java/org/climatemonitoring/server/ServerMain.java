@@ -1,14 +1,14 @@
 package org.climatemonitoring.server;
 
 import org.climatemonitoring.server.network.RemoteDatabaseService;
-import org.climatemonitoring.shared.models.PointOfInterest;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
+
+import static org.climatemonitoring.server.database.DbManager.closeDataSource;
 
 public class ServerMain {
 
@@ -25,6 +25,14 @@ public class ServerMain {
             } else {
                 remoteDatabaseService = new RemoteDatabaseService(null, null);
             }
+
+            // Creating a shutdown hook to ensure cleanup when the application is closed (to close the database connection mainly)
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                System.out.println("Shutting down...");
+                closeDataSource();
+                System.out.println("Shutdown complete.");
+            }));
+
             System.out.println("DATABASE READY.");
             Registry registry = LocateRegistry.createRegistry(1099);
             registry.rebind("RemoteDatabaseService",remoteDatabaseService);
