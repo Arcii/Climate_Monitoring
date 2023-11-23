@@ -17,6 +17,7 @@ import static java.lang.Math.sqrt;
 
 public class ClientManager {
 
+    private static ClientManager clientManager;
     private final String defaultServerIpAddress = "localhost";
     private RemoteDatabaseServiceInterface rmiService;
 
@@ -46,6 +47,14 @@ public class ClientManager {
         }
     }
 
+    //SINGLETON
+    public static ClientManager GetClientManager(){
+        if( clientManager== null){
+            clientManager = new ClientManager();
+        }
+        return clientManager;
+    }
+
     public RemoteDatabaseServiceInterface getRmiService() {
         return rmiService;
     }
@@ -54,20 +63,32 @@ public class ClientManager {
         this.rmiService = rmiService;
     }
 
-    public ArrayList<PointOfInterest> cercaAreaGeograficaNome(String name, String country) throws RemoteException{
-        return rmiService.cercaAreaGeograficaNome(name, country);
+    public ArrayList<PointOfInterest> cercaAreaGeograficaNome(String name, String country) {
+        try {
+            return rmiService.cercaAreaGeograficaNome(name, country);
+        }catch (RemoteException e){
+            System.err.println("Remote Exception in cercaAreaGeograficaNome() remote call.");
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    public ArrayList<PointOfInterest> cercaAreaGeograficaCoordinate(float latitude, float longitude) throws RemoteException{
-        DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
-        DecimalFormat df = new DecimalFormat("0.#####", symbols);
-        latitude = Float.parseFloat(df.format(latitude));
-        longitude = Float.parseFloat(df.format(longitude));
-        ArrayList<PointOfInterest> pointOfInterests = rmiService.cercaAreaGeograficaCoordinate(latitude, longitude);
-        if(pointOfInterests.size()==1){
-            return pointOfInterests;
-        }else{
-            return getListClosest(pointOfInterests, latitude, longitude);
+    public ArrayList<PointOfInterest> cercaAreaGeograficaCoordinate(float latitude, float longitude) {
+        try {
+            DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
+            DecimalFormat df = new DecimalFormat("0.#####", symbols);
+            latitude = Float.parseFloat(df.format(latitude));
+            longitude = Float.parseFloat(df.format(longitude));
+            ArrayList<PointOfInterest> pointOfInterests = rmiService.cercaAreaGeograficaCoordinate(latitude, longitude);
+            if (pointOfInterests.size() == 1) {
+                return pointOfInterests;
+            } else {
+                return getListClosest(pointOfInterests, latitude, longitude);
+            }
+        }catch (RemoteException e){
+            System.err.println("Remote Exception in cercaAreaGeograficaCoordinate() remote call.");
+            e.printStackTrace();
+            return null;
         }
     }
 
