@@ -1,5 +1,6 @@
 package org.climatemonitoring.server.network;
 
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.climatemonitoring.server.database.DbManager;
 import org.climatemonitoring.server.database.PredefinedQuery;
 import org.climatemonitoring.shared.RemoteDatabaseServiceInterface;
@@ -38,18 +39,21 @@ public class RemoteDatabaseService extends UnicastRemoteObject implements Remote
     public ArrayList<PointOfInterest> cercaAreaGeograficaNome(String name, String country) throws RemoteException{
         ArrayList<PointOfInterest> resultList = new ArrayList<>();
         String query = PredefinedQuery.select_queries.get(PredefinedQuery.Select.POI_BY_NAME);
-        try (PreparedStatement preparedStatement = dbManager.getDb_connection().prepareStatement(query)){
-            preparedStatement.setString(1, "%" + name + "%");
-            preparedStatement.setString(2, "%" + country + "%");
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    resultList.add(new PointOfInterest(
-                            resultSet.getInt("poi_id"),
-                            resultSet.getFloat("latitude"),
-                            resultSet.getFloat("longitude"),
-                            resultSet.getString("name"),
-                            resultSet.getString("country")
-                    ));
+        BasicDataSource dataSource = DbManager.getDataSource();
+        try(Connection connection= dataSource.getConnection()){
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, "%" + name + "%");
+                preparedStatement.setString(2, "%" + country + "%");
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        resultList.add(new PointOfInterest(
+                                resultSet.getInt("poi_id"),
+                                resultSet.getFloat("latitude"),
+                                resultSet.getFloat("longitude"),
+                                resultSet.getString("name"),
+                                resultSet.getString("country")
+                        ));
+                    }
                 }
             }
         }catch (SQLException e){
@@ -70,13 +74,13 @@ public class RemoteDatabaseService extends UnicastRemoteObject implements Remote
         ArrayList<PointOfInterest> resultList = new ArrayList<>();
         String query = PredefinedQuery.select_queries.get(PredefinedQuery.Select.POI_BY_COORDINATES);
 
-        try(Connection connection = dbManager.getDb_connection()){
+        BasicDataSource dataSource = DbManager.getDataSource();
+        try(Connection connection = dataSource.getConnection()){
             try(PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setDouble(1, latitude - 0.00001);
                 preparedStatement.setDouble(2, latitude + 0.00001);
                 preparedStatement.setDouble(3, longitude - 0.00001);
                 preparedStatement.setDouble(4, longitude + 0.00001);
-
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
                         resultList.add(new PointOfInterest(

@@ -5,6 +5,7 @@ import org.climatemonitoring.client.gui.views.PoiSearchResultGUI;
 import org.climatemonitoring.client.network.ClientManager;
 import org.climatemonitoring.shared.models.PointOfInterest;
 
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ public class PoiSearchResultGUIController {
         for (PointOfInterest poi : searchResults) {
             System.out.println(poi.toString());
         }
+
+        setUpTable();
 
         //ADD Listeners
         AddListeners();
@@ -57,6 +60,19 @@ public class PoiSearchResultGUIController {
 
     public void setSearchResults(ArrayList<PointOfInterest> searchResults) {
         this.searchResults = searchResults;
+    }
+
+    private void setUpTable(){
+        // Create a DefaultTableModel with column names
+        String[] columnNames = {"ID", "Name", "Country", "Latitude", "Longitude"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+
+        // Populate the model with PointOfInterest data
+        for (PointOfInterest poi : getSearchResults()) {
+            Object[] rowData = {poi.getPoi_id(), poi.getName(), poi.getCountry(), poi.getLatitude(), poi.getLongitude()};
+            model.addRow(rowData);
+        }
+        view.getSearchResultTable().setModel(model);
     }
 
 }

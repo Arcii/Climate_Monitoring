@@ -7,12 +7,15 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class PoiSearchResultGUI extends JFrame{
+
     private JPanel poiSearchResultPanel;
     private JLabel climatemonitoringLabel;
     private JLabel searchInfoLabel;
+    private JTable searchResultTable;
     private JPanel searchResultPanel;
     private JButton backButton;
     private JButton selectPoiButton;
+    private JScrollPane searchResultScroll;
 
     public PoiSearchResultGUI(ArrayList<PointOfInterest> searchResults){
         setTitle("Climate Monitoring");
@@ -68,6 +71,22 @@ public class PoiSearchResultGUI extends JFrame{
 
     public void setSelectPoiButton(JButton selectPoiButton) {
         this.selectPoiButton = selectPoiButton;
+    }
+
+    public JTable getSearchResultTable() {
+        return searchResultTable;
+    }
+
+    public void setSearchResultTable(JTable searchResultsTable) {
+        this.searchResultTable = searchResultsTable;
+    }
+
+    public JScrollPane getSearchResultsScroll() {
+        return searchResultScroll;
+    }
+
+    public void setSearchResultsScroll(JScrollPane searchResultsScroll) {
+        this.searchResultScroll = searchResultsScroll;
     }
 
 }
