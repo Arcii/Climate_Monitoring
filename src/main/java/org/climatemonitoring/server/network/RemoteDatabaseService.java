@@ -6,6 +6,7 @@ import org.climatemonitoring.server.database.PredefinedQuery;
 import org.climatemonitoring.shared.RemoteDatabaseServiceInterface;
 import org.climatemonitoring.shared.models.PointOfInterest;
 import org.climatemonitoring.shared.models.Survey;
+import org.climatemonitoring.shared.models.User;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -47,13 +48,7 @@ public class RemoteDatabaseService extends UnicastRemoteObject implements Remote
                 preparedStatement.setString(2, "%" + country + "%");
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     while (resultSet.next()) {
-                        resultList.add(new PointOfInterest(
-                                resultSet.getInt("poi_id"),
-                                resultSet.getFloat("latitude"),
-                                resultSet.getFloat("longitude"),
-                                resultSet.getString("name"),
-                                resultSet.getString("country")
-                        ));
+                        resultList.add(getRowPointOfInterest(resultSet));
                     }
                 }
             }
@@ -82,25 +77,13 @@ public class RemoteDatabaseService extends UnicastRemoteObject implements Remote
                 preparedStatement.setDouble(4, longitude + 0.00001);
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
-                        resultList.add(new PointOfInterest(
-                                resultSet.getInt("poi_id"),
-                                resultSet.getFloat("latitude"),
-                                resultSet.getFloat("longitude"),
-                                resultSet.getString("name"),
-                                resultSet.getString("country")
-                        ));
+                        resultList.add(getRowPointOfInterest(resultSet));
                         return resultList;
                     } else {
                         try (PreparedStatement nextPreparedStatement = connection.prepareStatement(PredefinedQuery.select_queries.get(PredefinedQuery.Select.POI));
                              ResultSet nextResultSet = nextPreparedStatement.executeQuery()) {
                             while (nextResultSet.next()) {
-                                resultList.add(new PointOfInterest(
-                                        nextResultSet.getInt("poi_id"),
-                                        nextResultSet.getFloat("latitude"),
-                                        nextResultSet.getFloat("longitude"),
-                                        nextResultSet.getString("name"),
-                                        nextResultSet.getString("country")
-                                ));
+                                resultList.add(getRowPointOfInterest(nextResultSet));
                             }
                             return resultList;
                         }
@@ -113,6 +96,27 @@ public class RemoteDatabaseService extends UnicastRemoteObject implements Remote
             return null;
         }
 
+    }
+
+    @Override
+    public User userLogin(String userid, String hashedpassword) throws RemoteException {
+        BasicDataSource dataSource = DbManager.getDataSource();
+        String query = PredefinedQuery.select_queries.get(PredefinedQuery.Select.USER_LOGIN_INFO);
+        try(Connection connection = dataSource.getConnection()){
+            try (PreparedStatement preparedStatement = connection.prepareStatement((query))){
+                preparedStatement.setString(1, userid);
+                preparedStatement.setString(2, hashedpassword);
+                try(ResultSet resultSet = preparedStatement.executeQuery()){
+                    if(resultSet.next()){
+                        return getRowUser(resultSet);
+                    }
+                }
+            }
+        }catch (SQLException e){
+            System.err.println("Exception in login, login failed.");
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public ArrayList<Survey> selectSurveysById(int poi_id) throws RemoteException{
@@ -153,6 +157,29 @@ public class RemoteDatabaseService extends UnicastRemoteObject implements Remote
             e.printStackTrace();
             return null;
         }
+    }
+
+    //PRIVATE METHODS
+
+    private PointOfInterest getRowPointOfInterest(ResultSet rs) throws SQLException{
+        return new PointOfInterest(
+                rs.getInt("poi_id"),
+                rs.getFloat("latitude"),
+                rs.getFloat("longitude"),
+                rs.getString("name"),
+                rs.getString("country")
+        );
+    }
+
+    private User getRowUser(ResultSet rs) throws SQLException{
+        return new User(
+                rs.getString("name"),
+                rs.getString("surname"),
+                rs.getString("email"),
+                rs.getString("userid"),
+                rs.getString("fiscalcode"),
+                rs.getString("hashedpassword")
+        );
     }
 
 }

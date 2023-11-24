@@ -7,6 +7,7 @@ import javax.swing.*;
 public class ClientHomeGUI extends JFrame {
     private JPanel guestUserPanel;
     private JLabel climatemonitoringLabel;
+    private JLabel greetingLabel;
     private JPanel coordinatesSearchPanel;
     private JLabel coordinatesSearchLabel;
     private JPanel nameSearchPanel;
@@ -17,14 +18,22 @@ public class ClientHomeGUI extends JFrame {
     private JTextField nameField;
     private JTextField stateField;
     private JButton cercaPerDenominazioneButton;
-    private JButton loginOperatorButton;
     private JLabel latitudeLabel;
     private JLabel longitudeLabel;
     private JLabel nameLabel;
     private JLabel stateLabel;
-    private JLabel greetingLabel;
+    private JPanel loginFormPanel;
+    private JLabel usernameLabel;
+    private JTextField usernameField;
+    private JLabel passwordLabel;
+    private JPasswordField passwordField;
+    private JButton loginButton;
+    private JLabel loginInfoLabel;
+    private JPanel signUpPanel;
+    private JLabel signUpLabel;
+    private JButton signUpButton;
 
-   public ClientHomeGUI(){
+    public ClientHomeGUI(){
        setTitle("Climate Monitoring");
        setContentPane(guestUserPanel);
        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,6 +57,14 @@ public class ClientHomeGUI extends JFrame {
 
     public void setClimatemonitoringLabel(JLabel climatemonitoringLabel) {
         this.climatemonitoringLabel = climatemonitoringLabel;
+    }
+
+    public JLabel getGreetingLabel() {
+        return greetingLabel;
+    }
+
+    public void setGreetingLabel(JLabel greetingLabel) {
+        this.greetingLabel = greetingLabel;
     }
 
     public JPanel getCoordinatesSearchPanel() {
@@ -130,14 +147,6 @@ public class ClientHomeGUI extends JFrame {
         this.cercaPerDenominazioneButton = cercaPerDenominazioneButton;
     }
 
-    public JButton getLoginOperatorButton() {
-        return loginOperatorButton;
-    }
-
-    public void setLoginOperatorButton(JButton loginOperatorButton) {
-        this.loginOperatorButton = loginOperatorButton;
-    }
-
     public JLabel getLatitudeLabel() {
         return latitudeLabel;
     }
@@ -170,12 +179,84 @@ public class ClientHomeGUI extends JFrame {
         this.stateLabel = stateLabel;
     }
 
-    public JLabel getGreetingLabel() {
-        return greetingLabel;
+    public JPanel getLoginFormPanel() {
+        return loginFormPanel;
     }
 
-    public void setGreetingLabel(JLabel greetingLabel) {
-        this.greetingLabel = greetingLabel;
+    public void setLoginFormPanel(JPanel loginFormPanel) {
+        this.loginFormPanel = loginFormPanel;
+    }
+
+    public JLabel getUsernameLabel() {
+        return usernameLabel;
+    }
+
+    public void setUsernameLabel(JLabel usernameLabel) {
+        this.usernameLabel = usernameLabel;
+    }
+
+    public JTextField getUsernameField() {
+        return usernameField;
+    }
+
+    public void setUsernameField(JTextField usernameField) {
+        this.usernameField = usernameField;
+    }
+
+    public JLabel getPasswordLabel() {
+        return passwordLabel;
+    }
+
+    public void setPasswordLabel(JLabel passwordLabel) {
+        this.passwordLabel = passwordLabel;
+    }
+
+    public JPasswordField getPasswordField() {
+        return passwordField;
+    }
+
+    public void setPasswordField(JPasswordField passwordField) {
+        this.passwordField = passwordField;
+    }
+
+    public JButton getLoginButton() {
+        return loginButton;
+    }
+
+    public void setLoginButton(JButton loginButton) {
+        this.loginButton = loginButton;
+    }
+
+    public JLabel getLoginInfoLabel() {
+        return loginInfoLabel;
+    }
+
+    public void setLoginInfoLabel(JLabel loginInfoLabel) {
+        this.loginInfoLabel = loginInfoLabel;
+    }
+
+    public JLabel getSignUpLabel() {
+        return signUpLabel;
+    }
+
+    public void setSignUpLabel(JLabel signUpLabel) {
+        this.signUpLabel = signUpLabel;
+    }
+
+    public JButton getSignUpButton() {
+        return signUpButton;
+    }
+
+    public void setSignUpButton(JButton signUpButton) {
+        this.signUpButton = signUpButton;
+    }
+
+    public JPanel getSignUpPanel() {
+        return signUpPanel;
+    }
+
+    public void setSignUpPanel(JPanel signUpPanel) {
+        this.signUpPanel = signUpPanel;
     }
 
 }

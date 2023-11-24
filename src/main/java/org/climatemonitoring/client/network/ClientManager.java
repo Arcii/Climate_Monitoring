@@ -1,17 +1,25 @@
 package org.climatemonitoring.client.network;
 
+import org.climatemonitoring.client.gui.views.PoiSearchResultGUI;
 import org.climatemonitoring.shared.RemoteDatabaseServiceInterface;
 import org.climatemonitoring.shared.models.PointOfInterest;
 import org.climatemonitoring.shared.models.Survey;
+import org.climatemonitoring.shared.models.User;
 
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CodingErrorAction;
+import java.nio.charset.StandardCharsets;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Arrays;
 
 import static java.lang.Math.*;
 import static java.lang.Math.sqrt;
@@ -102,6 +110,50 @@ public class ClientManager {
             return null;
         }
     }
+
+    public User userLogin(String userid, String hashedpassword){
+        try {
+            return rmiService.userLogin(userid, hashedpassword);
+        }catch (RemoteException e){
+            System.err.println("Remote Exception in userLogin() remote call.");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String hashPasswordSHA256(char[] password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = digest.digest(new String(password).getBytes());
+            Arrays.fill(password, '\0');
+
+            // Convert bytes to hexadecimal representation
+            StringBuilder stringBuilder = new StringBuilder();
+            for (byte b : hashedBytes) {
+                stringBuilder.append(String.format("%02x", b));
+            }
+
+            return stringBuilder.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static boolean isValidUtf8(String input) {
+        CharsetDecoder utf8Decoder = StandardCharsets.UTF_8.newDecoder();
+        utf8Decoder.onMalformedInput(CodingErrorAction.REPORT);
+        utf8Decoder.onUnmappableCharacter(CodingErrorAction.REPORT);
+
+        try {
+            utf8Decoder.decode(java.nio.ByteBuffer.wrap(input.getBytes(StandardCharsets.UTF_8)));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    //PRIVATE METHODS
 
     private ArrayList<PointOfInterest> getListClosest(ArrayList<PointOfInterest> results, float latitude, float longitude){
         ArrayList<PointOfInterest> resultList = new ArrayList<>();

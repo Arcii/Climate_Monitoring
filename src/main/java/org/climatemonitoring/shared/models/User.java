@@ -22,13 +22,13 @@ public class User implements Serializable {
         //Empty User
     }
 
-    public User(String name, String surname, String email, String userID, String fiscalCode, String password) {
+    public User(String name, String surname, String email, String userID, String fiscalCode, String hashedPassword) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.userid = userID;
         this.fiscalCode = fiscalCode;
-        setHashedPassword(password);
+        this.hashedPassword = hashedPassword;
     }
 
     public String getName() {
