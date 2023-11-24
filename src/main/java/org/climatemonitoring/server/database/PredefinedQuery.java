@@ -39,7 +39,7 @@ public class PredefinedQuery {
     };
 
     //SELECT QUERIES
-    public  enum Select{USER, CLIMATECENTER, POI, POI_BY_NAME, POI_BY_COORDINATES, SURVEY, POIS_FOR_CENTER, CENTERS_FOR_POI, SURVEYS_FOR_POI, USERS_FOR_CENTER,DATABASE,TABLE_FROM_DATABASE}
+    public  enum Select{USER, CLIMATECENTER, POI, POI_BY_NAME, POI_BY_COORDINATES, SURVEY_BY_ID, POIS_FOR_CENTER, CENTERS_FOR_POI, SURVEYs, USERS_FOR_CENTER,DATABASE,TABLE_FROM_DATABASE}
     public static final Hashtable<Select, String> select_queries = new Hashtable<Select, String>(){
 
         private static final long serialVersionUID = 1L;
@@ -72,7 +72,7 @@ public class PredefinedQuery {
                             " AND longitude > ? AND longitude < ?;"
             );
 
-            //Put Select SURVEY
+            //Put Select SURVEYS
             //TODO
 
             //Put Select POIS_FOR_CENTER
@@ -81,8 +81,12 @@ public class PredefinedQuery {
             //Put Select CENTERS_FOR_POI
             //TODO
 
-            //Put Select SURVEYS_FOR_POI
-            //TODO
+            //Put Select SURVEYS_BY_ID
+            put(
+                    Select.SURVEY_BY_ID,
+                    "SELECT * FROM parametriclimatici" +
+                            " WHERE poi_id = ?"
+            );
 
             //Put Select USERS_FOR_CENTER
             //TODO

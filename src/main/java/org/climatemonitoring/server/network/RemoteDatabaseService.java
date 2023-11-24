@@ -5,6 +5,7 @@ import org.climatemonitoring.server.database.DbManager;
 import org.climatemonitoring.server.database.PredefinedQuery;
 import org.climatemonitoring.shared.RemoteDatabaseServiceInterface;
 import org.climatemonitoring.shared.models.PointOfInterest;
+import org.climatemonitoring.shared.models.Survey;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -70,10 +71,8 @@ public class RemoteDatabaseService extends UnicastRemoteObject implements Remote
         DecimalFormat df = new DecimalFormat("0.#####", symbols);
         latitude = Float.parseFloat(df.format(latitude));
         longitude = Float.parseFloat(df.format(longitude));
-
         ArrayList<PointOfInterest> resultList = new ArrayList<>();
         String query = PredefinedQuery.select_queries.get(PredefinedQuery.Select.POI_BY_COORDINATES);
-
         BasicDataSource dataSource = DbManager.getDataSource();
         try(Connection connection = dataSource.getConnection()){
             try(PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -114,6 +113,46 @@ public class RemoteDatabaseService extends UnicastRemoteObject implements Remote
             return null;
         }
 
+    }
+
+    public ArrayList<Survey> selectSurveysById(int poi_id) throws RemoteException{
+        ArrayList<Survey> resultList = new ArrayList<>();
+        String query = PredefinedQuery.select_queries.get(PredefinedQuery.Select.SURVEY_BY_ID);
+        BasicDataSource dataSource = DbManager.getDataSource();
+        try(Connection connection = dataSource.getConnection()) {
+            try(PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, poi_id);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        resultList.add(new Survey(
+                                resultSet.getInt("dataid"),
+                                resultSet.getInt("poi_id"),
+                                resultSet.getInt("centerid"),
+                                resultSet.getTimestamp("timestamp"),
+                                resultSet.getInt("wind"),
+                                resultSet.getInt("humidity"),
+                                resultSet.getInt("pressure"),
+                                resultSet.getInt("temperature"),
+                                resultSet.getInt("precipitation"),
+                                resultSet.getInt("glacial_altitude"),
+                                resultSet.getInt("glacial_mass"),
+                                resultSet.getString("wind_notes"),
+                                resultSet.getString("humidity_notes"),
+                                resultSet.getString("pressure_notes"),
+                                resultSet.getString("temperature_notes"),
+                                resultSet.getString("precipitation_notes"),
+                                resultSet.getString("glacial_altitude_notes"),
+                                resultSet.getString("glacial_mass_notes")
+                        ));
+                    }
+                    return resultList;
+                }
+            }
+        }catch (SQLException e){
+            System.err.println("Search surveys by id failed.");
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

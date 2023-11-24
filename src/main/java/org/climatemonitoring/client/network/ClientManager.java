@@ -2,6 +2,7 @@ package org.climatemonitoring.client.network;
 
 import org.climatemonitoring.shared.RemoteDatabaseServiceInterface;
 import org.climatemonitoring.shared.models.PointOfInterest;
+import org.climatemonitoring.shared.models.Survey;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -87,6 +88,16 @@ public class ClientManager {
             }
         }catch (RemoteException e){
             System.err.println("Remote Exception in cercaAreaGeograficaCoordinate() remote call.");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ArrayList<Survey> selectSurveysById(int poi_id){
+        try {
+            return rmiService.selectSurveysById(poi_id);
+        }catch (RemoteException e){
+            System.err.println("Remote Exception in selectSurveys() remote call.");
             e.printStackTrace();
             return null;
         }
