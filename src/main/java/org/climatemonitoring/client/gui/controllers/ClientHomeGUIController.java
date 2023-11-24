@@ -1,6 +1,7 @@
 package org.climatemonitoring.client.gui.controllers;
 
 import org.climatemonitoring.client.gui.views.ClientHomeGUI;
+import org.climatemonitoring.client.gui.views.OperatorLoginGUI;
 import org.climatemonitoring.client.gui.views.PoiSearchResultGUI;
 import org.climatemonitoring.client.network.ClientManager;
 import org.climatemonitoring.shared.models.PointOfInterest;
@@ -29,7 +30,9 @@ public class ClientHomeGUIController {
         view.getLoginOperatorButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                OperatorLoginGUI form = new OperatorLoginGUI();
+                form.setVisible(true);
+                view.dispose();
             }
         });
 
@@ -84,6 +87,10 @@ public class ClientHomeGUIController {
 
     public void setView(ClientHomeGUI view) {
         this.view = view;
+    }
+
+    public ClientManager getClientManager() {
+        return clientManager;
     }
 
 }

@@ -81,12 +81,12 @@ public class PoiSearchResultGUI extends JFrame{
         this.searchResultTable = searchResultsTable;
     }
 
-    public JScrollPane getSearchResultsScroll() {
+    public JScrollPane getSearchResultScroll() {
         return searchResultScroll;
     }
 
-    public void setSearchResultsScroll(JScrollPane searchResultsScroll) {
-        this.searchResultScroll = searchResultsScroll;
+    public void setSearchResultScroll(JScrollPane searchResultScroll) {
+        this.searchResultScroll = searchResultScroll;
     }
 
 }

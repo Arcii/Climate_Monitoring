@@ -240,7 +240,7 @@
         <properties>
           <background color="-13947600"/>
           <foreground color="-1"/>
-          <text value="LogIn Operatore"/>
+          <text value="Accesso Operatore"/>
         </properties>
       </component>
     </children>

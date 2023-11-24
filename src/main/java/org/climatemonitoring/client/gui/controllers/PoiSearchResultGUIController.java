@@ -73,6 +73,10 @@ public class PoiSearchResultGUIController {
         this.view = view;
     }
 
+    public ClientManager getClientManager() {
+        return clientManager;
+    }
+
     public ArrayList<PointOfInterest> getSearchResults() {
         return searchResults;
     }
