@@ -193,8 +193,8 @@ public class PredefinedQuery {
                             " name VARCHAR(30) NOT NULL, " +
                             " surname VARCHAR(30) NOT NULL, " +
                             " email VARCHAR(80) UNIQUE NOT NULL, " +
-                            " fiscalcode VARCHAR(16) NOT NULL, " +
-                            " hashedpassword VARCHAR(256) NOT NULL, " +
+                            " fiscalcode VARCHAR(16) NOT NULL CHECK (LENGTH(fiscalcode) = 16), " +
+                            " hashedpassword VARCHAR(64) NOT NULL CHECK (LENGTH(hashedpassword) = 64), " +
                             " centerid INTEGER NOT NULL REFERENCES CentriMonitoraggio(centerid) " +
                             " ); "
             );
@@ -204,8 +204,8 @@ public class PredefinedQuery {
                             " centerid SERIAL PRIMARY KEY, " +
                             " name VARCHAR(50) NOT NULL, " +
                             " address VARCHAR(50) NOT NULL, " +
-                            " addressnumber NUMERIC(5, 0) NOT NULL, " +
-                            " cap NUMERIC(5, 0) NOT NULL, " +
+                            " addressnumber INTEGER NOT NULL, " +
+                            " cap INTEGER NOT NULL CHECK (LENGTH(cap::TEXT) = 5), " +
                             " city VARCHAR(30) NOT NULL, " +
                             " province VARCHAR(30) NOT NULL " +
                             " ); "
