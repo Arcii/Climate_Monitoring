@@ -45,7 +45,7 @@ public class ClientHomeGUIController {
                 String country = view.getStateField().getText().trim();
                 if(name.isEmpty() || country.isEmpty()){
                     System.err.println("No input for Name or Country");
-                    JOptionPane.showMessageDialog(view, "No input for Name or Country", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(view, "I campi Nome e/o Stato dell'area che vuoi cercare non sono stati inseriti.", "Alert", JOptionPane.INFORMATION_MESSAGE);
                 }else {
                     String asciiRegex = "\\A\\p{ASCII}*\\z";
                     Pattern pattern = Pattern.compile(asciiRegex);
@@ -56,7 +56,7 @@ public class ClientHomeGUIController {
                         view.dispose();
                     } else {
                         System.err.println("Name or Country format not valid");
-                        JOptionPane.showMessageDialog(view, "Name or Country format not valid", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(view, "Formato Nome o Stato non valido, entrambi i campi devono contenere caratteri ASCII.", "Alert", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             }
@@ -76,7 +76,7 @@ public class ClientHomeGUIController {
                     view.dispose();
                 }catch (NumberFormatException exc){
                     System.err.println("Coordinates format not valid");
-                    JOptionPane.showMessageDialog(view, "Coordinates format not valid", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(view, "Formato coordinate non valido, ogni latitudine o longitudine deve essere indicata come un numero decimale separato da un punto (ex. 45.23456)", "Alert", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
