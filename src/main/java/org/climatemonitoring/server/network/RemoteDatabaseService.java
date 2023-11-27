@@ -4,6 +4,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.climatemonitoring.server.database.DbManager;
 import org.climatemonitoring.server.database.PredefinedQuery;
 import org.climatemonitoring.shared.RemoteDatabaseServiceInterface;
+import org.climatemonitoring.shared.models.MonitoringCenter;
 import org.climatemonitoring.shared.models.PointOfInterest;
 import org.climatemonitoring.shared.models.Survey;
 import org.climatemonitoring.shared.models.User;
@@ -103,7 +104,7 @@ public class RemoteDatabaseService extends UnicastRemoteObject implements Remote
         BasicDataSource dataSource = DbManager.getDataSource();
         String query = PredefinedQuery.select_queries.get(PredefinedQuery.Select.USER_LOGIN_INFO);
         try(Connection connection = dataSource.getConnection()){
-            try (PreparedStatement preparedStatement = connection.prepareStatement((query))){
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
                 preparedStatement.setString(1, userid);
                 preparedStatement.setString(2, hashedpassword);
                 try(ResultSet resultSet = preparedStatement.executeQuery()){
@@ -119,6 +120,94 @@ public class RemoteDatabaseService extends UnicastRemoteObject implements Remote
         return null;
     }
 
+    @Override
+    public ArrayList<MonitoringCenter> getCentersList() throws RemoteException{
+        BasicDataSource dataSource = DbManager.getDataSource();
+        String query = PredefinedQuery.select_queries.get(PredefinedQuery.Select.CLIMATECENTER);
+        ArrayList<MonitoringCenter> resultList = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection()){
+            try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while(resultSet.next()){
+                    resultList.add(getRowMonitoringCenter(resultSet));
+                }
+                return resultList;
+            }
+        }catch (SQLException e){
+            System.err.println("Exception in getCenterList(), return null.");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public MonitoringCenter selectCenterById(int centerid) throws RemoteException{
+        BasicDataSource dataSource = DbManager.getDataSource();
+        String query = PredefinedQuery.select_queries.get(PredefinedQuery.Select.CLIMATECENTER_BY_ID);
+        try (Connection connection = dataSource.getConnection()){
+            try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
+                preparedStatement.setInt(1, centerid);
+                try (ResultSet resultSet = preparedStatement.executeQuery()){
+                    if(resultSet.next()){
+                        return getRowMonitoringCenter(resultSet);
+                    }
+                }
+            }
+        }catch (SQLException e){
+            System.err.println("Exception in selectCenterById(), return null.");
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public boolean completeRegistrationUser(User user, int centerid) throws RemoteException {
+        BasicDataSource dataSource = DbManager.getDataSource();
+        String query = PredefinedQuery.insert_queries.get(PredefinedQuery.Insert.USER);
+        try(Connection connection = dataSource.getConnection()){
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
+                preparedStatement.setString(1, user.getUserid());
+                preparedStatement.setString(2, user.getName());
+                preparedStatement.setString(3, user.getSurname());
+                preparedStatement.setString(4, user.getEmail());
+                preparedStatement.setString(5, user.getFiscalCode());
+                preparedStatement.setString(6, user.getHashedPassword());
+                preparedStatement.setInt(7, centerid);
+                int rowsAffected = preparedStatement.executeUpdate();
+                if( rowsAffected == 1){
+                    return true;
+                }else{
+                    System.err.println("Insertion for registration rowsAffected = " + rowsAffected);
+                }
+            }
+        }catch (SQLException e){
+            System.err.println("Exception completeRegistration(), return false.");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkUserExists(String userid){
+        BasicDataSource dataSource = DbManager.getDataSource();
+        String query = PredefinedQuery.select_queries.get(PredefinedQuery.Select.USER_EXISTS);
+        try(Connection connection = dataSource.getConnection()){
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
+                preparedStatement.setString(1,userid);
+                try (ResultSet resultSet = preparedStatement.executeQuery()){
+                    if (resultSet.next()) {
+                        return  resultSet.getBoolean(1);
+                    }
+                }
+            }
+        }catch (SQLException e){
+            System.err.println("Exception checkUserExists(), return false.");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
     public ArrayList<Survey> selectSurveysById(int poi_id) throws RemoteException{
         ArrayList<Survey> resultList = new ArrayList<>();
         String query = PredefinedQuery.select_queries.get(PredefinedQuery.Select.SURVEY_BY_ID);
@@ -159,6 +248,8 @@ public class RemoteDatabaseService extends UnicastRemoteObject implements Remote
         }
     }
 
+
+
     //PRIVATE METHODS
 
     private PointOfInterest getRowPointOfInterest(ResultSet rs) throws SQLException{
@@ -179,6 +270,18 @@ public class RemoteDatabaseService extends UnicastRemoteObject implements Remote
                 rs.getString("userid"),
                 rs.getString("fiscalcode"),
                 rs.getString("hashedpassword")
+        );
+    }
+
+    private MonitoringCenter getRowMonitoringCenter(ResultSet rs) throws SQLException{
+        return new MonitoringCenter(
+                rs.getInt("centerid"),
+                rs.getString("name"),
+                rs.getString("address"),
+                rs.getInt("addressnumber"),
+                rs.getInt("cap"),
+                rs.getString("city"),
+                rs.getString("province")
         );
     }
 

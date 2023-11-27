@@ -1,6 +1,7 @@
 package org.climatemonitoring.client.gui.views;
 
 import org.climatemonitoring.client.gui.controllers.OperatorRegistrationGUIController;
+import org.climatemonitoring.shared.models.User;
 
 import javax.swing.*;
 
@@ -31,6 +32,19 @@ public class OperatorRegistrationGUI extends JFrame{
         setContentPane(operatorRegistrationPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1920, 1024);// To set fixed dimensions
+        new OperatorRegistrationGUIController(this);
+    }
+
+    public OperatorRegistrationGUI(User user){
+        setTitle("Climate Monitoring");
+        setContentPane(operatorRegistrationPanel);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1920, 1024);// To set fixed dimensions
+        this.nameField.setText(user.getName());
+        this.surnameField.setText(user.getSurname());
+        this.fiscalCodeField.setText(user.getFiscalCode());
+        this.emailField.setText(user.getEmail());
+        this.userIdField.setText(user.getUserid());
         new OperatorRegistrationGUIController(this);
     }
 

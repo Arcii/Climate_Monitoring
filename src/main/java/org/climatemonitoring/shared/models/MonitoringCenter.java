@@ -29,7 +29,7 @@ public class MonitoringCenter implements Serializable {
         this.province = province;
     }
 
-    public long getCenterid() {
+    public int getCenterid() {
         return centerid;
     }
 

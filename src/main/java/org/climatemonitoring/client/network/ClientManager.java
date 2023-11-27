@@ -1,7 +1,7 @@
 package org.climatemonitoring.client.network;
 
-import org.climatemonitoring.client.gui.views.PoiSearchResultGUI;
 import org.climatemonitoring.shared.RemoteDatabaseServiceInterface;
+import org.climatemonitoring.shared.models.MonitoringCenter;
 import org.climatemonitoring.shared.models.PointOfInterest;
 import org.climatemonitoring.shared.models.Survey;
 import org.climatemonitoring.shared.models.User;
@@ -20,6 +20,8 @@ import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static java.lang.Math.*;
 import static java.lang.Math.sqrt;
@@ -121,6 +123,36 @@ public class ClientManager {
         }
     }
 
+    public boolean checkUserExists(String userid){
+        try {
+            return rmiService.checkUserExists(userid);
+        }catch (RemoteException e){
+            System.err.println("Remote Exception in checkUserExists() remote call.");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean completeRegistrationUser(User user, int centerid){
+        try {
+            return rmiService.completeRegistrationUser(user, centerid);
+        }catch (RemoteException e){
+            System.err.println("Remote Exception in completeRegistration() remote call.");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public ArrayList<MonitoringCenter> getCentersList(){
+        try {
+            return rmiService.getCentersList();
+        }catch (RemoteException e){
+            System.err.println("Remote Exception in getCenterList() remote call.");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static String hashPasswordSHA256(char[] password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -144,13 +176,30 @@ public class ClientManager {
         CharsetDecoder utf8Decoder = StandardCharsets.UTF_8.newDecoder();
         utf8Decoder.onMalformedInput(CodingErrorAction.REPORT);
         utf8Decoder.onUnmappableCharacter(CodingErrorAction.REPORT);
-
         try {
             utf8Decoder.decode(java.nio.ByteBuffer.wrap(input.getBytes(StandardCharsets.UTF_8)));
             return true;
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public static boolean isOnlyLettersString(String string){
+        Pattern pattern = Pattern.compile("^[a-zA-Z]+$");
+        Matcher matcher = pattern.matcher(string);
+        return matcher.matches();
+    }
+
+    public static boolean isOnlyLettersOrNumbersString(String string){
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9]+$");
+        Matcher matcher = pattern.matcher(string);
+        return matcher.matches();
+    }
+
+    public  static boolean isValidEmail(String email){
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
 
     //PRIVATE METHODS

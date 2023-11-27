@@ -4,7 +4,7 @@ CREATE DATABASE climatemonitoring;
 
 //Create Database Tables
 
-CREATE TABLE OperatoriRegistrati(
+CREATE TABLE operatoriregistrati(
     userid VARCHAR(30) PRIMARY KEY NOT NULL,
     name VARCHAR(30) NOT NULL,
     surname VARCHAR(30) NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE OperatoriRegistrati(
     centerid INTEGER NOT NULL REFERENCES CentriMonitoraggio(centerid)
 );
 
-CREATE TABLE CentriMonitoraggio(
+CREATE TABLE centrimonitoraggio(
     centerid SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     address VARCHAR(50) NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE CentriMonitoraggio(
     province VARCHAR(30) NOT NULL
 );
 
-CREATE TABLE CoordinateMonitoraggio(
+CREATE TABLE coordinatemonitoraggio(
     poi_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     country VARCHAR(100) NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE CoordinateMonitoraggio(
     longitude NUMERIC(8,5) NOT NULL
 );
 
-CREATE TABLE ParametriClimatici(
+CREATE TABLE parametriclimatici(
     dataid SERIAL PRIMARY KEY,
     poi_id INTEGER NOT NULL REFERENCES CoordinateMonitoraggio(poi_id),
     centerid INTEGER NOT NULL REFERENCES CentriMonitoraggio(centerid),
@@ -53,7 +53,7 @@ CREATE TABLE ParametriClimatici(
     glacial_mass_notes VARCHAR(256)
 );
 
-CREATE TABLE Coordinate_Centri (
+CREATE TABLE coordinate_centri (
     centerid INTEGER REFERENCES CentriMonitoraggio(centerid) ON DELETE CASCADE,
     poi_id INTEGER REFERENCES CoordinateMonitoraggio(poi_id) ON DELETE CASCADE,
     PRIMARY KEY (centerid, poi_id)

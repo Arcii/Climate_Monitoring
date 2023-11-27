@@ -13,15 +13,36 @@ public class PredefinedQuery {
         {
 
             //Put Insert User
-            //TODO
+            put(
+                    Insert.USER,
+                    "INSERT INTO operatoriregistrati ( " +
+                            " userid, " +
+                            " name, " +
+                            " surname, " +
+                            " email, " +
+                            " fiscalcode, " +
+                            " hashedpassword, " +
+                            " centerid) " +
+                            " VALUES (?,?,?,?,?,?,?); "
+            );
 
             //Put Insert ClimateMonitoringCenter
-            //TODO
+            put(
+                    Insert.CLIMATECENTER,
+                    "INSERT INTO centrimonitoraggio ( " +
+                            " name, " +
+                            " address, " +
+                            " addressnumber, " +
+                            " cap, " +
+                            " city, " +
+                            " province) " +
+                            " VALUES (?,?,?,?,?,?); "
+            );
 
             //Put Insert POI
             put(
                     Insert.POI,
-                    "INSERT INTO CoordinateMonitoraggio ( " +
+                    "INSERT INTO coordinatemonitoraggio ( " +
                             " name, " +
                             " country, " +
                             " latitude, " +
@@ -39,7 +60,7 @@ public class PredefinedQuery {
     };
 
     //SELECT QUERIES
-    public  enum Select{USER, USER_LOGIN_INFO, USER_EXISTS, USER_EMAIL_EXISTS, CLIMATECENTER, POI, POI_BY_NAME, POI_BY_COORDINATES, SURVEY_BY_ID, POIS_FOR_CENTER, CENTERS_FOR_POI, SURVEYs, USERS_FOR_CENTER,DATABASE,TABLE_FROM_DATABASE}
+    public  enum Select{USER, USER_LOGIN_INFO, USER_EXISTS, USER_EMAIL_EXISTS, CLIMATECENTER, CLIMATECENTER_BY_ID, POI, POI_BY_NAME, POI_BY_COORDINATES, SURVEY_BY_ID, POIS_FOR_CENTER, CENTERS_FOR_POI, SURVEYs, USERS_FOR_CENTER,DATABASE,TABLE_FROM_DATABASE}
     public static final Hashtable<Select, String> select_queries = new Hashtable<Select, String>(){
 
         private static final long serialVersionUID = 1L;
@@ -49,7 +70,7 @@ public class PredefinedQuery {
             put(
                     Select.USER,
                     "SELECT * " +
-                            " FROM OperatoriRegistrati " +
+                            " FROM operatoriregistrati " +
                             " WHERE userid = ? ; "
             );
 
@@ -57,7 +78,7 @@ public class PredefinedQuery {
             put(
                     Select.USER_LOGIN_INFO,
                     "SELECT * " +
-                            "FROM OperatoriRegistrati " +
+                            "FROM operatoriregistrati " +
                             " WHERE userid = ? AND hashedpassword = ? ;"
             );
 
@@ -65,7 +86,7 @@ public class PredefinedQuery {
             put(
                     Select.USER_EXISTS,
                     "SELECT EXISTS " +
-                            " (SELECT 1 FROM OperatoriRegistrati " +
+                            " (SELECT 1 FROM operatoriregistrati " +
                             " WHERE userid = ?); "
 
             );
@@ -74,30 +95,43 @@ public class PredefinedQuery {
             put(
                     Select.USER_EMAIL_EXISTS,
                     "SELECT EXISTS " +
-                            " (SELECT 1 FROM OperatoriRegistrati " +
+                            " (SELECT 1 FROM operatoriregistrati " +
                             " WHERE email = ?); "
             );
 
             //Put Select ClimateMonitoringCenter
-            // TODO
+            put(
+                    Select.CLIMATECENTER,
+                    "SELECT * " +
+                            " FROM centrimonitoraggio ; "
+            );
+
+            //Put Select ClimateMonitoringCenter by centerid
+            put(
+                    Select.CLIMATECENTER_BY_ID,
+                    "SELECT * " +
+                            " FROM centrimonitoraggio" +
+                            " WHERE centerid = ? ; "
+
+            );
 
             //Put Select POI
             put(
                     Select.POI,
                     "SELECT * " +
-                            " FROM CoordinateMonitoraggio; "
+                            " FROM coordinatemonitoraggio; "
             );
 
             put(
                     Select.POI_BY_NAME,
                     "SELECT * " +
-                            " FROM CoordinateMonitoraggio " +
+                            " FROM coordinatemonitoraggio " +
                             " WHERE name ILIKE lower(?) AND country ILIKE lower(?); "
             );
 
             put(
                     Select.POI_BY_COORDINATES,
-                    "SELECT * FROM CoordinateMonitoraggio " +
+                    "SELECT * FROM coordinatemonitoraggio " +
                             " WHERE latitude > ? AND latitude < ? " +
                             " AND longitude > ? AND longitude < ?; "
             );
@@ -188,7 +222,7 @@ public class PredefinedQuery {
 
             put(
                     Create.USERS_TABLE,
-                    "CREATE TABLE OperatoriRegistrati( " +
+                    "CREATE TABLE operatoriregistrati( " +
                             " userid VARCHAR(30) PRIMARY KEY NOT NULL, " +
                             " name VARCHAR(30) NOT NULL, " +
                             " surname VARCHAR(30) NOT NULL, " +
@@ -200,7 +234,7 @@ public class PredefinedQuery {
             );
 
             put(Create.MONITORING_CENTERS_TABLE,
-                    "CREATE TABLE CentriMonitoraggio( " +
+                    "CREATE TABLE centrimonitoraggio( " +
                             " centerid SERIAL PRIMARY KEY, " +
                             " name VARCHAR(50) NOT NULL, " +
                             " address VARCHAR(50) NOT NULL, " +
@@ -212,7 +246,7 @@ public class PredefinedQuery {
             );
 
             put(Create.POIS_TABLE,
-                    "CREATE TABLE CoordinateMonitoraggio( " +
+                    "CREATE TABLE coordinatemonitoraggio( " +
                             " poi_id SERIAL PRIMARY KEY, " +
                             " name VARCHAR(100) NOT NULL, " +
                             " country VARCHAR(100) NOT NULL, " +
@@ -222,7 +256,7 @@ public class PredefinedQuery {
             );
 
             put(Create.SURVEY_TABLE,
-                    "CREATE TABLE ParametriClimatici( " +
+                    "CREATE TABLE parametriclimatici( " +
                             " dataid SERIAL PRIMARY KEY, " +
                             " poi_id INTEGER NOT NULL REFERENCES CoordinateMonitoraggio(poi_id), " +
                             " centerid INTEGER NOT NULL REFERENCES CentriMonitoraggio(centerid), " +
@@ -245,7 +279,7 @@ public class PredefinedQuery {
             );
 
             put(Create.MONITORING_CENTERS_POIS_TABLE,
-                    "CREATE TABLE Coordinate_Centri ( " +
+                    "CREATE TABLE coordinate_centri ( " +
                             " centerid INTEGER REFERENCES CentriMonitoraggio(centerid) ON DELETE CASCADE, " +
                             " poi_id INTEGER REFERENCES CoordinateMonitoraggio(poi_id) ON DELETE CASCADE, " +
                             " PRIMARY KEY (centerid, poi_id) " +
