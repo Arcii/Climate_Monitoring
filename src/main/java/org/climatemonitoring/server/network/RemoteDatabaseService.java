@@ -177,18 +177,142 @@ public class RemoteDatabaseService extends UnicastRemoteObject implements Remote
                 if( rowsAffected == 1){
                     return true;
                 }else{
-                    System.err.println("Insertion for registration rowsAffected = " + rowsAffected);
+                    System.err.println("Insertion for registration User rowsAffected = " + rowsAffected);
                 }
             }
         }catch (SQLException e){
-            System.err.println("Exception completeRegistration(), return false.");
+            System.err.println("Exception completeRegistrationUser(), return false.");
             e.printStackTrace();
         }
         return false;
     }
 
     @Override
+    public int completeRegistrationCenter(MonitoringCenter center){
+        BasicDataSource dataSource = DbManager.getDataSource();
+        String query = PredefinedQuery.insert_queries.get(PredefinedQuery.Insert.CLIMATECENTER);
+        try (Connection connection = dataSource.getConnection()){
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
+                preparedStatement.setString(1, center.getName());
+                preparedStatement.setString(2, center.getAddress());
+                preparedStatement.setInt(3, center.getAddressNumber());
+                preparedStatement.setInt(4, center.getCap());
+                preparedStatement.setString(5, center.getCity());
+                preparedStatement.setString(6, center.getProvince());
+                try {
+                    connection.setAutoCommit(false);
+                    int rowsAffected = preparedStatement.executeUpdate();
+                    if (rowsAffected == 1) {
+                        connection.commit();
+                        connection.setAutoCommit(true);
+                        return checkCenterExists(center);
+                    }
+                }catch (SQLException e) {
+                    connection.rollback();
+                    connection.setAutoCommit(true);
+                    System.err.println("Exception in insertion transaction of new Center, rolling back database.");
+                    e.printStackTrace();
+                }
+            }
+        }catch (SQLException e){
+            System.err.println("Exception completeRegistrationCenter(), return -1.");
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    @Override
+    public void linkCenterToPois(MonitoringCenter center, ArrayList<PointOfInterest> poiList) throws RemoteException {
+        BasicDataSource dataSource = DbManager.getDataSource();
+        String query = PredefinedQuery.insert_queries.get(PredefinedQuery.Insert.CENTER_POI);
+        try (Connection connection = dataSource.getConnection()){
+            try(PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                try {
+                    int rowsAffected;
+                    connection.setAutoCommit(false);
+                    for (PointOfInterest poi : poiList) {
+                        preparedStatement.setInt(1, center.getCenterid());
+                        preparedStatement.setInt(2, poi.getPoi_id());
+                        rowsAffected = preparedStatement.executeUpdate();
+                        if (rowsAffected > 0) {
+                            System.out.println("Insert for center " + center.getCenterid() + " and poi " + poi.getPoi_id() + " completed succesfully.");
+                        } else {
+                            System.out.println("Insert for center " + center.getCenterid() + " and poi " + poi.getPoi_id() + " failed.");
+                        }
+                    }
+                    connection.commit();
+                    connection.setAutoCommit(true);
+                }catch (SQLException e){
+                    connection.rollback();
+                    connection.setAutoCommit(true);
+                    System.err.println("Exception in transaction in linkCenterToPois(), rolling back database.");
+                    e.printStackTrace();
+                }
+            }
+        }catch (SQLException e){
+            System.err.println("Exception in insertion of Center_Pois relations, rolling back database.");
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public int insertPoi(PointOfInterest poi) throws RemoteException {
+        BasicDataSource dataSource = DbManager.getDataSource();
+        String query = PredefinedQuery.insert_queries.get(PredefinedQuery.Insert.POI);
+        try (Connection connection = dataSource.getConnection()) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, poi.getName());
+                preparedStatement.setString(2, poi.getCountry());
+                preparedStatement.setDouble(3, poi.getLatitude());
+                preparedStatement.setDouble(4, poi.getLongitude());
+                try {
+                    connection.setAutoCommit(false);
+                    int rowsAffected = preparedStatement.executeUpdate();
+                    if (rowsAffected > 0) {
+                        connection.commit();
+                        connection.setAutoCommit(true);
+                        return checkPoiExists(poi);
+                    }
+                }catch (SQLException e) {
+                    connection.rollback();
+                    connection.setAutoCommit(true);
+                    System.err.println("Exception in insertion transaction of new POI, rolling back database.");
+                    e.printStackTrace();
+                }
+            }
+        }catch (SQLException e){
+            System.err.println("Exception in insertPoi(), return -1.");
+        }
+        return -1;
+    }
+
+    public int checkCenterExists(MonitoringCenter center){
+        BasicDataSource dataSource = DbManager.getDataSource();
+        String query = PredefinedQuery.select_queries.get(PredefinedQuery.Select.CLIMATECENTER_BY_ATTRIBUTES);
+        try(Connection connection = dataSource.getConnection()){
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
+                preparedStatement.setString(1, center.getName());
+                preparedStatement.setString(2, center.getAddress());
+                preparedStatement.setInt(3, center.getAddressNumber());
+                preparedStatement.setInt(4, center.getCap());
+                preparedStatement.setString(5, center.getCity());
+                preparedStatement.setString(6, center.getProvince());
+                try (ResultSet resultSet = preparedStatement.executeQuery()){
+                    if(resultSet.next()){
+                        return resultSet.getInt("centerid");
+                    }
+                }
+            }
+        }catch (SQLException e){
+            System.err.println("Exception checkCenterExists(), return -1.");
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    @Override
     public boolean checkUserExists(String userid){
+        boolean exists = false;
         BasicDataSource dataSource = DbManager.getDataSource();
         String query = PredefinedQuery.select_queries.get(PredefinedQuery.Select.USER_EXISTS);
         try(Connection connection = dataSource.getConnection()){
@@ -196,15 +320,41 @@ public class RemoteDatabaseService extends UnicastRemoteObject implements Remote
                 preparedStatement.setString(1,userid);
                 try (ResultSet resultSet = preparedStatement.executeQuery()){
                     if (resultSet.next()) {
-                        return  resultSet.getBoolean(1);
+                        exists = resultSet.getBoolean(1);
                     }
                 }
             }
         }catch (SQLException e){
-            System.err.println("Exception checkUserExists(), return false.");
+            System.err.println("Exception in checkUserExists(), return false.");
             e.printStackTrace();
         }
-        return false;
+        return exists;
+    }
+
+    @Override
+    public int checkPoiExists(PointOfInterest poi) throws RemoteException {
+        BasicDataSource dataSource = DbManager.getDataSource();
+        String query = PredefinedQuery.select_queries.get(PredefinedQuery.Select.POI_BY_DATA);
+        try (Connection connection = dataSource.getConnection()){
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
+                preparedStatement.setString(1, poi.getName());
+                preparedStatement.setString(2, poi.getCountry());
+                preparedStatement.setDouble(3, poi.getLatitude());
+                preparedStatement.setDouble(4, poi.getLongitude());
+                try (ResultSet resultSet = preparedStatement.executeQuery()){
+                    if(resultSet.next()){
+                        System.out.println(resultSet.getInt("poi_id"));
+                        System.out.println(resultSet.getString("name"));
+                        System.out.println(resultSet.getString("country"));
+                        return resultSet.getInt("poi_id");
+                    }
+                }
+            }
+        }catch (SQLException e){
+            System.err.println("Exception in checkPoiExists(), return -1");
+            e.printStackTrace();
+        }
+        return -1;
     }
 
     @Override

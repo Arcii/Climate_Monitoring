@@ -143,6 +143,59 @@ public class ClientManager {
         }
     }
 
+    public int checkCenterExists(String name,String address, String addressnumber, String cap, String city, String province){
+        try {
+            return rmiService.checkCenterExists(new MonitoringCenter(0,name,address,Integer.parseInt(addressnumber),Integer.parseInt(cap),city,province));
+        }catch (RemoteException e){
+            System.err.println("Remote Exception in checkCenterExists() remote call.");
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public int completeRegistrationCenter(MonitoringCenter center){
+        try {
+            return rmiService.completeRegistrationCenter(center);
+        }catch (RemoteException e){
+            System.err.println("Remote Exception in completeRegistrationCenter() remote call.");
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public int checkPoiExists(PointOfInterest poi){
+        try {
+            return rmiService.checkPoiExists(poi);
+        }catch (RemoteException e){
+            System.err.println("Remote Exception in checkPoiExists() remote call.");
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public ArrayList<PointOfInterest> insertPois(ArrayList<PointOfInterest> poiList) throws Exception{
+        for (PointOfInterest poi : poiList) {
+            if(poi.getPoi_id()<=0){
+                int createdPoi_id = insertPoi(poi);
+                if(createdPoi_id<=0){
+                    throw new Exception("Si è riscontrato un problema con l'inserimento di uno o più Aree aggiunte e non già presenti, riprova o cancella le Aree nella lista (solo quelle con ID = 0) e reinseriscile");
+                }
+                poi.setPoi_id(createdPoi_id);
+            }
+        }
+        return poiList;
+    }
+
+    public int insertPoi(PointOfInterest poi){
+        try{
+            return rmiService.insertPoi(poi);
+        }catch (RemoteException e){
+            System.err.println("Remote Exception in insertPoi() remote call.");
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
     public ArrayList<MonitoringCenter> getCentersList(){
         try {
             return rmiService.getCentersList();
@@ -152,6 +205,17 @@ public class ClientManager {
             return null;
         }
     }
+
+    public void linkCenterToPois(MonitoringCenter center, ArrayList<PointOfInterest> poiList){
+        try {
+            rmiService.linkCenterToPois(center,poiList);
+        }catch (RemoteException e){
+            System.err.println("Remote Exception in linkCenterToPois() remote call.");
+            e.printStackTrace();
+        }
+    }
+
+    //STATIC METHODS
 
     public static String hashPasswordSHA256(char[] password) {
         try {
@@ -190,6 +254,21 @@ public class ClientManager {
         return matcher.matches();
     }
 
+    public static boolean isOnlyLettersAndSpacesString(String string){
+        Pattern pattern = Pattern.compile("^[a-zA-Z\\s]+$");
+        Matcher matcher = pattern.matcher(string);
+        return matcher.matches();
+    }
+
+    public static boolean isOnlyNumbersString(String string){
+        try {
+            Integer.parseInt(string);
+            return true;
+        }catch (NumberFormatException e){
+            return false;
+        }
+    }
+
     public static boolean isOnlyLettersOrNumbersString(String string){
         Pattern pattern = Pattern.compile("^[a-zA-Z0-9]+$");
         Matcher matcher = pattern.matcher(string);
@@ -200,6 +279,18 @@ public class ClientManager {
         Pattern pattern = Pattern.compile("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
+    }
+
+    public static boolean isValidCap(String cap) {
+        return Pattern.matches("\\d{5}", cap);
+    }
+
+    public static boolean isAsciiString(String string){
+        return Pattern.matches("\\A\\p{ASCII}*\\z",string);
+    }
+
+    public static boolean isValidFiscalCode(String fiscalCode){
+        return Pattern.matches("^[A-Z]{6}\\d{2}[ABCDEHLMPRST]\\d{2}[A-Z]\\d{3}[A-Z]$", fiscalCode);
     }
 
     //PRIVATE METHODS

@@ -29,6 +29,15 @@ public class MonitoringCenter implements Serializable {
         this.province = province;
     }
 
+    public MonitoringCenter(String name, String address, int addressNumber, int cap, String city, String province) {
+        this.name = name;
+        this.address = address;
+        this.addressNumber = addressNumber;
+        this.cap = cap;
+        this.city = city;
+        this.province = province;
+    }
+
     public int getCenterid() {
         return centerid;
     }

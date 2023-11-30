@@ -54,13 +54,19 @@ public class PredefinedQuery {
             //TODO
 
             //Put Insert Center-POI reference
-            //TODO
+            put(
+                    Insert.CENTER_POI,
+                    "INSERT INTO coordinate_centri ( " +
+                            " centerid, " +
+                            " poi_id) " +
+                            " VALUES (?,?); "
+            );
 
         }
     };
 
     //SELECT QUERIES
-    public  enum Select{USER, USER_LOGIN_INFO, USER_EXISTS, USER_EMAIL_EXISTS, CLIMATECENTER, CLIMATECENTER_BY_ID, POI, POI_BY_NAME, POI_BY_COORDINATES, SURVEY_BY_ID, POIS_FOR_CENTER, CENTERS_FOR_POI, SURVEYs, USERS_FOR_CENTER,DATABASE,TABLE_FROM_DATABASE}
+    public  enum Select{USER, USER_LOGIN_INFO, USER_EXISTS, USER_EMAIL_EXISTS, CLIMATECENTER, CLIMATECENTER_BY_ID, CLIMATECENTER_BY_ATTRIBUTES, POI, POI_BY_DATA, POI_BY_NAME, POI_BY_COORDINATES, SURVEY_BY_ID, POIS_FOR_CENTER, CENTERS_FOR_POI, SURVEYs, USERS_FOR_CENTER,DATABASE,TABLE_FROM_DATABASE}
     public static final Hashtable<Select, String> select_queries = new Hashtable<Select, String>(){
 
         private static final long serialVersionUID = 1L;
@@ -110,9 +116,16 @@ public class PredefinedQuery {
             put(
                     Select.CLIMATECENTER_BY_ID,
                     "SELECT * " +
-                            " FROM centrimonitoraggio" +
+                            " FROM centrimonitoraggio " +
                             " WHERE centerid = ? ; "
+            );
 
+            //Put Select ClimateMonitoringCenter By all fields except id to check existence
+            put(
+                    Select.CLIMATECENTER_BY_ATTRIBUTES,
+                    "SELECT * " +
+                            " FROM centrimonitoraggio " +
+                            " WHERE name = ? AND address = ? AND addressnumber = ? AND cap = ? AND city = ? AND province = ? ;"
             );
 
             //Put Select POI
@@ -120,6 +133,13 @@ public class PredefinedQuery {
                     Select.POI,
                     "SELECT * " +
                             " FROM coordinatemonitoraggio; "
+            );
+
+            put(
+                    Select.POI_BY_DATA,
+                    "SELECT * " +
+                            " FROM coordinatemonitoraggio " +
+                            " WHERE name = ? AND country = ? AND latitude = ? AND longitude = ? ; "
             );
 
             put(

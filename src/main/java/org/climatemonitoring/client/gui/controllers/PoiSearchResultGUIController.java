@@ -26,10 +26,6 @@ public class PoiSearchResultGUIController {
         this.clientManager = GetClientManager();
         this.searchResults = searchResults;
 
-        for (PointOfInterest poi : searchResults) {
-            System.out.println(poi.toString());
-        }
-
         setUpTable();
 
         //ADD Listeners
@@ -59,7 +55,7 @@ public class PoiSearchResultGUIController {
                     view.dispose();
                 }else{
                     System.err.println("Button pressed without row selected");
-                    JOptionPane.showMessageDialog(view, "Prima di visualizzare i parametri climatici devi selezionare l'area geografica", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(view, "Non hai selezionato l'area che vuoi aggiungere, selezionala nella tabella prima di premere \"Aggiungi Area\".", "Alert", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
@@ -86,11 +82,9 @@ public class PoiSearchResultGUIController {
     }
 
     private void setUpTable(){
-        // Create a DefaultTableModel with column names
-        String[] columnNames = {"ID", "Name", "Country", "Latitude", "Longitude"};
+        String[] columnNames = {"ID", "Nome", "Stato", "Latitudine", "Longitudine"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
-        // Populate the model with PointOfInterest data
         for (PointOfInterest poi : getSearchResults()) {
             Object[] rowData = {poi.getPoi_id(), poi.getName(), poi.getCountry(), poi.getLatitude(), poi.getLongitude()};
             model.addRow(rowData);

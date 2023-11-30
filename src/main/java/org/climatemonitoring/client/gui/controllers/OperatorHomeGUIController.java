@@ -36,16 +36,21 @@ public class OperatorHomeGUIController {
                     System.err.println("No input for Name or Country");
                     JOptionPane.showMessageDialog(view, "I campi Nome e/o Stato dell'area che vuoi cercare non sono stati inseriti.", "Alert", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    String asciiRegex = "\\A\\p{ASCII}*\\z";
-                    Pattern pattern = Pattern.compile(asciiRegex);
-                    if (pattern.matcher(name).matches() && pattern.matcher(country).matches()) {
-                        ArrayList<PointOfInterest> result = clientManager.cercaAreaGeograficaNome(name, country);
-                        PoiSearchResultGUI form = new PoiSearchResultGUI(result);
-                        form.setVisible(true);
-                        view.dispose();
-                    } else {
-                        System.err.println("Name or Country format not valid");
-                        JOptionPane.showMessageDialog(view, "Formato Nome o Stato non valido, entrambi i campi devono contenere caratteri ASCII.", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                    if(name.length() <= 100 && country.length() <= 100) {
+                        String asciiRegex = "\\A\\p{ASCII}*\\z";
+                        Pattern pattern = Pattern.compile(asciiRegex);
+                        if (pattern.matcher(name).matches() && pattern.matcher(country).matches()) {
+                            ArrayList<PointOfInterest> result = clientManager.cercaAreaGeograficaNome(name, country);
+                            PoiSearchResultGUI form = new PoiSearchResultGUI(result);
+                            form.setVisible(true);
+                            view.dispose();
+                        } else {
+                            System.err.println("Name or Country format not valid");
+                            JOptionPane.showMessageDialog(view, "Formato Nome o Stato non valido, entrambi i campi devono contenere caratteri ASCII.", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }else{
+                        System.err.println("Name or Country string inserted too long");
+                        JOptionPane.showMessageDialog(view, "Il nome o lo stato forniti sono stringhe troppo lunghe.", "Alert", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             }

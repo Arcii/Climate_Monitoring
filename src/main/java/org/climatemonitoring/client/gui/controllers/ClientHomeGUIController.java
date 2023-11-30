@@ -47,16 +47,21 @@ public class ClientHomeGUIController {
                     System.err.println("No input for Name or Country");
                     JOptionPane.showMessageDialog(view, "I campi Nome e/o Stato dell'area che vuoi cercare non sono stati inseriti.", "Alert", JOptionPane.INFORMATION_MESSAGE);
                 }else {
-                    String asciiRegex = "\\A\\p{ASCII}*\\z";
-                    Pattern pattern = Pattern.compile(asciiRegex);
-                    if (pattern.matcher(name).matches() && pattern.matcher(country).matches()) {
-                        ArrayList<PointOfInterest> result = clientManager.cercaAreaGeograficaNome(name, country);
-                        PoiSearchResultGUI form = new PoiSearchResultGUI(result);
-                        form.setVisible(true);
-                        view.dispose();
-                    } else {
-                        System.err.println("Name or Country format not valid");
-                        JOptionPane.showMessageDialog(view, "Formato Nome o Stato non valido, entrambi i campi devono contenere caratteri ASCII.", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                    if(name.length() <= 100 && country.length() <= 100) {
+                        String asciiRegex = "\\A\\p{ASCII}*\\z";
+                        Pattern pattern = Pattern.compile(asciiRegex);
+                        if (pattern.matcher(name).matches() && pattern.matcher(country).matches()) {
+                            ArrayList<PointOfInterest> result = clientManager.cercaAreaGeograficaNome(name, country);
+                            PoiSearchResultGUI form = new PoiSearchResultGUI(result);
+                            form.setVisible(true);
+                            view.dispose();
+                        } else {
+                            System.err.println("Name or Country format not valid");
+                            JOptionPane.showMessageDialog(view, "Formato Nome o Stato non valido, entrambi i campi devono contenere caratteri ASCII.", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }else{
+                        System.err.println("Name or Country string inserted too long");
+                        JOptionPane.showMessageDialog(view, "Il nome o lo stato forniti sono stringhe troppo lunghe.", "Alert", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             }
@@ -85,25 +90,30 @@ public class ClientHomeGUIController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String userid = view.getUsernameField().getText().trim();
-                if(!userid.isEmpty() && view.getPasswordField().getPassword().length != 0) {
-                    if (ClientManager.isValidUtf8(userid)) {
-                        String hashedpassword = ClientManager.hashPasswordSHA256(view.getPasswordField().getPassword());
-                        User user =clientManager.userLogin(userid,hashedpassword);
-                        if(user != null){
-                            OperatorHomeGUI form = new OperatorHomeGUI();
-                            form.setVisible(true);
-                            view.dispose();
-                        }else{
-                            System.err.println("Login failed.");
-                            JOptionPane.showMessageDialog(view, "Il login è fallito, controlla di aver inserito username e password corretti", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                if(userid.length() <= 30) {
+                    if (!userid.isEmpty() && view.getPasswordField().getPassword().length != 0) {
+                        if (ClientManager.isValidUtf8(userid)) {
+                            String hashedpassword = ClientManager.hashPasswordSHA256(view.getPasswordField().getPassword());
+                            User user = clientManager.userLogin(userid, hashedpassword);
+                            if (user != null) {
+                                OperatorHomeGUI form = new OperatorHomeGUI();
+                                form.setVisible(true);
+                                view.dispose();
+                            } else {
+                                System.err.println("Login failed.");
+                                JOptionPane.showMessageDialog(view, "Il login è fallito, controlla di aver inserito username e password corretti", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        } else {
+                            System.out.println("Check UTF-8 on username failed.");
+                            JOptionPane.showMessageDialog(view, "Hai inserito un username che non può essere corretto (ogni username è una stringa UTF-8 valida)", "Alert", JOptionPane.INFORMATION_MESSAGE);
                         }
-                    }else{
-                        System.out.println("Check UTF-8 on username failed.");
-                        JOptionPane.showMessageDialog(view, "Hai inserito un username che non può essere corretto (ogni username è una stringa UTF-8 valida)", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        System.err.println("Empty field username and/or password");
+                        JOptionPane.showMessageDialog(view, "I campi username e/o password non sono stati inseriti.", "Alert", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }else{
-                    System.err.println("Empty field username and/or password");
-                    JOptionPane.showMessageDialog(view, "I campi username e/o password non sono stati inseriti.", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                    System.err.println("Userid provided for login is too long");
+                    JOptionPane.showMessageDialog(view, "L'username inserito contiene troppi caratteri e quindi non può essere corretto, ogni username ha un massimo di 30 caratteri.", "Alert", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });

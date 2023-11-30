@@ -25,6 +25,13 @@ public class PointOfInterest implements Serializable {
         this.country = country;
     }
 
+    public PointOfInterest(float latitude, float longitude, String name, String country) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.name = name;
+        this.country = country;
+    }
+
     public int getPoi_id() {
         return poi_id;
     }

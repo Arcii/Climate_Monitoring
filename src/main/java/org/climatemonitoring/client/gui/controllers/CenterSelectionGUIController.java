@@ -1,5 +1,6 @@
 package org.climatemonitoring.client.gui.controllers;
 
+import org.climatemonitoring.client.gui.views.CenterRegistrationGUI;
 import org.climatemonitoring.client.gui.views.CenterSelectionGUI;
 import org.climatemonitoring.client.gui.views.ClientHomeGUI;
 import org.climatemonitoring.client.gui.views.OperatorRegistrationGUI;
@@ -38,7 +39,9 @@ public class CenterSelectionGUIController {
         view.getCenterRegistrationButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                CenterRegistrationGUI form = new CenterRegistrationGUI(getUser(),getCentersList());
+                form.setVisible(true);
+                view.dispose();
             }
         });
 

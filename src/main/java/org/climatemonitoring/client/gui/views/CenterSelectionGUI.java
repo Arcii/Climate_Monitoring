@@ -108,4 +108,11 @@ public class CenterSelectionGUI extends JFrame{
         this.backButton = backButton;
     }
 
+    public JScrollPane getCentersScroll() {
+        return centersScroll;
+    }
+
+    public void setCentersScroll(JScrollPane centersScroll) {
+        this.centersScroll = centersScroll;
+    }
 }

@@ -27,4 +27,14 @@ public interface RemoteDatabaseServiceInterface extends Remote {
 
     boolean checkUserExists(String userid) throws RemoteException;
 
+    int completeRegistrationCenter(MonitoringCenter center) throws RemoteException;
+
+    void linkCenterToPois(MonitoringCenter center, ArrayList<PointOfInterest> poiList) throws RemoteException;
+
+    int checkCenterExists(MonitoringCenter center) throws RemoteException;
+
+    int checkPoiExists(PointOfInterest poi) throws RemoteException;
+
+    int insertPoi(PointOfInterest poi) throws RemoteException;
+
 }
