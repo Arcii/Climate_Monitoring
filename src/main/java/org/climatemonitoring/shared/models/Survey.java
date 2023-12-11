@@ -31,11 +31,30 @@ public class Survey implements Serializable {
         //Empty Survey
     }
 
-    public Survey(int dataid, int poi_id, int userid, Timestamp timestamp, int wind, int humidity, int pressure, int temperature, int precipitation, int glacial_altitude, int glacial_mass, String wind_notes, String humidity_notes, String pressure_notes, String temperature_notes, String precipitation_notes, String glacial_altitude_notes, String glacial_mass_notes) {
+    public Survey(int dataid, int poi_id, int centerid, Timestamp timestamp, int wind, int humidity, int pressure, int temperature, int precipitation, int glacial_altitude, int glacial_mass, String wind_notes, String humidity_notes, String pressure_notes, String temperature_notes, String precipitation_notes, String glacial_altitude_notes, String glacial_mass_notes) {
         this.dataid = dataid;
         this.poi_id = poi_id;
-        this.centerid = userid;
+        this.centerid = centerid;
         this.timestamp = timestamp;
+        this.wind = wind;
+        this.humidity = humidity;
+        this.pressure = pressure;
+        this.temperature = temperature;
+        this.precipitation = precipitation;
+        this.glacial_altitude = glacial_altitude;
+        this.glacial_mass = glacial_mass;
+        this.wind_notes = wind_notes;
+        this.humidity_notes = humidity_notes;
+        this.pressure_notes = pressure_notes;
+        this.temperature_notes = temperature_notes;
+        this.precipitation_notes = precipitation_notes;
+        this.glacial_altitude_notes = glacial_altitude_notes;
+        this.glacial_mass_notes = glacial_mass_notes;
+    }
+
+    public Survey(int poi_id, int centerid, int wind, int humidity, int pressure, int temperature, int precipitation, int glacial_altitude, int glacial_mass, String wind_notes, String humidity_notes, String pressure_notes, String temperature_notes, String precipitation_notes, String glacial_altitude_notes, String glacial_mass_notes){
+        this.poi_id = poi_id;
+        this.centerid = centerid;
         this.wind = wind;
         this.humidity = humidity;
         this.pressure = pressure;

@@ -16,7 +16,7 @@ public class User implements Serializable {
     private String email;
     private String fiscalCode;
     private String hashedPassword;
-    private int center_id;
+    private int centerid;
 
     public User() {
         //Empty User
@@ -86,12 +86,12 @@ public class User implements Serializable {
         }
     }
 
-    public int getCenter_id() {
-        return center_id;
+    public int getCenterid() {
+        return centerid;
     }
 
-    public void setCenter_id(int center_id) {
-        this.center_id = center_id;
+    public void setCenterid(int centerid) {
+        this.centerid = centerid;
     }
 
     public boolean checkPassword(String password) {
@@ -123,7 +123,7 @@ public class User implements Serializable {
                 " surname='" + surname + '\'' + ",\n" +
                 " email='" + email + '\'' + ",\n" +
                 " fiscalCode='" + fiscalCode + '\'' + "\n" +
-                " centerid='" + center_id + '\'' + "\n" +
+                " centerid='" + centerid + '\'' + "\n" +
                 '}';
     }
 
