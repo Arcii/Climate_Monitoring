@@ -1,0 +1,150 @@
+package com.climatemonitoring.shared.models;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
+
+public class User implements Serializable {
+
+    //FIELDS
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+    private String userid;
+    private String name;
+    private String surname;
+    private String email;
+    private String fiscalCode;
+    private String hashedPassword;
+    private int centerid;
+
+    //CONSTRUCTORS
+
+    public User() {
+        //Empty User
+    }
+
+    public User(String name, String surname, String email, String userID, String fiscalCode, String hashedPassword) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.userid = userID;
+        this.fiscalCode = fiscalCode;
+        this.hashedPassword = hashedPassword;
+    }
+
+    //GETTER AND SETTER
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public String getFiscalCode() {
+        return fiscalCode;
+    }
+
+    public void setFiscalCode(String fiscalCode) {
+        this.fiscalCode = fiscalCode;
+    }
+
+    public String getHashedPassword() {
+        return hashedPassword;
+    }
+
+    public void setHashedPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedPasswordBytes = md.digest(password.getBytes());
+            this.hashedPassword = bytesToHex(hashedPasswordBytes);
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println("Set hashed password : NoSuchAlgorithmException");
+            e.printStackTrace();
+        }
+    }
+
+    public int getCenterid() {
+        return centerid;
+    }
+
+    public void setCenterid(int centerid) {
+        this.centerid = centerid;
+    }
+
+    //PUBLIC METHODS
+
+    public boolean checkPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedPasswordBytes = md.digest(password.getBytes());
+            String hashedPassword = bytesToHex(hashedPasswordBytes);
+            return hashedPassword.equals(this.hashedPassword);
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println("Check password : NoSuchAlgorithmException");
+            e.printStackTrace(); // Handle exception
+            return false;
+        }
+    }
+
+    //PRIVATE METHODS
+
+    private static String bytesToHex(byte[] bytes) {
+        StringBuilder result = new StringBuilder();
+        for (byte b : bytes) {
+            result.append(String.format("%02x", b));
+        }
+        return result.toString();
+    }
+
+    //CUSTOM EQUALS AND TOSTRING METHODS
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(getName(), user.getName()) && Objects.equals(getSurname(), user.getSurname()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getUserid(), user.getUserid()) && Objects.equals(getFiscalCode(), user.getFiscalCode());
+    }
+
+    @Override
+    public String toString() {
+        return "User{\n" +
+                " userid='" + userid + '\'' + ",\n" +
+                " name='" + name + '\'' + ",\n" +
+                " surname='" + surname + '\'' + ",\n" +
+                " email='" + email + '\'' + ",\n" +
+                " fiscalCode='" + fiscalCode + '\'' + "\n" +
+                " centerid='" + centerid + '\'' + "\n" +
+                '}';
+    }
+
+}
