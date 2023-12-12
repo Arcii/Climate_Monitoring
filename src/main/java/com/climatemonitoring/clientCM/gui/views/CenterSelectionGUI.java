@@ -5,6 +5,7 @@ import com.climatemonitoring.shared.models.MonitoringCenter;
 import com.climatemonitoring.shared.models.User;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.uiDesigner.core.Spacer;
 
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
@@ -145,7 +146,7 @@ public class CenterSelectionGUI extends JFrame {
      */
     private void $$$setupUI$$$() {
         centerRegistrationPanel = new JPanel();
-        centerRegistrationPanel.setLayout(new GridLayoutManager(6, 3, new Insets(0, 0, 0, 0), -1, -1));
+        centerRegistrationPanel.setLayout(new GridLayoutManager(7, 5, new Insets(0, 0, 0, 0), -1, -1));
         centerRegistrationPanel.setBackground(new Color(-9473675));
         centerRegistrationPanel.setForeground(new Color(-9473675));
         climatemonitoringLabel = new JLabel();
@@ -154,12 +155,12 @@ public class CenterSelectionGUI extends JFrame {
         if (climatemonitoringLabelFont != null) climatemonitoringLabel.setFont(climatemonitoringLabelFont);
         climatemonitoringLabel.setForeground(new Color(-1));
         climatemonitoringLabel.setText("Climate Monitoring");
-        centerRegistrationPanel.add(climatemonitoringLabel, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        centerRegistrationPanel.add(climatemonitoringLabel, new GridConstraints(0, 1, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         centersSelectionPanel = new JPanel();
         centersSelectionPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         centersSelectionPanel.setBackground(new Color(-9473675));
         centersSelectionPanel.setForeground(new Color(-9473675));
-        centerRegistrationPanel.add(centersSelectionPanel, new GridConstraints(4, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        centerRegistrationPanel.add(centersSelectionPanel, new GridConstraints(4, 1, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         centersScroll = new JScrollPane();
         centersSelectionPanel.add(centersScroll, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         centersTable = new JTable();
@@ -170,36 +171,42 @@ public class CenterSelectionGUI extends JFrame {
         if (centerRegistrationLabelFont != null) centerRegistrationLabel.setFont(centerRegistrationLabelFont);
         centerRegistrationLabel.setForeground(new Color(-1));
         centerRegistrationLabel.setText("Per completare la registrazione è necessario indicare il Centro di Monitaraggio di afferenza : ");
-        centerRegistrationPanel.add(centerRegistrationLabel, new GridConstraints(1, 0, 1, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        centerRegistrationPanel.add(centerRegistrationLabel, new GridConstraints(1, 1, 1, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         centerRegistrationLabel2 = new JLabel();
         centerRegistrationLabel2.setBackground(new Color(-1));
         Font centerRegistrationLabel2Font = this.$$$getFont$$$(null, -1, 16, centerRegistrationLabel2.getFont());
         if (centerRegistrationLabel2Font != null) centerRegistrationLabel2.setFont(centerRegistrationLabel2Font);
         centerRegistrationLabel2.setForeground(new Color(-1));
         centerRegistrationLabel2.setText(" - Se il Centro di Monitoraggio di tua afferenza è nella lista sottostante selezionalo e clicca su \"Completa Registrazione\"");
-        centerRegistrationPanel.add(centerRegistrationLabel2, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        centerRegistrationPanel.add(centerRegistrationLabel2, new GridConstraints(2, 1, 1, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         completeRegistrationButton = new JButton();
         completeRegistrationButton.setBackground(new Color(-13947600));
         completeRegistrationButton.setForeground(new Color(-1));
         completeRegistrationButton.setText("Completa Registrazione");
-        centerRegistrationPanel.add(completeRegistrationButton, new GridConstraints(5, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        centerRegistrationPanel.add(completeRegistrationButton, new GridConstraints(5, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         centerRegisrationLabel3 = new JLabel();
         centerRegisrationLabel3.setBackground(new Color(-1));
         Font centerRegisrationLabel3Font = this.$$$getFont$$$(null, -1, 16, centerRegisrationLabel3.getFont());
         if (centerRegisrationLabel3Font != null) centerRegisrationLabel3.setFont(centerRegisrationLabel3Font);
         centerRegisrationLabel3.setForeground(new Color(-1));
         centerRegisrationLabel3.setText(" - Se il tuo centro di afferenza non è già registrato clicca su \"Registra Centro\" per procedere con la registrazione del centro");
-        centerRegistrationPanel.add(centerRegisrationLabel3, new GridConstraints(3, 0, 1, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        centerRegistrationPanel.add(centerRegisrationLabel3, new GridConstraints(3, 1, 1, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         centerRegistrationButton = new JButton();
         centerRegistrationButton.setBackground(new Color(-13947600));
         centerRegistrationButton.setForeground(new Color(-1));
         centerRegistrationButton.setText("Registra Centro");
-        centerRegistrationPanel.add(centerRegistrationButton, new GridConstraints(5, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        centerRegistrationPanel.add(centerRegistrationButton, new GridConstraints(5, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         backButton = new JButton();
         backButton.setBackground(new Color(-13947600));
         backButton.setForeground(new Color(-1));
         backButton.setText("Indietro");
-        centerRegistrationPanel.add(backButton, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        centerRegistrationPanel.add(backButton, new GridConstraints(5, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final Spacer spacer1 = new Spacer();
+        centerRegistrationPanel.add(spacer1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(20, 20), null, null, 0, false));
+        final Spacer spacer2 = new Spacer();
+        centerRegistrationPanel.add(spacer2, new GridConstraints(0, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(20, 20), null, null, 0, false));
+        final Spacer spacer3 = new Spacer();
+        centerRegistrationPanel.add(spacer3, new GridConstraints(6, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(20, 20), null, null, 0, false));
     }
 
     /**

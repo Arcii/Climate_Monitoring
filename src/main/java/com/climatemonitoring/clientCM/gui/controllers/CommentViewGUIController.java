@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 import static com.climatemonitoring.clientCM.network.ClientManager.GetClientManager;
 
@@ -90,39 +91,51 @@ public class CommentViewGUIController {
     private void setUpViewAndTable(){
         String[] columnNames = {"Operatore", "Commenti"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-        ArrayList<String> commentsList;
+        ArrayList<String> commentsList = new ArrayList<>();
 
         switch(getCommentType()){
             case "vento":
                 getView().getCommentsInfoLabel().setText("I commenti lasciati per il " + commentType + " sono : ");
-                commentsList = getListComments(getSurveysAggregate().getWind_notes_list());
+                if(getSurveysAggregate().getWind_notes_list() != null && !Objects.equals(getSurveysAggregate().getWind_notes_list(), "")) {
+                    commentsList.addAll(getListComments(getSurveysAggregate().getWind_notes_list()));
+                }
                 break;
             case "umidità":
                 getView().getCommentsInfoLabel().setText("I commenti lasciati per l'" + commentType + " sono : ");
-                commentsList = getListComments(getSurveysAggregate().getHumidity_notes_list());
+                if(getSurveysAggregate().getHumidity_notes_list() != null && !Objects.equals(getSurveysAggregate().getHumidity_notes_list(), "")) {
+                    commentsList.addAll(getListComments(getSurveysAggregate().getHumidity_notes_list()));
+                }
                 break;
             case "pressione":
                 getView().getCommentsInfoLabel().setText("I commenti lasciati per la " + commentType + " sono : ");
-                commentsList = getListComments(getSurveysAggregate().getPressure_notes_list());
+                if(getSurveysAggregate().getPressure_notes_list() != null && !Objects.equals(getSurveysAggregate().getPressure_notes_list(), "")) {
+                    commentsList.addAll(getListComments(getSurveysAggregate().getPressure_notes_list()));
+                }
                 break;
             case "temperatura":
                 getView().getCommentsInfoLabel().setText("I commenti lasciati per la " + commentType + " sono : ");
-                commentsList = getListComments(getSurveysAggregate().getTemperature_notes_list());
+                if(getSurveysAggregate().getTemperature_notes_list() != null && !Objects.equals(getSurveysAggregate().getTemperature_notes_list(), "")) {
+                    commentsList.addAll(getListComments(getSurveysAggregate().getTemperature_notes_list()));
+                }
                 break;
             case "precipitazioni":
                 getView().getCommentsInfoLabel().setText("I commenti lasciati per le " + commentType + " sono : ");
-                commentsList = getListComments(getSurveysAggregate().getPrecipitation_notes_list());
+                if(getSurveysAggregate().getPrecipitation_notes_list() != null && !Objects.equals(getSurveysAggregate().getPrecipitation_notes_list(),"")) {
+                    commentsList.addAll(getListComments(getSurveysAggregate().getPrecipitation_notes_list()));
+                }
                 break;
             case "Altitudine dei ghiacciai":
                 getView().getCommentsInfoLabel().setText("I commenti lasciati per l'" + commentType + " sono : ");
-                commentsList = getListComments(getSurveysAggregate().getGlacial_altitude_notes_list());
+                if(getSurveysAggregate().getGlacial_altitude_notes_list() != null && !Objects.equals(getSurveysAggregate().getGlacial_altitude_notes_list(), "")) {
+                    commentsList.addAll(getListComments(getSurveysAggregate().getGlacial_altitude_notes_list()));
+                }
                 break;
             case "Massa dei ghiacciai":
                 getView().getCommentsInfoLabel().setText("I commenti lasciati per la " + commentType + " sono : ");
-                commentsList = getListComments(getSurveysAggregate().getGlacial_mass_notes_list());
+                if(getSurveysAggregate().getGlacial_mass_notes_list() != null && !Objects.equals(getSurveysAggregate().getGlacial_mass_notes_list(), "")) {
+                    commentsList.addAll(getListComments(getSurveysAggregate().getGlacial_mass_notes_list()));
+                }
                 break;
-            default:
-                commentsList = new ArrayList<>();
         }
 
         int count = 1;
