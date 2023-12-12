@@ -43,7 +43,10 @@ public class OperatorRegistrationGUI extends JFrame {
         setTitle("Climate Monitoring");
         setContentPane(operatorRegistrationPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1920, 1024);// To set fixed dimensions
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setSize(screenSize);
+        setMinimumSize(new Dimension(1000, 650));
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         new OperatorRegistrationGUIController(this);
     }
 

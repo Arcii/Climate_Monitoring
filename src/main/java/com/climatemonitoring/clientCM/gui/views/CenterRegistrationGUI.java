@@ -57,7 +57,10 @@ public class CenterRegistrationGUI extends JFrame {
         setTitle("Climate Monitoring");
         setContentPane(centerRegistrationPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1920, 1024);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setSize(screenSize);
+        setMinimumSize(new Dimension(1000, 650));
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         new CenterRegistrationGUIController(this, user, centersList);
     }
 

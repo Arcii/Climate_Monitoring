@@ -49,7 +49,10 @@ public class ClientHomeGUI extends JFrame {
         setTitle("Climate Monitoring");
         setContentPane(guestUserPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1920, 1024);// To set fixed dimensions
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setSize(screenSize);
+        setMinimumSize(new Dimension(1000, 650));
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         coordinatesSearchPanel.setSize(400, 400);
         nameSearchPanel.setSize(400, 400);
         new ClientHomeGUIController(this);

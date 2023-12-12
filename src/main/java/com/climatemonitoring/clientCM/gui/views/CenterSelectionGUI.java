@@ -36,7 +36,10 @@ public class CenterSelectionGUI extends JFrame {
         setTitle("Climate Monitoring");
         setContentPane(centerRegistrationPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1920, 1024);// To set fixed dimensions
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setSize(screenSize);
+        setMinimumSize(new Dimension(1000, 650));
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         new CenterSelectionGUIController(this, user, centersList);
     }
 
