@@ -14,24 +14,77 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Locale;
 
+/**
+ * The `CenterSelectionGUI` class represents the view where the user selects or chooses to create
+ * their climate monitoring center. It displays a list of available monitoring centers and provides
+ * options for the user to complete the registration process or register a new center.
+ *
+ * <p>
+ * Note: A user cannot register to the Climate Monitoring application as an Operator
+ * without selecting or creating a climate Monitoring Center to which he/she refers.
+ * </p>
+ *
+ * @author Lorenzo Cattapan 726459  (Varese)
+ * @version 1.0
+ * @see CenterSelectionGUIController
+ */
 public class CenterSelectionGUI extends JFrame {
 
-    //FIELDS
+    //*****************FIELDS*****************//
 
+    /**
+     * The main panel for center registration.
+     */
     private JPanel centerRegistrationPanel;
+    /**
+     * Label displaying the application name.
+     */
     private JLabel climatemonitoringLabel;
+    /**
+     * Label providing information about center registration.
+     */
     private JLabel centerRegistrationLabel;
+    /**
+     * Additional label for center registration information.
+     */
     private JLabel centerRegistrationLabel2;
+    /**
+     * Button for completing the registration process.
+     */
     private JButton completeRegistrationButton;
+    /**
+     * Label providing additional instructions for center registration.
+     */
     private JLabel centerRegisrationLabel3;
+    /**
+     * Table displaying available monitoring centers.
+     */
     private JTable centersTable;
+    /**
+     * Panel for displaying and scrolling through monitoring centers.
+     */
     private JPanel centersSelectionPanel;
+    /**
+     * Button for registering a new monitoring center.
+     */
     private JButton centerRegistrationButton;
+    /**
+     * Button for navigating back to the previous step.
+     */
     private JButton backButton;
+    /**
+     * Scroll pane for the monitoring centers table.
+     */
     private JScrollPane centersScroll;
 
-    //CONSTRUCTOR
+    //*****************CONSTRUCTOR*****************//
 
+    /**
+     * Constructs an instance of the `CenterSelectionGUI`.
+     *
+     * @param user        The user associated with the registration process.
+     * @param centersList The list of available monitoring centers.
+     */
     public CenterSelectionGUI(User user, ArrayList<MonitoringCenter> centersList) {
         setTitle("Climate Monitoring");
         setContentPane(centerRegistrationPanel);
@@ -43,92 +96,202 @@ public class CenterSelectionGUI extends JFrame {
         new CenterSelectionGUIController(this, user, centersList);
     }
 
-    //GETTER AND SETTER
+    //*****************GETTER AND SETTER*****************//
 
+    /**
+     * Gets the main panel for center registration.
+     *
+     * @return The center registration panel.
+     */
     public JPanel getCenterRegistrationPanel() {
         return centerRegistrationPanel;
     }
 
+    /**
+     * Sets the center registration panel.
+     *
+     * @param centerRegistrationPanel The center registration panel to set.
+     */
     public void setCenterRegistrationPanel(JPanel centerRegistrationPanel) {
         this.centerRegistrationPanel = centerRegistrationPanel;
     }
 
+    /**
+     * Gets the label displaying the application name.
+     *
+     * @return The label displaying the application name.
+     */
     public JLabel getClimatemonitoringLabel() {
         return climatemonitoringLabel;
     }
 
+    /**
+     * Sets the label displaying the application name.
+     *
+     * @param climatemonitoringLabel The label to set.
+     */
     public void setClimatemonitoringLabel(JLabel climatemonitoringLabel) {
         this.climatemonitoringLabel = climatemonitoringLabel;
     }
 
+    /**
+     * Gets the label providing information about center registration.
+     *
+     * @return The label providing information about center registration.
+     */
     public JLabel getCenterRegistrationLabel() {
         return centerRegistrationLabel;
     }
 
+    /**
+     * Sets the label providing information about center registration.
+     *
+     * @param centerRegistrationLabel The label to set.
+     */
     public void setCenterRegistrationLabel(JLabel centerRegistrationLabel) {
         this.centerRegistrationLabel = centerRegistrationLabel;
     }
 
+    /**
+     * Gets the additional label for center registration information.
+     *
+     * @return The additional label for center registration information.
+     */
     public JLabel getCenterRegistrationLabel2() {
         return centerRegistrationLabel2;
     }
 
+    /**
+     * Sets the additional label for center registration information.
+     *
+     * @param centerRegistrationLabel2 The additional label to set.
+     */
     public void setCenterRegistrationLabel2(JLabel centerRegistrationLabel2) {
         this.centerRegistrationLabel2 = centerRegistrationLabel2;
     }
 
+    /**
+     * Gets the button for completing the registration process.
+     *
+     * @return The button for completing the registration process.
+     */
     public JButton getCompleteRegistrationButton() {
         return completeRegistrationButton;
     }
 
+    /**
+     * Sets the button for completing the registration process.
+     *
+     * @param completeRegistrationButton The button to set.
+     */
     public void setCompleteRegistrationButton(JButton completeRegistrationButton) {
         this.completeRegistrationButton = completeRegistrationButton;
     }
 
+    /**
+     * Gets the label providing additional instructions for center registration.
+     *
+     * @return The label providing additional instructions for center registration.
+     */
     public JLabel getCenterRegisrationLabel3() {
         return centerRegisrationLabel3;
     }
 
+    /**
+     * Sets the label providing additional instructions for center registration.
+     *
+     * @param centerRegisrationLabel3 The label to set.
+     */
     public void setCenterRegisrationLabel3(JLabel centerRegisrationLabel3) {
         this.centerRegisrationLabel3 = centerRegisrationLabel3;
     }
 
+    /**
+     * Gets the table displaying available monitoring centers.
+     *
+     * @return The table displaying available monitoring centers.
+     */
     public JTable getCentersTable() {
         return centersTable;
     }
 
+    /**
+     * Sets the table displaying available monitoring centers.
+     *
+     * @param centersTable The table to set.
+     */
     public void setCentersTable(JTable centersTable) {
         this.centersTable = centersTable;
     }
 
+    /**
+     * Gets the panel for displaying and scrolling through monitoring centers.
+     *
+     * @return The panel for displaying and scrolling through monitoring centers.
+     */
     public JPanel getCentersSelectionPanel() {
         return centersSelectionPanel;
     }
 
+    /**
+     * Sets the panel for displaying and scrolling through monitoring centers.
+     *
+     * @param centersSelectionPanel The panel to set.
+     */
     public void setCentersSelectionPanel(JPanel centersSelectionPanel) {
         this.centersSelectionPanel = centersSelectionPanel;
     }
 
+    /**
+     * Gets the button for registering a new monitoring center.
+     *
+     * @return The button for registering a new monitoring center.
+     */
     public JButton getCenterRegistrationButton() {
         return centerRegistrationButton;
     }
 
+    /**
+     * Sets the button for registering a new monitoring center.
+     *
+     * @param centerRegistrationButton The button to set.
+     */
     public void setCenterRegistrationButton(JButton centerRegistrationButton) {
         this.centerRegistrationButton = centerRegistrationButton;
     }
 
+    /**
+     * Gets the button for navigating back to the previous step.
+     *
+     * @return The button for navigating back to the previous step.
+     */
     public JButton getBackButton() {
         return backButton;
     }
 
+    /**
+     * Sets the button for navigating back to the previous step.
+     *
+     * @param backButton The button to set.
+     */
     public void setBackButton(JButton backButton) {
         this.backButton = backButton;
     }
 
+    /**
+     * Gets the scroll pane for the monitoring centers table.
+     *
+     * @return The scroll pane for the monitoring centers table.
+     */
     public JScrollPane getCentersScroll() {
         return centersScroll;
     }
 
+    /**
+     * Sets the scroll pane for the monitoring centers table.
+     *
+     * @param centersScroll The scroll pane to set.
+     */
     public void setCentersScroll(JScrollPane centersScroll) {
         this.centersScroll = centersScroll;
     }

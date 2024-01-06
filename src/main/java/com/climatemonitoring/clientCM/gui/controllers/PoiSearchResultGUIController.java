@@ -15,66 +15,134 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * Controller class for managing the interaction between the PoiSearchResultGUI view and the underlying data.
+ * Handles the display of search results, user actions, and navigation.
+ *
+ * @author Lorenzo Cattapan 726459 (Varese)
+ * @version 1.0
+ * @see PoiSearchResultGUI
+ */
 public class PoiSearchResultGUIController {
 
-    //FIELDS
+    //*****************FIELDS*****************//
 
+    /**
+     * The associated PoiSearchResultGUI view.
+     */
     private PoiSearchResultGUI view;
+    /**
+     * The client manager responsible for communication with the server.
+     */
     private final ClientManager clientManager;
+    /**
+     * The list of PointOfInterest objects representing the search results.
+     */
     private ArrayList<PointOfInterest> searchResults;
+    /**
+     * The User object representing the current user. Null if the user is a guest.
+     */
     private User user;
 
-    //CONSTRUCTOR
+    //*****************CONSTRUCTOR*****************//
 
+    /**
+     * Constructs a new instance of PoiSearchResultGUIController.
+     *
+     * @param view          The PoiSearchResultGUI view associated with this controller.
+     * @param searchResults The list of PointOfInterest objects representing the search results.
+     * @param user          The User object representing the current user. Null for guest users.
+     */
     public PoiSearchResultGUIController(PoiSearchResultGUI view, ArrayList<PointOfInterest> searchResults, User user) {
         this.view = view;
         this.clientManager = ClientManager.GetClientManager();
         this.searchResults = searchResults;
         this.user = user;
 
+        // Set up the table with search results.
         setUpTable();
 
         //ADD Listeners
         AddListeners();
     }
 
-    //GETTER AND SETTER
+    //*****************GETTER AND SETTER*****************//
 
+    /**
+     * Gets the associated PoiSearchResultGUI view.
+     *
+     * @return The PoiSearchResultGUI view.
+     */
     public PoiSearchResultGUI getView() {
         return view;
     }
 
+    /**
+     * Sets the associated PoiSearchResultGUI view.
+     *
+     * @param view The PoiSearchResultGUI view to set.
+     */
     public void setView(PoiSearchResultGUI view) {
         this.view = view;
     }
 
+    /**
+     * Gets the client manager responsible for communication with the server.
+     *
+     * @return The ClientManager object.
+     */
     public ClientManager getClientManager() {
         return clientManager;
     }
 
+    /**
+     * Gets the list of PointOfInterest objects representing the search results.
+     *
+     * @return The list of PointOfInterest objects.
+     */
     public ArrayList<PointOfInterest> getSearchResults() {
         return searchResults;
     }
 
+    /**
+     * Sets the list of PointOfInterest objects representing the search results.
+     *
+     * @param searchResults The list of PointOfInterest objects to set.
+     */
     public void setSearchResults(ArrayList<PointOfInterest> searchResults) {
         this.searchResults = searchResults;
     }
 
+    /**
+     * Gets the User object representing the current user. Null if the user is a guest.
+     *
+     * @return The User object.
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Sets the User object representing the current user. Null for guest users.
+     *
+     * @param user The User object to set.
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
-    //PRIVATE ADD LISTENERS METHOD
+    //*****************PRIVATE ADD LISTENERS METHOD*****************//
 
+    /**
+     * Adds listeners for user actions on the PoiSearchResultGUI view.
+     */
     private void AddListeners(){
 
+        // Add listener for the "Back" button.
         view.getBackButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Navigate back to the appropriate home screen based on the user type.
                 if(getUser() == null) {
                     ClientHomeGUI form = new ClientHomeGUI();
                     form.setVisible(true);
@@ -87,6 +155,7 @@ public class PoiSearchResultGUIController {
             }
         });
 
+        // Add listener for the "Select POI" button.
         view.getSelectPoiButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -116,8 +185,11 @@ public class PoiSearchResultGUIController {
         });
     }
 
-    //PRIVATE METHODS
+    //*****************PRIVATE METHODS*****************//
 
+    /**
+     * Sets up the JTable with search results in the PoiSearchResultGUI view.
+     */
     private void setUpTable(){
         String[] columnNames = {"ID", "Nome", "Stato", "Latitudine", "Longitudine"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);

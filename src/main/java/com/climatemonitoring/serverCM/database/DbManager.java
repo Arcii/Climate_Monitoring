@@ -16,16 +16,57 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
+/**
+ * The `DbManager` class is responsible for managing the connection pool and
+ * executing various database operations on a PostgreSQL database. It follows
+ * the Singleton design pattern to ensure a single instance is created for the
+ * entire application, providing a centralized point for managing the database
+ * connections.
+ *
+ * <p>
+ * This class initializes and maintains a connection pool using Apache DBCP (Database
+ * Connection Pooling) to efficiently handle database connections and improve
+ * performance. It also performs operations such as creating the database, creating
+ * tables, initializing the database with data, and reconnecting to the database
+ * when needed.
+ * </p>
+ *
+ * @author Lorenzo Cattapan 726459 (Varese)
+ * @version 1.0
+ * @see PredefinedQuery
+ * @see com.climatemonitoring.serverCM.network.RemoteDatabaseService
+ */
 public class DbManager {
 
-    //FIELDS
+    //*****************FIELDS*****************//
 
+    /**
+     * Singleton instance of the DbManager
+     */
     private static DbManager controller;
+    /**
+     * Connection to the PostgreSQL server
+     */
     private Connection db_server_connection;
+    /**
+     * Database name
+     */
     private static final String DB_NAME = "dbcm";
+    /**
+     * JDBC URL for connecting to the PostgreSQL database
+     */
     private static final String JDBC_URL = "jdbc:postgresql://localhost/dbcm";
+    /**
+     * JDBC username
+     */
     private static String jdbcUser;
+    /**
+     * JDBC password
+     */
     private static String jdbcPassword;
+    /**
+     * DBCP DataSource for connection pooling
+     */
     private static BasicDataSource dataSource;
 
 
@@ -41,8 +82,17 @@ public class DbManager {
         dataSource.setMaxOpenPreparedStatements(400);
     }
 
-    //PRIVATE CONSTRUCTOR FOR SINGLETON DESIGN PATTERN
+    //*****************PRIVATE CONSTRUCTOR FOR SINGLETON DESIGN PATTERN*****************//
 
+    /**
+     * Private constructor for the singleton pattern. It reads database configuration
+     * from a file, establishes a connection to the database, and performs necessary
+     * setup operations such as creating the database and tables if they do not exist.
+     *
+     * @param username The username for accessing the database.
+     * @param password The password for accessing the database.
+     * @throws FileNotFoundException If the database configuration file is not found.
+     */
     private DbManager(String username, String password) throws FileNotFoundException{
         BufferedReader db_Config;
         InputStream db_ConfigStream = getClass().getClassLoader().getResourceAsStream("config/DBconfig.config");
@@ -74,8 +124,16 @@ public class DbManager {
         }
     }
 
-    //SINGLETON
+    //*****************SINGLETON*****************//
 
+    /**
+     * Returns the singleton instance of the `DbManager`. If the instance does not
+     * exist, it creates a new one with the provided username and password.
+     *
+     * @param username The username for accessing the database.
+     * @param password The password for accessing the database.
+     * @return The singleton instance of the `DbManager`.
+     */
     public static DbManager GetDbManager(String username, String password){
         if(controller == null){
             try {
@@ -89,48 +147,105 @@ public class DbManager {
         return controller;
     }
 
-    //GETTER AND SETTER
+    //*****************GETTER AND SETTER*****************//
 
+    /**
+     * Retrieves the connection to the PostgreSQL database.
+     * This connection is a connection not in the pool and used only by the server to create and initialize
+     * the database.
+     *
+     * @return The connection to the PostgreSQL database used by the server.
+     */
     public Connection getDb_server_connection() {
         return db_server_connection;
     }
 
+    /**
+     * Sets the connection to the PostgreSQL database.
+     * This connection is a connection not in the pool and used only by the server to create and initialize
+     * the database.
+     *
+     * @param db_server_connection The new connection to the PostgreSQL database used by the server.
+     */
     public void setDb_server_connection(Connection db_server_connection) {
         this.db_server_connection = db_server_connection;
     }
 
+    /**
+     * Retrieves a connection to the PostgreSQL database from the connection pool.
+     *
+     * @return A connection to the PostgreSQL database.
+     * @throws SQLException If a SQL exception occurs while getting the connection.
+     */
     public Connection getDb_connection() throws SQLException{
         return dataSource.getConnection();
     }
 
+    /**
+     * Retrieves the JDBC username used for connecting to the database.
+     *
+     * @return The JDBC username.
+     */
     public static String getJdbcUser() {
         return jdbcUser;
     }
 
+    /**
+     * Sets the JDBC username used for connecting to the database.
+     *
+     * @param jdbcUser The new JDBC username.
+     */
     public static void setJdbcUser(String jdbcUser) {
         DbManager.jdbcUser = jdbcUser;
         dataSource.setUsername(jdbcUser);
     }
 
+    /**
+     * Retrieves the JDBC password used for connecting to the database.
+     *
+     * @return The JDBC password.
+     */
     public static String getJdbcPassword() {
         return jdbcPassword;
     }
 
+    /**
+     * Sets the JDBC password used for connecting to the database.
+     *
+     * @param jdbcPassword The new JDBC password.
+     */
     public static void setJdbcPassword(String jdbcPassword) {
         DbManager.jdbcPassword = jdbcPassword;
         dataSource.setPassword(jdbcPassword);
     }
 
+    /**
+     * Retrieves the Apache DBCP DataSource used for connection pooling.
+     *
+     * @return The Apache DBCP DataSource.
+     */
     public static BasicDataSource getDataSource() {
         return dataSource;
     }
 
+    /**
+     * Sets the Apache DBCP DataSource used for connection pooling.
+     *
+     * @param dataSource The new Apache DBCP DataSource.
+     */
     public static void setDataSource(BasicDataSource dataSource) {
         DbManager.dataSource = dataSource;
     }
 
-    //PUBLIC METHODS
+    //*****************PUBLIC METHODS*****************//
 
+    /**
+     * Establishes a connection to the database using the provided URL, username, and password.
+     *
+     * @param url      The URL of the database server.
+     * @param username The username for accessing the database.
+     * @param password The password for accessing the database.
+     */
     public void ConnectToDb(String url, String username, String password) {
         System.out.println("Connecting to database ...");
         try {
@@ -144,6 +259,9 @@ public class DbManager {
         }
     }
 
+    /**
+     * Closes the database connection pool.
+     */
     public static void closeDataSource() {
         System.out.println("Closing database connection pool ...");
         if (dataSource != null) {
@@ -158,8 +276,12 @@ public class DbManager {
         }
     }
 
-    //PRIVATE METHODS
+    //*****************PRIVATE METHODS*****************//
 
+    /**
+     * Reconnects to the PostgreSQL database by closing the existing connection and
+     * establishing a new one using the JDBC URL, username, and password.
+     */
     private void ReconnectToDb() {
         System.out.println("Reconnecting to database ...");
         try {
@@ -172,6 +294,11 @@ public class DbManager {
         }
     }
 
+    /**
+     * Checks if the database with the specified name already exists.
+     *
+     * @return True if the database exists; false otherwise.
+     */
     private boolean CheckDbExists() {
         System.out.println("Checking if database dbcm already exists ...");
         String query = PredefinedQuery.select_queries.get(PredefinedQuery.Select.DATABASE);
@@ -191,6 +318,9 @@ public class DbManager {
         return db_exists;
     }
 
+    /**
+     * Creates the main database if it does not already exist.
+     */
     private void DbCreate(){
         System.out.println("Creating database ...");
         try (Statement statement = getDb_server_connection().createStatement()){
@@ -204,6 +334,9 @@ public class DbManager {
         }
     }
 
+    /**
+     * Creates the necessary tables within the database.
+     */
     private void DbCreateTables(){
         System.out.println("Creating Tables ...");
         try(Statement statement = getDb_server_connection().createStatement()){
@@ -219,6 +352,10 @@ public class DbManager {
         }
     }
 
+    /**
+     * Initializes the database by checking if the Point of Interest (POI) table
+     * contains any data. If not, it populates the table with data.
+     */
     private void DbInitialize(){
         System.out.println("Initializing Database ...");
         String query = PredefinedQuery.select_queries.get(PredefinedQuery.Select.POI);
@@ -234,6 +371,10 @@ public class DbManager {
         }
     }
 
+    /**
+     * Populates the "coordinatemonitoraggio" table in the database with data from
+     * an Excel file containing geonames and coordinates.
+     */
     private void DbPopulate(){
         System.out.println("Populating table \"coordinatemonitoraggio\" ...");
         DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
@@ -241,6 +382,7 @@ public class DbManager {
         try {
             // Read Excel file
             InputStream inputStream = getClass().getResourceAsStream("/config/geonames-and-coordinates.xlsx");
+            assert inputStream != null;
             XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
             XSSFSheet sheet = workbook.getSheetAt(0); // Assuming the data is in the first sheet
 

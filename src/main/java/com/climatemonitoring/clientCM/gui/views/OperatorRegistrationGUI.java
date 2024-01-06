@@ -12,33 +12,106 @@ import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.util.Locale;
 
+/**
+ * OperatorRegistrationGUI class represents the graphical user interface for the Operator registration process.
+ * It allows new operators to register by providing necessary information such as name, surname, fiscal code, email, username, and password.
+ * The class includes fields for user input, labels, buttons, and a controller to handle user interactions.
+ *
+ * @author Lorenzo Cattapan 726459 (Varese)
+ * @version 1.0
+ * @see OperatorRegistrationGUIController
+ */
 public class OperatorRegistrationGUI extends JFrame {
 
-    //FIELDS
+    //*****************FIELDS*****************//
 
+    /**
+     * The main panel for the Operator Registration GUI.
+     */
     private JPanel operatorRegistrationPanel;
+    /**
+     * Label displaying the application name.
+     */
     private JLabel climatemonitoringLabel;
+    /**
+     * Information label guiding the user through the registration process.
+     */
     private JLabel registrationFormInfoLabel;
+    /**
+     * Panel containing the registration form fields.
+     */
     private JPanel registrationFormPanel;
+    /**
+     * Text field for entering the operator's name.
+     */
     private JTextField nameField;
+    /**
+     * Text field for entering the operator's surname.
+     */
     private JTextField surnameField;
+    /**
+     * Text field for entering the operator's fiscal code.
+     */
     private JTextField fiscalCodeField;
+    /**
+     * Text field for entering the operator's email address.
+     */
     private JTextField emailField;
+    /**
+     * Text field for entering the desired username.
+     */
     private JTextField userIdField;
+    /**
+     * Password field for entering the desired password.
+     */
     private JPasswordField passwordField;
+    /**
+     * Password field for confirming the entered password.
+     */
     private JPasswordField confirmPasswordField;
+    /**
+     * Label indicating the purpose of the name field.
+     */
     private JLabel nameLabel;
+    /**
+     * Label indicating the purpose of the surname field.
+     */
     private JLabel surnameLabel;
+    /**
+     * Label indicating the purpose of the fiscal code field.
+     */
     private JLabel fiscalCodeLabel;
+    /**
+     * Label indicating the purpose of the email field.
+     */
     private JLabel emailLabel;
+    /**
+     * Label indicating the purpose of the username field.
+     */
     private JLabel userIdLabel;
+    /**
+     * Label indicating the purpose of the password field.
+     */
     private JLabel passwordLabel;
+    /**
+     * Label indicating the purpose of the confirmPassword field.
+     */
     private JLabel confirmPasswordLabel;
+    /**
+     * Button to proceed with the registration process.
+     */
     private JButton continueRegistrationButton;
+    /**
+     * Button to go back to the previous screen.
+     */
     private JButton backButton;
 
-    //CONSTRUCTORS
+    //*****************CONSTRUCTORS*****************//
 
+    /**
+     * Default constructor for OperatorRegistrationGUI.
+     * Initializes the GUI components and sets up the basic layout.
+     */
     public OperatorRegistrationGUI() {
         setTitle("Climate Monitoring");
         setContentPane(operatorRegistrationPanel);
@@ -50,6 +123,12 @@ public class OperatorRegistrationGUI extends JFrame {
         new OperatorRegistrationGUIController(this);
     }
 
+    /**
+     * Constructor for OperatorRegistrationGUI pre-filled with user data.
+     * Used when the registration process is initiated from an existing user.
+     *
+     * @param user The user object with pre-filled information.
+     */
     public OperatorRegistrationGUI(User user) {
         setTitle("Climate Monitoring");
         setContentPane(operatorRegistrationPanel);
@@ -63,164 +142,364 @@ public class OperatorRegistrationGUI extends JFrame {
         new OperatorRegistrationGUIController(this);
     }
 
-    //GETTER AND SETTER
+    //*****************GETTER AND SETTER*****************//
 
+    /**
+     * Gets the main panel for the Operator Registration GUI.
+     *
+     * @return The JPanel representing the Operator Registration panel.
+     */
     public JPanel getOperatorRegistrationPanel() {
         return operatorRegistrationPanel;
     }
 
+    /**
+     * Sets the main panel for the Operator Registration GUI.
+     *
+     * @param operatorRegistrationPanel The JPanel to set as the Operator Registration panel.
+     */
     public void setOperatorRegistrationPanel(JPanel operatorRegistrationPanel) {
         this.operatorRegistrationPanel = operatorRegistrationPanel;
     }
 
+    /**
+     * Gets the label displaying the application name.
+     *
+     * @return The JLabel representing the climatemonitoringLabel.
+     */
     public JLabel getClimatemonitoringLabel() {
         return climatemonitoringLabel;
     }
 
+    /**
+     * Sets the label displaying the application name.
+     *
+     * @param climatemonitoringLabel The JLabel to set as climatemonitoringLabel.
+     */
     public void setClimatemonitoringLabel(JLabel climatemonitoringLabel) {
         this.climatemonitoringLabel = climatemonitoringLabel;
     }
 
+    /**
+     * Gets the information label guiding the user through the registration process.
+     *
+     * @return The JLabel representing the registrationFormInfoLabel.
+     */
     public JLabel getRegistrationFormInfoLabel() {
         return registrationFormInfoLabel;
     }
 
+    /**
+     * Sets the information label guiding the user through the registration process.
+     *
+     * @param registrationFormInfoLabel The JLabel to set as registrationFormInfoLabel.
+     */
     public void setRegistrationFormInfoLabel(JLabel registrationFormInfoLabel) {
         this.registrationFormInfoLabel = registrationFormInfoLabel;
     }
 
+    /**
+     * Gets the panel containing the registration form fields.
+     *
+     * @return The JPanel representing the registrationFormPanel.
+     */
     public JPanel getRegistrationFormPanel() {
         return registrationFormPanel;
     }
 
+    /**
+     * Sets the panel containing the registration form fields.
+     *
+     * @param registrationFormPanel The JPanel to set as registrationFormPanel.
+     */
     public void setRegistrationFormPanel(JPanel registrationFormPanel) {
         this.registrationFormPanel = registrationFormPanel;
     }
 
+    /**
+     * Gets the text field for entering the operator's name.
+     *
+     * @return The JTextField representing the nameField.
+     */
     public JTextField getNameField() {
         return nameField;
     }
 
+    /**
+     * Sets the text field for entering the operator's name.
+     *
+     * @param nameField The JTextField to set as nameField.
+     */
     public void setNameField(JTextField nameField) {
         this.nameField = nameField;
     }
 
+    /**
+     * Gets the text field for entering the operator's surname.
+     *
+     * @return The JTextField representing the surnameField.
+     */
     public JTextField getSurnameField() {
         return surnameField;
     }
 
+    /**
+     * Sets the text field for entering the operator's surname.
+     *
+     * @param surnameField The JTextField to set as surnameField.
+     */
     public void setSurnameField(JTextField surnameField) {
         this.surnameField = surnameField;
     }
 
+    /**
+     * Gets the text field for entering the operator's fiscal code.
+     *
+     * @return The JTextField representing the fiscalCodeField.
+     */
     public JTextField getFiscalCodeField() {
         return fiscalCodeField;
     }
 
+    /**
+     * Sets the text field for entering the operator's fiscal code.
+     *
+     * @param fiscalCodeField The JTextField to set as fiscalCodeField.
+     */
     public void setFiscalCodeField(JTextField fiscalCodeField) {
         this.fiscalCodeField = fiscalCodeField;
     }
 
+    /**
+     * Gets the text field for entering the operator's email.
+     *
+     * @return The JTextField representing the emailField.
+     */
     public JTextField getEmailField() {
         return emailField;
     }
 
+    /**
+     * Sets the text field for entering the operator's email.
+     *
+     * @param emailField The JTextField to set as emailField.
+     */
     public void setEmailField(JTextField emailField) {
         this.emailField = emailField;
     }
 
+    /**
+     * Gets the text field for entering the operator's userid.
+     *
+     * @return The JTextField representing the userIdField.
+     */
     public JTextField getUserIdField() {
         return userIdField;
     }
 
+    /**
+     * Sets the text field for entering the operator's username.
+     *
+     * @param userIdField The JTextField to set as userIdField.
+     */
     public void setUserIdField(JTextField userIdField) {
         this.userIdField = userIdField;
     }
 
+    /**
+     * Gets the password field for entering the operator's password.
+     *
+     * @return The JPasswordField representing the passwordField.
+     */
     public JPasswordField getPasswordField() {
         return passwordField;
     }
 
+    /**
+     * Sets the password field for entering the operator's password.
+     *
+     * @param passwordField The JPasswordField to set as passwordField.
+     */
     public void setPasswordField(JPasswordField passwordField) {
         this.passwordField = passwordField;
     }
 
+    /**
+     * Gets the password field for confirming the operator's password.
+     *
+     * @return The JPasswordField representing the confirmPasswordField.
+     */
     public JPasswordField getConfirmPasswordField() {
         return confirmPasswordField;
     }
 
+    /**
+     * Sets the password field for confirming the operator's password.
+     *
+     * @param confirmPasswordField The JPasswordField to set as confirmPasswordField.
+     */
     public void setConfirmPasswordField(JPasswordField confirmPasswordField) {
         this.confirmPasswordField = confirmPasswordField;
     }
 
+    /**
+     * Gets the label for displaying the "Name" field.
+     *
+     * @return The JLabel representing the nameLabel.
+     */
     public JLabel getNameLabel() {
         return nameLabel;
     }
 
+    /**
+     * Sets the label for displaying the "Name" field.
+     *
+     * @param nameLabel The JLabel to set as nameLabel.
+     */
     public void setNameLabel(JLabel nameLabel) {
         this.nameLabel = nameLabel;
     }
 
+    /**
+     * Gets the label for displaying the "Surname" field.
+     *
+     * @return The JLabel representing the surnameLabel.
+     */
     public JLabel getSurnameLabel() {
         return surnameLabel;
     }
 
+    /**
+     * Sets the label for displaying the "Surname" field.
+     *
+     * @param surnameLabel The JLabel to set as surnameLabel.
+     */
     public void setSurnameLabel(JLabel surnameLabel) {
         this.surnameLabel = surnameLabel;
     }
 
+    /**
+     * Gets the label for displaying the "Fiscal Code" field.
+     *
+     * @return The JLabel representing the fiscalCodeLabel.
+     */
     public JLabel getFiscalCodeLabel() {
         return fiscalCodeLabel;
     }
 
+    /**
+     * Sets the label for displaying the "Fiscal Code" field.
+     *
+     * @param fiscalCodeLabel The JLabel to set as fiscalCodeLabel.
+     */
     public void setFiscalCodeLabel(JLabel fiscalCodeLabel) {
         this.fiscalCodeLabel = fiscalCodeLabel;
     }
 
+    /**
+     * Gets the label for displaying the "Email" field.
+     *
+     * @return The JLabel representing the emailLabel.
+     */
     public JLabel getEmailLabel() {
         return emailLabel;
     }
 
+    /**
+     * Sets the label for displaying the "Email" field.
+     *
+     * @param emailLabel The JLabel to set as emailLabel.
+     */
     public void setEmailLabel(JLabel emailLabel) {
         this.emailLabel = emailLabel;
     }
 
+    /**
+     * Gets the label for displaying the "Username" field.
+     *
+     * @return The JLabel representing the userIdLabel.
+     */
     public JLabel getUserIdLabel() {
         return userIdLabel;
     }
 
+    /**
+     * Sets the label for displaying the "Username" field.
+     *
+     * @param userIdLabel The JLabel to set as userIdLabel.
+     */
     public void setUserIdLabel(JLabel userIdLabel) {
         this.userIdLabel = userIdLabel;
     }
 
+    /**
+     * Gets the label for displaying the "Password" field.
+     *
+     * @return The JLabel representing the passwordLabel.
+     */
     public JLabel getPasswordLabel() {
         return passwordLabel;
     }
 
+    /**
+     * Sets the label for displaying the "Password" field.
+     *
+     * @param passwordLabel The JLabel to set as passwordLabel.
+     */
     public void setPasswordLabel(JLabel passwordLabel) {
         this.passwordLabel = passwordLabel;
     }
 
+    /**
+     * Gets the label for displaying the "Confirm Password" field.
+     *
+     * @return The JLabel representing the confirmPasswordLabel.
+     */
     public JLabel getConfirmPasswordLabel() {
         return confirmPasswordLabel;
     }
 
+    /**
+     * Sets the label for displaying the "Confirm Password" field.
+     *
+     * @param confirmPasswordLabel The JLabel to set as confirmPasswordLabel.
+     */
     public void setConfirmPasswordLabel(JLabel confirmPasswordLabel) {
         this.confirmPasswordLabel = confirmPasswordLabel;
     }
 
+    /**
+     * Gets the button for continuing the registration process.
+     *
+     * @return The JButton representing the continueRegistrationButton.
+     */
     public JButton getContinueRegistrationButton() {
         return continueRegistrationButton;
     }
 
+    /**
+     * Sets the button for continuing the registration process.
+     *
+     * @param continueRegistrationButton The JButton to set as continueRegistrationButton.
+     */
     public void setContinueRegistrationButton(JButton continueRegistrationButton) {
         this.continueRegistrationButton = continueRegistrationButton;
     }
 
+    /**
+     * Gets the button for navigating back in the registration process.
+     *
+     * @return The JButton representing the backButton.
+     */
     public JButton getBackButton() {
         return backButton;
     }
 
+    /**
+     * Sets the button for navigating back in the registration process.
+     *
+     * @param backButton The JButton to set as backButton.
+     */
     public void setBackButton(JButton backButton) {
         this.backButton = backButton;
     }

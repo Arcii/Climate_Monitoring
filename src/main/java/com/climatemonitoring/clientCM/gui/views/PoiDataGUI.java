@@ -15,62 +15,224 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Locale;
 
+/**
+ * This class represents the GUI view where the aggregate data for a Point Of Interest (POI) is displayed.
+ * It extends the JFrame class and is associated with the PoiDataGUIController for handling user interactions.
+ * The GUI displays information related to SurveysAggregate for a specific PointOfInterest.
+ *
+ * @author Lorenzo Cattapan 726459 (Varese)
+ * @version 1.0
+ * @see PoiDataGUIController
+ */
 public class PoiDataGUI extends JFrame {
 
-    //FIELDS
+    //*****************FIELDS*****************//
 
+    /**
+     * The main panel that holds the entire Point Of Interest (POI) data.
+     */
     private JPanel poiDataPanel;
+    /**
+     * A label displaying the title or branding for the Climate Monitoring application.
+     */
     private JLabel climatemonitoringLabel;
+    /**
+     * A label displaying information related to the Point Of Interest (POI).
+     */
     private JLabel poi_infoLabel;
+    /**
+     * The panel containing the search results for the POI.
+     */
     private JPanel searchResultPanel;
+    /**
+     * The scroll pane for the search result table.
+     */
     private JScrollPane searchResultScroll;
+    /**
+     * The table displaying search results related to the POI.
+     */
     private JTable searchResultTable;
+    /**
+     * A label displaying the count of search results.
+     */
     private JLabel countLabel;
+    /**
+     * A label displaying the number of climate monitoring centers related to the POI.
+     */
     private JLabel centersNumberLabel;
+    /**
+     * A label displaying the timestamp of the oldest survey related to the POI.
+     */
     private JLabel oldestSurveyLabel;
+    /**
+     * A label displaying the timestamp of the most recent survey related to the POI.
+     */
     private JLabel recentSurveyLabel;
+    /**
+     * The main panel containing general data related to the POI.
+     */
     private JPanel generalDataPanel;
+    /**
+     * The main panel containing various data panels related to the POI.
+     */
     private JPanel dataPanel;
+    /**
+     * The panel containing wind-related data.
+     */
     private JPanel windDataPanel;
+    /**
+     * A label displaying the average wind score.
+     */
     private JLabel windAvgLabel;
+    /**
+     * A label displaying the maximum wind score.
+     */
     private JLabel windMaxLabel;
+    /**
+     * A label displaying the minimum wind score.
+     */
     private JLabel windMinLabel;
+    /**
+     * The panel containing humidity-related data.
+     */
     private JPanel humidityDataPanel;
+    /**
+     * A label displaying the average humidity.
+     */
     private JLabel humidityAvgLabel;
+    /**
+     * A label displaying the maximum humidity.
+     */
     private JLabel humidityMaxLabel;
+    /**
+     * A label displaying the minimum humidity.
+     */
     private JLabel humidityMinLabel;
+    /**
+     * The panel containing pressure-related data.
+     */
     private JPanel pressureDataLabel;
+    /**
+     * A label displaying the average atmospheric pressure score.
+     */
     private JLabel pressureAvgLabel;
+    /**
+     * A label displaying the maximum atmospheric pressure.
+     */
     private JLabel pressureMaxLabel;
+    /**
+     * A label displaying the minimum atmospheric pressure.
+     */
     private JLabel pressureMinLabel;
+    /**
+     * The panel containing temperature-related data.
+     */
     private JPanel temperatureDataLabel;
+    /**
+     * A label displaying the average temperature.
+     */
     private JLabel temperatureAvgLabel;
+    /**
+     * A label displaying the maximum temperature.
+     */
     private JLabel temperatureMaxLabel;
+    /**
+     * A label displaying the minimum temperature.
+     */
     private JLabel temperatureMinLabel;
+    /**
+     * The panel containing precipitation-related data.
+     */
     private JPanel precipitationDataLabel;
+    /**
+     * A label displaying the average precipitation.
+     */
     private JLabel precipitationAvgLabel;
+    /**
+     * A label displaying the maximum precipitation.
+     */
     private JLabel precipitationMaxLabel;
+    /**
+     * A label displaying the minimum precipitation.
+     */
     private JLabel precipitationMinLabel;
+    /**
+     * The panel containing glacial altitude-related data.
+     */
     private JPanel glacial_altitudeDataPanel;
+    /**
+     * The panel containing glacial mass-related data.
+     */
     private JPanel glacial_massDataPanel;
+    /**
+     * A label displaying the maximum glacial altitude.
+     */
     private JLabel glacial_altitudeMaxLabel;
+    /**
+     * A label displaying the minimum glacial altitude.
+     */
     private JLabel glacial_altitudeMinLabel;
+    /**
+     * A label displaying the average glacial altitude.
+     */
     private JLabel glacial_altitudeAvgLabel;
+    /**
+     * A label displaying the average glacial mass.
+     */
     private JLabel glacial_massAvgLabel;
+    /**
+     * A label displaying the maximum glacial mass.
+     */
     private JLabel glacial_massMaxLabel;
+    /**
+     * A label displaying the minimum glacial mass.
+     */
     private JLabel glacial_massMinLabel;
+    /**
+     * Button to add a comment on wind-related data.
+     */
     private JButton windCommentButton;
+    /**
+     * Button to add a comment on humidity-related data.
+     */
     private JButton humidityCommentButton;
+    /**
+     * Button to add a comment on pressure-related data.
+     */
     private JButton pressureCommentButton;
+    /**
+     * Button to add a comment on temperature-related data.
+     */
     private JButton temperatureCommentButton;
+    /**
+     * Button to add a comment on precipitation-related data.
+     */
     private JButton precipitationCommentButton;
+    /**
+     * Button to add a comment on glacial altitude-related data.
+     */
     private JButton glacial_altitudeCommentButton;
+    /**
+     * Button to add a comment on glacial mass-related data.
+     */
     private JButton glacial_massCommentButton;
+    /**
+     * Button to navigate back to the previous view or screen.
+     */
     private JButton backButton;
+    /**
+     * The panel containing buttons for adding comments on various data.
+     */
     private JPanel commentButtonsPanel;
 
-    //CONSTRUCTORS
+    //*****************CONSTRUCTORS*****************//
 
+    /**
+     * Constructor for PoiDataGUI.
+     *
+     * @param surveysAggregate The SurveysAggregate object containing aggregate data for the Point Of Interest (POI).
+     * @param searchResults An ArrayList of PointOfInterest used when going back to previous views.
+     */
     public PoiDataGUI(SurveysAggregate surveysAggregate, ArrayList<PointOfInterest> searchResults) {
         setTitle("Climate Monitoring");
         setContentPane(poiDataPanel);
@@ -82,6 +244,13 @@ public class PoiDataGUI extends JFrame {
         new PoiDataGUIController(this, surveysAggregate, searchResults, null);
     }
 
+    /**
+     * Constructor for PoiDataGUI for a logged in user(Operator).
+     *
+     * @param surveysAggregate The SurveysAggregate object containing aggregate data for the Point Of Interest (POI).
+     * @param searchResults An ArrayList of PointOfInterest used when going back to previous views.
+     * @param user The User object representing the current user.
+     */
     public PoiDataGUI(SurveysAggregate surveysAggregate, ArrayList<PointOfInterest> searchResults, User user) {
         setTitle("Climate Monitoring");
         setContentPane(poiDataPanel);
@@ -90,6 +259,16 @@ public class PoiDataGUI extends JFrame {
         new PoiDataGUIController(this, surveysAggregate, searchResults, user);
     }
 
+    /**
+     * Constructor for PoiDataGUI with a user and no search results.
+     *
+     * <p>
+     * Note: not used in the application.
+     * </p>
+     *
+     * @param surveysAggregate The SurveysAggregate object containing aggregate data for the Point Of Interest (POI).
+     * @param user The User object representing the current user.
+     */
     public PoiDataGUI(SurveysAggregate surveysAggregate, User user) {
         setTitle("Climate Monitoring");
         setContentPane(poiDataPanel);
@@ -98,396 +277,886 @@ public class PoiDataGUI extends JFrame {
         new PoiDataGUIController(this, surveysAggregate, null, user);
     }
 
-    //GETTER AND SETTER
+    //*****************GETTER AND SETTER*****************//
 
+    /**
+     * Gets the main panel containing Point Of Interest (POI) data.
+     *
+     * @return The JPanel representing the POI data panel.
+     */
     public JPanel getPoiDataPanel() {
         return poiDataPanel;
     }
 
+    /**
+     * Sets the main panel containing Point Of Interest (POI) data.
+     *
+     * @param poiDataPanel The JPanel representing the POI data panel to be set.
+     */
     public void setPoiDataPanel(JPanel poiDataPanel) {
         this.poiDataPanel = poiDataPanel;
     }
 
+    /**
+     * Gets the label displaying the title or branding for the Climate Monitoring application.
+     *
+     * @return The JLabel representing the branding label.
+     */
     public JLabel getClimatemonitoringLabel() {
         return climatemonitoringLabel;
     }
 
+    /**
+     * Sets the label displaying the title or branding for the Climate Monitoring application.
+     *
+     * @param climatemonitoringLabel The JLabel representing the branding label to be set.
+     */
     public void setClimatemonitoringLabel(JLabel climatemonitoringLabel) {
         this.climatemonitoringLabel = climatemonitoringLabel;
     }
 
+    /**
+     * Gets the label displaying information related to the Point Of Interest (POI).
+     *
+     * @return The JLabel representing the information label for the POI.
+     */
     public JLabel getPoi_infoLabel() {
         return poi_infoLabel;
     }
 
+    /**
+     * Sets the label displaying information related to the Point Of Interest (POI).
+     *
+     * @param poi_infoLabel The JLabel representing the information label for the POI to be set.
+     */
     public void setPoi_infoLabel(JLabel poi_infoLabel) {
         this.poi_infoLabel = poi_infoLabel;
     }
 
+    /**
+     * Gets the panel containing search results for the Point Of Interest (POI).
+     *
+     * @return The JPanel representing the search result panel.
+     */
     public JPanel getSearchResultPanel() {
         return searchResultPanel;
     }
 
+    /**
+     * Sets the panel containing search results for the Point Of Interest (POI).
+     *
+     * @param searchResultPanel The JPanel representing the search result panel to be set.
+     */
     public void setSearchResultPanel(JPanel searchResultPanel) {
         this.searchResultPanel = searchResultPanel;
     }
 
+    /**
+     * Gets the scroll pane for the search result table.
+     *
+     * @return The JScrollPane representing the search result scroll pane.
+     */
     public JScrollPane getSearchResultScroll() {
         return searchResultScroll;
     }
 
+    /**
+     * Sets the scroll pane for the search result table.
+     *
+     * @param searchResultScroll The JScrollPane representing the search result scroll pane to be set.
+     */
     public void setSearchResultScroll(JScrollPane searchResultScroll) {
         this.searchResultScroll = searchResultScroll;
     }
 
+    /**
+     * Gets the table displaying search results for the Point Of Interest (POI).
+     *
+     * @return The JTable representing the search result table.
+     */
     public JTable getSearchResultTable() {
         return searchResultTable;
     }
 
+    /**
+     * Sets the table displaying search results for the Point Of Interest (POI).
+     *
+     * @param searchResultTable The JTable representing the search result table to be set.
+     */
     public void setSearchResultTable(JTable searchResultTable) {
         this.searchResultTable = searchResultTable;
     }
 
+    /**
+     * Gets the label displaying the count of search results.
+     *
+     * @return The JLabel representing the count label.
+     */
     public JLabel getCountLabel() {
         return countLabel;
     }
 
+    /**
+     * Sets the label displaying the count of search results.
+     *
+     * @param countLabel The JLabel representing the count label to be set.
+     */
     public void setCountLabel(JLabel countLabel) {
         this.countLabel = countLabel;
     }
 
+    /**
+     * Gets the label displaying the number of climate monitoring centers related to the POI.
+     *
+     * @return The JLabel representing the centers number label.
+     */
     public JLabel getCentersNumberLabel() {
         return centersNumberLabel;
     }
 
+    /**
+     * Sets the label displaying the number of climate monitoring centers related to the POI.
+     *
+     * @param centersNumberLabel The JLabel representing the centers number label to be set.
+     */
     public void setCentersNumberLabel(JLabel centersNumberLabel) {
         this.centersNumberLabel = centersNumberLabel;
     }
 
+    /**
+     * Gets the label displaying the timestamp of the oldest survey related to the POI.
+     *
+     * @return The JLabel representing the oldest survey timestamp label.
+     */
     public JLabel getOldestSurveyLabel() {
         return oldestSurveyLabel;
     }
 
+    /**
+     * Sets the label displaying the timestamp of the oldest survey related to the POI.
+     *
+     * @param oldestSurveyLabel The JLabel representing the oldest survey timestamp label to be set.
+     */
     public void setOldestSurveyLabel(JLabel oldestSurveyLabel) {
         this.oldestSurveyLabel = oldestSurveyLabel;
     }
 
+    /**
+     * Gets the label displaying the timestamp of the most recent survey related to the POI.
+     *
+     * @return The JLabel representing the recent survey timestamp label.
+     */
     public JLabel getRecentSurveyLabel() {
         return recentSurveyLabel;
     }
 
+    /**
+     * Sets the label displaying the timestamp of the most recent survey related to the POI.
+     *
+     * @param recentSurveyLabel The JLabel representing the recent survey timestamp label to be set.
+     */
     public void setRecentSurveyLabel(JLabel recentSurveyLabel) {
         this.recentSurveyLabel = recentSurveyLabel;
     }
 
+    /**
+     * Gets the main panel containing general data related to the POI.
+     *
+     * @return The JPanel representing the general data panel.
+     */
     public JPanel getGeneralDataPanel() {
         return generalDataPanel;
     }
 
+    /**
+     * Sets the main panel containing general data related to the POI.
+     *
+     * @param generalDataPanel The JPanel representing the general data panel to be set.
+     */
     public void setGeneralDataPanel(JPanel generalDataPanel) {
         this.generalDataPanel = generalDataPanel;
     }
 
+    /**
+     * Gets the main panel containing various data panels related to the POI.
+     *
+     * @return The JPanel representing the data panel.
+     */
     public JPanel getDataPanel() {
         return dataPanel;
     }
 
+    /**
+     * Sets the main panel containing various data panels related to the POI.
+     *
+     * @param dataPanel The JPanel representing the data panel to be set.
+     */
     public void setDataPanel(JPanel dataPanel) {
         this.dataPanel = dataPanel;
     }
 
+    /**
+     * Gets the panel containing wind-related data.
+     *
+     * @return The JPanel representing the wind data panel.
+     */
     public JPanel getWindDataPanel() {
         return windDataPanel;
     }
 
+    /**
+     * Sets the panel containing wind-related data.
+     *
+     * @param windDataPanel The JPanel representing the wind data panel to be set.
+     */
     public void setWindDataPanel(JPanel windDataPanel) {
         this.windDataPanel = windDataPanel;
     }
 
+    /**
+     * Gets the label displaying the average wind speed.
+     *
+     * @return The JLabel representing the wind average label.
+     */
     public JLabel getWindAvgLabel() {
         return windAvgLabel;
     }
 
+    /**
+     * Sets the label displaying the average wind speed.
+     *
+     * @param windAvgLabel The JLabel representing the wind average label to be set.
+     */
     public void setWindAvgLabel(JLabel windAvgLabel) {
         this.windAvgLabel = windAvgLabel;
     }
 
+    /**
+     * Gets the label displaying the maximum wind speed.
+     *
+     * @return The JLabel representing the wind maximum label.
+     */
     public JLabel getWindMaxLabel() {
         return windMaxLabel;
     }
 
+    /**
+     * Sets the label displaying the maximum wind speed.
+     *
+     * @param windMaxLabel The JLabel representing the wind maximum label to be set.
+     */
     public void setWindMaxLabel(JLabel windMaxLabel) {
         this.windMaxLabel = windMaxLabel;
     }
 
+    /**
+     * Gets the label displaying the minimum wind speed.
+     *
+     * @return The JLabel representing the wind minimum label.
+     */
     public JLabel getWindMinLabel() {
         return windMinLabel;
     }
 
+    /**
+     * Sets the label displaying the minimum wind speed.
+     *
+     * @param windMinLabel The JLabel representing the wind minimum label to be set.
+     */
     public void setWindMinLabel(JLabel windMinLabel) {
         this.windMinLabel = windMinLabel;
     }
 
+    /**
+     * Gets the panel containing humidity-related data.
+     *
+     * @return The JPanel representing the humidity data panel.
+     */
     public JPanel getHumidityDataPanel() {
         return humidityDataPanel;
     }
 
+    /**
+     * Sets the panel containing humidity-related data.
+     *
+     * @param humidityDataPanel The JPanel representing the humidity data panel to be set.
+     */
     public void setHumidityDataPanel(JPanel humidityDataPanel) {
         this.humidityDataPanel = humidityDataPanel;
     }
 
+    /**
+     * Gets the label displaying the average humidity.
+     *
+     * @return The JLabel representing the humidity average label.
+     */
     public JLabel getHumidityAvgLabel() {
         return humidityAvgLabel;
     }
 
+    /**
+     * Sets the label displaying the average humidity.
+     *
+     * @param humidityAvgLabel The JLabel representing the humidity average label to be set.
+     */
     public void setHumidityAvgLabel(JLabel humidityAvgLabel) {
         this.humidityAvgLabel = humidityAvgLabel;
     }
 
+    /**
+     * Gets the label displaying the maximum humidity.
+     *
+     * @return The JLabel representing the humidity maximum label.
+     */
     public JLabel getHumidityMaxLabel() {
         return humidityMaxLabel;
     }
 
+    /**
+     * Sets the label displaying the maximum humidity.
+     *
+     * @param humidityMaxLabel The JLabel representing the humidity maximum label to be set.
+     */
     public void setHumidityMaxLabel(JLabel humidityMaxLabel) {
         this.humidityMaxLabel = humidityMaxLabel;
     }
 
+    /**
+     * Gets the label displaying the minimum humidity.
+     *
+     * @return The JLabel representing the humidity minimum label.
+     */
     public JLabel getHumidityMinLabel() {
         return humidityMinLabel;
     }
 
+    /**
+     * Sets the label displaying the minimum humidity.
+     *
+     * @param humidityMinLabel The JLabel representing the humidity minimum label to be set.
+     */
     public void setHumidityMinLabel(JLabel humidityMinLabel) {
         this.humidityMinLabel = humidityMinLabel;
     }
 
+    /**
+     * Gets the panel containing pressure-related data.
+     *
+     * @return The JPanel representing the pressure data panel.
+     */
     public JPanel getPressureDataLabel() {
         return pressureDataLabel;
     }
 
+    /**
+     * Sets the panel containing pressure-related data.
+     *
+     * @param pressureDataLabel The JPanel representing the pressure data panel to be set.
+     */
     public void setPressureDataLabel(JPanel pressureDataLabel) {
         this.pressureDataLabel = pressureDataLabel;
     }
 
+    /**
+     * Gets the label displaying the average pressure.
+     *
+     * @return The JLabel representing the pressure average label.
+     */
     public JLabel getPressureAvgLabel() {
         return pressureAvgLabel;
     }
 
+    /**
+     * Sets the label displaying the average pressure.
+     *
+     * @param pressureAvgLabel The JLabel representing the pressure average label to be set.
+     */
     public void setPressureAvgLabel(JLabel pressureAvgLabel) {
         this.pressureAvgLabel = pressureAvgLabel;
     }
 
+    /**
+     * Gets the label displaying the maximum pressure.
+     *
+     * @return The JLabel representing the pressure maximum label.
+     */
     public JLabel getPressureMaxLabel() {
         return pressureMaxLabel;
     }
 
+    /**
+     * Sets the label displaying the maximum pressure.
+     *
+     * @param pressureMaxLabel The JLabel representing the pressure maximum label to be set.
+     */
     public void setPressureMaxLabel(JLabel pressureMaxLabel) {
         this.pressureMaxLabel = pressureMaxLabel;
     }
 
+    /**
+     * Gets the label displaying the minimum pressure.
+     *
+     * @return The JLabel representing the pressure minimum label.
+     */
     public JLabel getPressureMinLabel() {
         return pressureMinLabel;
     }
 
+    /**
+     * Sets the label displaying the minimum pressure.
+     *
+     * @param pressureMinLabel The JLabel representing the pressure minimum label to be set.
+     */
     public void setPressureMinLabel(JLabel pressureMinLabel) {
         this.pressureMinLabel = pressureMinLabel;
     }
 
+    /**
+     * Gets the panel containing temperature-related data.
+     *
+     * @return The JPanel representing the temperature data panel.
+     */
     public JPanel getTemperatureDataLabel() {
         return temperatureDataLabel;
     }
 
+    /**
+     * Sets the panel containing temperature-related data.
+     *
+     * @param temperatureDataLabel The JPanel representing the temperature data panel to be set.
+     */
     public void setTemperatureDataLabel(JPanel temperatureDataLabel) {
         this.temperatureDataLabel = temperatureDataLabel;
     }
 
+    /**
+     * Gets the label displaying the average temperature.
+     *
+     * @return The JLabel representing the temperature average label.
+     */
     public JLabel getTemperatureAvgLabel() {
         return temperatureAvgLabel;
     }
 
+    /**
+     * Sets the label displaying the average temperature.
+     *
+     * @param temperatureAvgLabel The JLabel representing the temperature average label to be set.
+     */
     public void setTemperatureAvgLabel(JLabel temperatureAvgLabel) {
         this.temperatureAvgLabel = temperatureAvgLabel;
     }
 
+    /**
+     * Gets the label displaying the maximum temperature.
+     *
+     * @return The JLabel representing the temperature maximum label.
+     */
     public JLabel getTemperatureMaxLabel() {
         return temperatureMaxLabel;
     }
 
+    /**
+     * Sets the label displaying the maximum temperature.
+     *
+     * @param temperatureMaxLabel The JLabel representing the temperature maximum label to be set.
+     */
     public void setTemperatureMaxLabel(JLabel temperatureMaxLabel) {
         this.temperatureMaxLabel = temperatureMaxLabel;
     }
 
+    /**
+     * Gets the label displaying the minimum temperature.
+     *
+     * @return The JLabel representing the temperature minimum label.
+     */
     public JLabel getTemperatureMinLabel() {
         return temperatureMinLabel;
     }
 
+    /**
+     * Sets the label displaying the minimum temperature.
+     *
+     * @param temperatureMinLabel The JLabel representing the temperature minimum label to be set.
+     */
     public void setTemperatureMinLabel(JLabel temperatureMinLabel) {
         this.temperatureMinLabel = temperatureMinLabel;
     }
 
+    /**
+     * Gets the panel containing precipitation-related data.
+     *
+     * @return The JPanel representing the precipitation data panel.
+     */
     public JPanel getPrecipitationDataLabel() {
         return precipitationDataLabel;
     }
 
+    /**
+     * Sets the panel containing precipitation-related data.
+     *
+     * @param precipitationDataLabel The JPanel representing the precipitation data panel to be set.
+     */
     public void setPrecipitationDataLabel(JPanel precipitationDataLabel) {
         this.precipitationDataLabel = precipitationDataLabel;
     }
 
+    /**
+     * Gets the label displaying the average precipitation.
+     *
+     * @return The JLabel representing the precipitation average label.
+     */
     public JLabel getPrecipitationAvgLabel() {
         return precipitationAvgLabel;
     }
 
+    /**
+     * Sets the label displaying the average precipitation.
+     *
+     * @param precipitationAvgLabel The JLabel representing the precipitation average label to be set.
+     */
     public void setPrecipitationAvgLabel(JLabel precipitationAvgLabel) {
         this.precipitationAvgLabel = precipitationAvgLabel;
     }
 
+    /**
+     * Gets the label displaying the maximum precipitation.
+     *
+     * @return The JLabel representing the precipitation maximum label.
+     */
     public JLabel getPrecipitationMaxLabel() {
         return precipitationMaxLabel;
     }
 
+    /**
+     * Sets the label displaying the maximum precipitation.
+     *
+     * @param precipitationMaxLabel The JLabel representing the precipitation maximum label to be set.
+     */
     public void setPrecipitationMaxLabel(JLabel precipitationMaxLabel) {
         this.precipitationMaxLabel = precipitationMaxLabel;
     }
 
+    /**
+     * Gets the label displaying the minimum precipitation.
+     *
+     * @return The JLabel representing the precipitation minimum label.
+     */
     public JLabel getPrecipitationMinLabel() {
         return precipitationMinLabel;
     }
 
+    /**
+     * Sets the label displaying the minimum precipitation.
+     *
+     * @param precipitationMinLabel The JLabel representing the precipitation minimum label to be set.
+     */
     public void setPrecipitationMinLabel(JLabel precipitationMinLabel) {
         this.precipitationMinLabel = precipitationMinLabel;
     }
 
+    /**
+     * Gets the panel containing glacial altitude-related data.
+     *
+     * @return The JPanel representing the glacial altitude data panel.
+     */
     public JPanel getGlacial_altitudeDataPanel() {
         return glacial_altitudeDataPanel;
     }
 
+    /**
+     * Sets the panel containing glacial altitude-related data.
+     *
+     * @param glacial_altitudeDataPanel The JPanel representing the glacial altitude data panel to be set.
+     */
     public void setGlacial_altitudeDataPanel(JPanel glacial_altitudeDataPanel) {
         this.glacial_altitudeDataPanel = glacial_altitudeDataPanel;
     }
 
+    /**
+     * Gets the panel containing glacial mass-related data.
+     *
+     * @return The JPanel representing the glacial mass data panel.
+     */
     public JPanel getGlacial_massDataPanel() {
         return glacial_massDataPanel;
     }
 
+    /**
+     * Sets the panel containing glacial mass-related data.
+     *
+     * @param glacial_massDataPanel The JPanel representing the glacial mass data panel to be set.
+     */
     public void setGlacial_massDataPanel(JPanel glacial_massDataPanel) {
         this.glacial_massDataPanel = glacial_massDataPanel;
     }
 
+    /**
+     * Gets the label displaying the maximum glacial altitude.
+     *
+     * @return The JLabel representing the glacial altitude maximum label.
+     */
     public JLabel getGlacial_altitudeMaxLabel() {
         return glacial_altitudeMaxLabel;
     }
 
+    /**
+     * Sets the label displaying the maximum glacial altitude.
+     *
+     * @param glacial_altitudeMaxLabel The JLabel representing the glacial altitude maximum label to be set.
+     */
     public void setGlacial_altitudeMaxLabel(JLabel glacial_altitudeMaxLabel) {
         this.glacial_altitudeMaxLabel = glacial_altitudeMaxLabel;
     }
 
+    /**
+     * Gets the label displaying the minimum glacial altitude.
+     *
+     * @return The JLabel representing the glacial altitude minimum label.
+     */
     public JLabel getGlacial_altitudeMinLabel() {
         return glacial_altitudeMinLabel;
     }
 
+    /**
+     * Sets the label displaying the minimum glacial altitude.
+     *
+     * @param glacial_altitudeMinLabel The JLabel representing the glacial altitude minimum label to be set.
+     */
     public void setGlacial_altitudeMinLabel(JLabel glacial_altitudeMinLabel) {
         this.glacial_altitudeMinLabel = glacial_altitudeMinLabel;
     }
 
+    /**
+     * Gets the label displaying the average glacial altitude.
+     *
+     * @return The JLabel representing the glacial altitude average label.
+     */
     public JLabel getGlacial_altitudeAvgLabel() {
         return glacial_altitudeAvgLabel;
     }
 
+    /**
+     * Sets the label displaying the average glacial altitude.
+     *
+     * @param glacial_altitudeAvgLabel The JLabel representing the glacial altitude average label to be set.
+     */
     public void setGlacial_altitudeAvgLabel(JLabel glacial_altitudeAvgLabel) {
         this.glacial_altitudeAvgLabel = glacial_altitudeAvgLabel;
     }
 
+    /**
+     * Gets the label displaying the average glacial mass.
+     *
+     * @return The JLabel representing the glacial mass average label.
+     */
     public JLabel getGlacial_massAvgLabel() {
         return glacial_massAvgLabel;
     }
 
+    /**
+     * Sets the label displaying the average glacial mass.
+     *
+     * @param glacial_massAvgLabel The JLabel representing the glacial mass average label to be set.
+     */
     public void setGlacial_massAvgLabel(JLabel glacial_massAvgLabel) {
         this.glacial_massAvgLabel = glacial_massAvgLabel;
     }
 
+    /**
+     * Gets the label displaying the maximum glacial mass.
+     *
+     * @return The JLabel representing the glacial mass maximum label.
+     */
     public JLabel getGlacial_massMaxLabel() {
         return glacial_massMaxLabel;
     }
 
+    /**
+     * Sets the label displaying the maximum glacial mass.
+     *
+     * @param glacial_massMaxLabel The JLabel representing the glacial mass maximum label to be set.
+     */
     public void setGlacial_massMaxLabel(JLabel glacial_massMaxLabel) {
         this.glacial_massMaxLabel = glacial_massMaxLabel;
     }
 
+    /**
+     * Gets the label displaying the minimum glacial mass.
+     *
+     * @return The JLabel representing the glacial mass minimum label.
+     */
     public JLabel getGlacial_massMinLabel() {
         return glacial_massMinLabel;
     }
 
+    /**
+     * Sets the label displaying the minimum glacial mass.
+     *
+     * @param glacial_massMinLabel The JLabel representing the glacial mass minimum label to be set.
+     */
     public void setGlacial_massMinLabel(JLabel glacial_massMinLabel) {
         this.glacial_massMinLabel = glacial_massMinLabel;
     }
 
+    /**
+     * Gets the button to view comments on wind-related data.
+     *
+     * @return The JButton representing the wind comment button.
+     */
     public JButton getWindCommentButton() {
         return windCommentButton;
     }
 
+    /**
+     * Sets the button to view comments on wind-related data.
+     *
+     * @param windCommentButton The JButton representing the wind comment button to be set.
+     */
     public void setWindCommentButton(JButton windCommentButton) {
         this.windCommentButton = windCommentButton;
     }
 
+    /**
+     * Gets the button to view comments on humidity-related data.
+     *
+     * @return The JButton representing the humidity comment button.
+     */
     public JButton getHumidityCommentButton() {
         return humidityCommentButton;
     }
 
+    /**
+     * Sets the button to view comments on humidity-related data.
+     *
+     * @param humidityCommentButton The JButton representing the humidity comment button to be set.
+     */
     public void setHumidityCommentButton(JButton humidityCommentButton) {
         this.humidityCommentButton = humidityCommentButton;
     }
 
+    /**
+     * Gets the button to view comments on pressure-related data.
+     *
+     * @return The JButton representing the pressure comment button.
+     */
     public JButton getPressureCommentButton() {
         return pressureCommentButton;
     }
 
+    /**
+     * Sets the button to view comments on pressure-related data.
+     *
+     * @param pressureCommentButton The JButton representing the pressure comment button to be set.
+     */
     public void setPressureCommentButton(JButton pressureCommentButton) {
         this.pressureCommentButton = pressureCommentButton;
     }
 
+    /**
+     * Gets the button to view comments on temperature-related data.
+     *
+     * @return The JButton representing the temperature comment button.
+     */
     public JButton getTemperatureCommentButton() {
         return temperatureCommentButton;
     }
 
+    /**
+     * Sets the button to view comments on temperature-related data.
+     *
+     * @param temperatureCommentButton The JButton representing the temperature comment button to be set.
+     */
     public void setTemperatureCommentButton(JButton temperatureCommentButton) {
         this.temperatureCommentButton = temperatureCommentButton;
     }
 
+    /**
+     * Gets the button to view comments on precipitation-related data.
+     *
+     * @return The JButton representing the precipitation comment button.
+     */
     public JButton getPrecipitationCommentButton() {
         return precipitationCommentButton;
     }
 
+    /**
+     * Sets the button to view comments on precipitation-related data.
+     *
+     * @param precipitationCommentButton The JButton representing the precipitation comment button to be set.
+     */
     public void setPrecipitationCommentButton(JButton precipitationCommentButton) {
         this.precipitationCommentButton = precipitationCommentButton;
     }
 
+    /**
+     * Gets the button to view comments on glacial altitude-related data.
+     *
+     * @return The JButton representing the glacial altitude comment button.
+     */
     public JButton getGlacial_altitudeCommentButton() {
         return glacial_altitudeCommentButton;
     }
 
+    /**
+     * Sets the button to view comments on glacial altitude-related data.
+     *
+     * @param glacial_altitudeCommentButton The JButton representing the glacial altitude comment button to be set.
+     */
     public void setGlacial_altitudeCommentButton(JButton glacial_altitudeCommentButton) {
         this.glacial_altitudeCommentButton = glacial_altitudeCommentButton;
     }
 
+    /**
+     * Gets the button to view comments on glacial mass-related data.
+     *
+     * @return The JButton representing the glacial mass comment button.
+     */
     public JButton getGlacial_massCommentButton() {
         return glacial_massCommentButton;
     }
 
+    /**
+     * Sets the button to view comments on glacial mass-related data.
+     *
+     * @param glacial_massCommentButton The JButton representing the glacial mass comment button to be set.
+     */
     public void setGlacial_massCommentButton(JButton glacial_massCommentButton) {
         this.glacial_massCommentButton = glacial_massCommentButton;
     }
 
+    /**
+     * Gets the button for navigating back.
+     *
+     * @return The JButton representing the back button.
+     */
     public JButton getBackButton() {
         return backButton;
     }
 
+    /**
+     * Sets the button for navigating back.
+     *
+     * @param backButton The JButton representing the back button to be set.
+     */
     public void setBackButton(JButton backButton) {
         this.backButton = backButton;
     }
 
+    /**
+     * Gets the panel containing various comment-related buttons.
+     *
+     * @return The JPanel representing the comment buttons panel.
+     */
     public JPanel getCommentButtonsPanel() {
         return commentButtonsPanel;
     }
 
+    /**
+     * Sets the panel containing various comment-related buttons.
+     *
+     * @param commentButtonsPanel The JPanel representing the comment buttons panel to be set.
+     */
     public void setCommentButtonsPanel(JPanel commentButtonsPanel) {
         this.commentButtonsPanel = commentButtonsPanel;
     }

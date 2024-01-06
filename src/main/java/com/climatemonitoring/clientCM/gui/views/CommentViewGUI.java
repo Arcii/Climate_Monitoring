@@ -12,20 +12,54 @@ import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.util.Locale;
 
+/**
+ * GUI window for visualizing comments related to a Point of Interest (POI).
+ *
+ * @author Lorenzo Cattapan 726459 (Varese)
+ * @version 1.0
+ * @see CommentViewGUIController
+ */
 public class CommentViewGUI extends JFrame {
 
-    //FIELDS
+    //*****************FIELDS*****************//
 
+    /**
+     * Panel containing the comments GUI components.
+     */
     private JPanel commentsPanel;
+    /**
+     * Label displaying "Climate Monitoring".
+     */
     private JLabel climatemonitoringLabel;
+    /**
+     * Label providing information about the comments.
+     */
     private JLabel commentsInfoLabel;
+    /**
+     * Table displaying comments.
+     */
     private JTable commentsTable;
+    /**
+     * Panel containing the comments table.
+     */
     private JPanel commentsTablePanel;
+    /**
+     * Scroll pane for the comments table.
+     */
     private JScrollPane commentsTableScroll;
+    /**
+     * Button to close the comments window.
+     */
     private JButton closeButton;
 
-    //CONSTRUCTOR
+    //*****************CONSTRUCTOR*****************//
 
+    /**
+     * Constructs an instance of CommentViewGUI.
+     *
+     * @param surveysAggregate SurveysAggregate instance representing the POI and related data.
+     * @param commentType      Type of comments to be displayed.
+     */
     public CommentViewGUI(SurveysAggregate surveysAggregate, String commentType) {
         setTitle("Climate Monitoring");
         setContentPane(commentsPanel);
@@ -34,60 +68,130 @@ public class CommentViewGUI extends JFrame {
         new CommentViewGUIController(this, surveysAggregate, commentType);
     }
 
-    //GETTER AND SETTER
+    //*****************GETTER AND SETTER*****************//
 
+    /**
+     * Retrieves the comments panel.
+     *
+     * @return JPanel instance representing the comments panel.
+     */
     public JPanel getCommentsPanel() {
         return commentsPanel;
     }
 
+    /**
+     * Sets the comments panel.
+     *
+     * @param commentsPanel JPanel instance representing the comments panel.
+     */
     public void setCommentsPanel(JPanel commentsPanel) {
         this.commentsPanel = commentsPanel;
     }
 
+    /**
+     * Retrieves the label displaying "Climate Monitoring".
+     *
+     * @return JLabel instance representing the "Climate Monitoring" label.
+     */
     public JLabel getClimatemonitoringLabel() {
         return climatemonitoringLabel;
     }
 
+    /**
+     * Sets the "Climate Monitoring" label.
+     *
+     * @param climatemonitoringLabel JLabel instance representing the "Climate Monitoring" label.
+     */
     public void setClimatemonitoringLabel(JLabel climatemonitoringLabel) {
         this.climatemonitoringLabel = climatemonitoringLabel;
     }
 
+    /**
+     * Retrieves the label providing information about the comments.
+     *
+     * @return JLabel instance representing the comments information label.
+     */
     public JLabel getCommentsInfoLabel() {
         return commentsInfoLabel;
     }
 
+    /**
+     * Sets the comments information label.
+     *
+     * @param commentsInfoLabel JLabel instance representing the comments information label.
+     */
     public void setCommentsInfoLabel(JLabel commentsInfoLabel) {
         this.commentsInfoLabel = commentsInfoLabel;
     }
 
+    /**
+     * Retrieves the table displaying comments.
+     *
+     * @return JTable instance representing the comments table.
+     */
     public JTable getCommentsTable() {
         return commentsTable;
     }
 
+    /**
+     * Sets the comments table.
+     *
+     * @param commentsTable JTable instance representing the comments table.
+     */
     public void setCommentsTable(JTable commentsTable) {
         this.commentsTable = commentsTable;
     }
 
+    /**
+     * Retrieves the panel containing the comments table.
+     *
+     * @return JPanel instance representing the comments table panel.
+     */
     public JPanel getCommentsTablePanel() {
         return commentsTablePanel;
     }
 
+    /**
+     * Sets the comments table panel.
+     *
+     * @param commentsTablePanel JPanel instance representing the comments table panel.
+     */
     public void setCommentsTablePanel(JPanel commentsTablePanel) {
         this.commentsTablePanel = commentsTablePanel;
     }
 
+    /**
+     * Retrieves the scroll pane for the comments table.
+     *
+     * @return JScrollPane instance representing the comments table scroll pane.
+     */
     public JScrollPane getCommentsTableScroll() {
         return commentsTableScroll;
     }
 
+    /**
+     * Sets the comments table scroll pane.
+     *
+     * @param commentsTableScroll JScrollPane instance representing the comments table scroll pane.
+     */
     public void setCommentsTableScroll(JScrollPane commentsTableScroll) {
         this.commentsTableScroll = commentsTableScroll;
     }
 
+    /**
+     * Retrieves the button to close the comments window.
+     *
+     * @return JButton instance representing the close button.
+     */
     public JButton getCloseButton() {
         return closeButton;
     }
 
+    /**
+     * Sets the close button.
+     *
+     * @param closeButton JButton instance representing the close button.
+     */
     public void setCloseButton(JButton closeButton) {
         this.closeButton = closeButton;
     }

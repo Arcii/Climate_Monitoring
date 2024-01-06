@@ -19,8 +19,15 @@
         <profile>
             <id>client</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
+
+            <properties>
+                <profile.name>clientCM</profile.name>
+                <profile.mainClass>com.climatemonitoring.clientCM.ClimateMonitoring</profile.mainClass>
+                <profile.excludes>com/climatemonitoring/serverCM/**</profile.excludes>
+            </properties>
+
             <build>
                 <plugins>
                     <plugin>
@@ -31,10 +38,13 @@
                             <archive>
                                 <manifest>
                                     <addClasspath>true</addClasspath>
-                                    <mainClass>com.climatemonitoring.clientCM.ClimateMonitoring</mainClass>
+                                    <mainClass>${profile.mainClass}</mainClass>
                                 </manifest>
                             </archive>
-                            <excludes>com/climatemonitoring/serverCM/**</excludes>
+                            <excludes>${profile.excludes}</excludes>
+
+                            <outputDirectory>${project.build.directory}/client</outputDirectory>
+
                         </configuration>
                     </plugin>
 
@@ -51,9 +61,12 @@
                                 </goals>
                                 <configuration>
                                     <finalName>${project.artifactId}-${project.version}-clientCM</finalName>
+
+                                    <outputDirectory>${project.build.directory}/client</outputDirectory>
+
                                     <transformers>
                                         <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                            <mainClass>com.climatemonitoring.clientCM.ClimateMonitoring</mainClass>
+                                            <mainClass>${profile.mainClass}</mainClass>
                                         </transformer>
                                     </transformers>
                                 </configuration>
@@ -70,6 +83,13 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+
+            <properties>
+                <profile.name>serverCM</profile.name>
+                <profile.mainClass>com.climatemonitoring.serverCM.ServerMain</profile.mainClass>
+                <profile.excludes>com/climatemonitoring/clientCM/**</profile.excludes>
+            </properties>
+
             <build>
                 <resources>
                     <resource>
@@ -85,10 +105,13 @@
                             <archive>
                                 <manifest>
                                     <addClasspath>true</addClasspath>
-                                    <mainClass>com.climatemonitoring.clientCM.ServerMain</mainClass>
+                                    <mainClass>${profile.mainClass}</mainClass>
                                 </manifest>
                             </archive>
-                            <excludes>com/climatemonitoring/clientCM/**</excludes>
+                            <excludes>${profile.excludes}</excludes>
+
+                            <outputDirectory>${project.build.directory}/server</outputDirectory>
+
                         </configuration>
                     </plugin>
 
@@ -105,9 +128,12 @@
                                 </goals>
                                 <configuration>
                                     <finalName>${project.artifactId}-${project.version}-serverCM</finalName>
+
+                                    <outputDirectory>${project.build.directory}/server</outputDirectory>
+
                                     <transformers>
                                         <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                            <mainClass>com.climatemonitoring.serverCM.ServerMain</mainClass>
+                                            <mainClass>${profile.mainClass}</mainClass>
                                         </transformer>
                                     </transformers>
                                 </configuration>

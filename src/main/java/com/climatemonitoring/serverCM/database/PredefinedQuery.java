@@ -3,11 +3,25 @@ package com.climatemonitoring.serverCM.database;
 import java.io.Serial;
 import java.util.Hashtable;
 
+/**
+ * Utility class for storing predefined SQL queries used in the Climate Monitoring application for easy access.
+ *
+ * @author Lorenzo Cattapan 726459 (Varese)
+ * @version 1.0
+ * @see DbManager
+ */
 public class PredefinedQuery {
 
-    //INSERT QUERIES
+    //*****************INSERT QUERIES*****************//
 
+    /**
+     * Enumeration of predefined INSERT queries.
+     */
     public enum Insert{USER, CLIMATECENTER, POI, SURVEY, CENTER_POI}
+
+    /**
+     * Hashtable storing predefined INSERT queries.
+     */
     public static final Hashtable<Insert, String> insert_queries = new Hashtable<>(){
 
         @Serial
@@ -86,9 +100,16 @@ public class PredefinedQuery {
 
     };
 
-    //SELECT QUERIES
+    //*****************SELECT QUERIES*******************//
 
+    /**
+     * Enumeration of predefined SELECT queries.
+     */
     public  enum Select{USER, USER_LOGIN_INFO, USER_EXISTS, USER_EMAIL_EXISTS, CLIMATECENTER, CLIMATECENTER_BY_ID, CLIMATECENTER_BY_ATTRIBUTES, POI, POI_BY_DATA, POI_BY_NAME, POI_BY_COORDINATES, SURVEY_BY_ID, POIS_BY_CENTER, POI_SURVEYS_AGGREGATE,DATABASE,TABLE_FROM_DATABASE}
+
+    /**
+     * Hashtable storing predefined SELECT queries.
+     */
     public static final Hashtable<Select, String> select_queries = new Hashtable<>(){
 
         @Serial
@@ -245,9 +266,16 @@ public class PredefinedQuery {
 
     };
 
-    //CREATE DATABASE AND TABLES QUERIES
+    //*****************CREATE DATABASE AND TABLES QUERIES*****************//
 
+    /**
+     * Enumeration of predefined CREATE queries.
+     */
     public enum Create{CREATE_DB, USERS_TABLE, MONITORING_CENTERS_TABLE, POIS_TABLE, SURVEY_TABLE, MONITORING_CENTERS_POIS_TABLE}
+
+    /**
+     * Hashtable storing predefined CREATE queries.
+     */
     public static final Hashtable<Create, String> create_queries = new Hashtable<>(){
 
         @Serial

@@ -14,15 +14,39 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+/**
+ * The controller class for the ClientHomeGUI view.
+ *
+ * <p>
+ * This class handles user interactions and events related to the ClientHomeGUI.
+ * It communicates with the ClientManager for performing various operations.
+ * </p>
+ *
+ * @author Lorenzo Cattapan 726459 (Varese)
+ * @version 1.0
+ * @see ClientHomeGUI
+ */
 public class ClientHomeGUIController {
 
-    //FIELDS
+    //*****************FIELDS*****************//
 
+    /**
+     * The associated ClientHomeGUI view.
+     */
     private ClientHomeGUI view;
+    /**
+     * The ClientManager singleton instance responsible for handling network operations.
+     */
     private final ClientManager clientManager;
 
-    //CONSTRUCTOR
+    //*****************CONSTRUCTOR*****************//
 
+    /**
+     * Constructs a new instance of the ClientHomeGUIController.
+     * that adds listeners to the GUI elements in the ClientHomeGUI view
+     *
+     * @param view The associated ClientHomeGUI view.
+     */
     public ClientHomeGUIController(ClientHomeGUI view) {
         this.view = view;
         this.clientManager = ClientManager.GetClientManager();
@@ -31,22 +55,40 @@ public class ClientHomeGUIController {
         AddListeners();
     }
 
-    //GETTER AND SETTER
+    //*****************GETTER AND SETTER*****************//
 
+    /**
+     * Getter for the associated ClientHomeGUI view.
+     *
+     * @return The ClientHomeGUI view.
+     */
     public ClientHomeGUI getView() {
         return view;
     }
 
+    /**
+     * Setter for the associated ClientHomeGUI view.
+     *
+     * @param view The ClientHomeGUI view to set.
+     */
     public void setView(ClientHomeGUI view) {
         this.view = view;
     }
 
+    /**
+     * Getter for the associated ClientManager.
+     *
+     * @return The associated ClientManager.
+     */
     public ClientManager getClientManager() {
         return clientManager;
     }
 
-    //PRIVATE ADD LISTENERS METHOD
+    //*****************PRIVATE ADD LISTENERS METHOD*****************//
 
+    /**
+     * Adds event listeners to various components in the ClientHomeGUI view.
+     */
     private void AddListeners(){
 
         view.getSignUpButton().addActionListener(new ActionListener() {

@@ -18,23 +18,49 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+/**
+ * Controller class for the OperatorHomeGUI view.
+ * It communicates with the ClientManager for performing various operations.
+ *
+ * @author Lorenzo Cattapan 726459 (Varese)
+ * @version 1.0
+ * @see OperatorHomeGUI
+ */
 public class OperatorHomeGUIController {
 
-    //FIELDS
+    //*****************FIELDS*****************//
 
+    /**
+     * Reference to the OperatorHomeGUI view.
+     */
     private OperatorHomeGUI view;
+    /**
+     * ClientManager instance for managing network operations.
+     */
     private final ClientManager clientManager;
+    /**
+     * DefaultTableModel for the POI table.
+     */
     private DefaultTableModel poiTable;
+    /**
+     * User associated with the controller.
+     */
     private User user;
 
-    //CONSTRUCTOR
+    //*****************CONSTRUCTOR*****************//
 
+    /**
+     * Constructs an instance of OperatorHomeGUIController.
+     *
+     * @param view OperatorHomeGUI view instance.
+     * @param user User associated with the controller.
+     */
     public OperatorHomeGUIController(OperatorHomeGUI view, User user) {
         this.view = view;
         this.clientManager = ClientManager.GetClientManager();
         this.user = user;
 
-        view.getGreetingLabel().setText("Benvenuto " + user.getUserid() + " del centro oon id " + user.getCenterid() + " inserisci i dati dell'area geografica di cui vuoi visualizzare le rilevazioni :");
+        view.getGreetingLabel().setText("Benvenuto " + user.getUserid() + " del centro con id " + "\"" + user.getCenterid() + "\"" + " inserisci i dati dell'area geografica di cui vuoi visualizzare le rilevazioni :");
 
         setUpTable(user);
 
@@ -43,40 +69,79 @@ public class OperatorHomeGUIController {
 
     }
 
-    //GETTER AND SETTER
+    //*****************GETTER AND SETTER*****************//
 
+    /**
+     * Retrieves the reference to the OperatorHomeGUI view.
+     *
+     * @return OperatorHomeGUI view instance.
+     */
     public OperatorHomeGUI getView() {
         return view;
     }
 
+    /**
+     * Sets the reference to the OperatorHomeGUI view.
+     *
+     * @param view OperatorHomeGUI view instance.
+     */
     public void setView(OperatorHomeGUI view) {
         this.view = view;
     }
 
+    /**
+     * Retrieves the ClientManager instance.
+     *
+     * @return ClientManager instance.
+     */
     public ClientManager getClientManager() {
         return clientManager;
     }
 
+    /**
+     * Retrieves the DefaultTableModel for the POI table.
+     *
+     * @return DefaultTableModel instance.
+     */
     public DefaultTableModel getPoiTable() {
         return poiTable;
     }
 
+    /**
+     * Sets the DefaultTableModel for the POI table.
+     *
+     * @param poiTable DefaultTableModel instance.
+     */
     public void setPoiTable(DefaultTableModel poiTable) {
         this.poiTable = poiTable;
     }
 
+    /**
+     * Retrieves the User associated with the controller.
+     *
+     * @return User instance.
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Sets the User associated with the controller.
+     *
+     * @param user User instance.
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
-    //PRIVATE ADD LISTENERS METHOD
+    //*****************PRIVATE ADD LISTENERS METHOD*****************//
 
+    /**
+     * Adds listeners to GUI components.
+     */
     private void AddListeners() {
 
+        // ActionListener for Coordinates Search Button
         view.getCoordinatesSearchButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -96,6 +161,7 @@ public class OperatorHomeGUIController {
             }
         });
 
+        // ActionListener for Name POI Search Button
         view.getNamePoiSearchButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -125,6 +191,7 @@ public class OperatorHomeGUIController {
             }
         });
 
+        // ActionListener for Add Survey Button
         view.getAddSurveyButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -185,6 +252,7 @@ public class OperatorHomeGUIController {
             }
         });
 
+        // ActionListener for Add POI to Center Button
         view.getAddPoiToCenterButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -226,6 +294,7 @@ public class OperatorHomeGUIController {
             }
         });
 
+        // ActionListener for Select POI Button
         view.getSelectPoiButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -248,6 +317,7 @@ public class OperatorHomeGUIController {
             }
         });
 
+        // ActionListener for Logout Button
         view.getLogoutButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -259,8 +329,27 @@ public class OperatorHomeGUIController {
 
     }
 
-    //PRIVATE METHODS
+    //*****************PRIVATE METHODS*****************//
 
+    /**
+     * Checks the validity of survey fields.
+     *
+     * @param windScore              Wind score.
+     * @param humidityScore          Humidity score.
+     * @param pressureScore          Pressure score.
+     * @param temperatureScore       Temperature score.
+     * @param precipitationScore     Precipitation score.
+     * @param glacial_altitudeScore  Glacial altitude score.
+     * @param glacial_massScore      Glacial mass score.
+     * @param windNotes              Wind notes.
+     * @param humidityNotes          Humidity notes.
+     * @param pressureNotes          Pressure notes.
+     * @param temperatureNotes       Temperature notes.
+     * @param precipitationNotes     Precipitation notes.
+     * @param glacial_altitudeNotes  Glacial altitude notes.
+     * @param glacial_massNotes      Glacial mass notes.
+     * @throws FieldFormatException If any field format is invalid.
+     */
     private void checkSurveyFields(int windScore, int humidityScore, int pressureScore, int temperatureScore, int precipitationScore, int glacial_altitudeScore, int glacial_massScore, String windNotes, String humidityNotes, String pressureNotes, String temperatureNotes, String precipitationNotes, String glacial_altitudeNotes, String glacial_massNotes) throws FieldFormatException{
         if(ClientManager.isValidScore(windScore) &&
                 ClientManager.isValidScore(humidityScore) &&
@@ -298,6 +387,11 @@ public class OperatorHomeGUIController {
         }
     }
 
+    /**
+     * Sets up the POI JTable.
+     *
+     * @param user User associated with the controller.
+     */
     private void setUpTable(User user){
         String[] columnNames = {"ID", "Nome", "Stato", "Latitudine", "Longitudine"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
@@ -313,6 +407,11 @@ public class OperatorHomeGUIController {
         setPoiTable(model);
     }
 
+    /**
+     * Adds a row to the POI JTable.
+     *
+     * @param poi PointOfInterest instance to be added.
+     */
     private void addRowToTable(PointOfInterest poi){
         Object[] rowData = {poi.getPoi_id(), poi.getName(), poi.getCountry(), poi.getLatitude(), poi.getLongitude()};
         DefaultTableModel model = getPoiTable();

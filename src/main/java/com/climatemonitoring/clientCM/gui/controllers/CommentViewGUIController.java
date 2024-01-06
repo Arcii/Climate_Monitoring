@@ -15,17 +15,45 @@ import java.util.Objects;
 
 import static com.climatemonitoring.clientCM.network.ClientManager.GetClientManager;
 
+/**
+ * Controller class for managing the behavior of the CommentViewGUI.
+ * This class handles the interaction between the CommentViewGUI and the ClientManager.
+ *
+ * @author Lorenzo Cattapan 726459 (Varese)
+ * @version 1.0
+ * @see CommentViewGUI
+ * @see ClientManager
+ */
 public class CommentViewGUIController {
 
-    //FIELDS
+    //*****************FIELDS*****************//
 
+    /**
+     * Reference to the CommentViewGUI.
+     */
     private CommentViewGUI view;
+    /**
+     * Instance of the ClientManager for data management.
+     */
     private final ClientManager clientManager;
+    /**
+     * SurveysAggregate containing data related to surveys.
+     */
     private SurveysAggregate surveysAggregate;
+    /**
+     * Type of comments to be displayed.
+     */
     private String commentType;
 
-    //CONSTRUCTOR
+    //*****************CONSTRUCTOR*****************//
 
+    /**
+     * Constructs an instance of CommentViewGUIController.
+     *
+     * @param view              Reference to the CommentViewGUI.
+     * @param surveysAggregate  SurveysAggregate containing data related to surveys.
+     * @param commentType       Type of comments to be displayed.
+     */
     public CommentViewGUIController(CommentViewGUI view, SurveysAggregate surveysAggregate, String commentType){
         this.view = view;
         this.clientManager = GetClientManager();
@@ -38,39 +66,79 @@ public class CommentViewGUIController {
         AddListeners();
     }
 
-    //GETTER AND SETTER
+    //*****************GETTER AND SETTER*****************//
 
+    /**
+     * Retrieves the reference to the CommentViewGUI.
+     *
+     * @return CommentViewGUI instance representing the view.
+     */
     public CommentViewGUI getView() {
         return view;
     }
 
+    /**
+     * Sets the reference to the CommentViewGUI.
+     *
+     * @param view CommentViewGUI instance representing the view.
+     */
     public void setView(CommentViewGUI view) {
         this.view = view;
     }
 
+    /**
+     * Retrieves the instance of the ClientManager.
+     *
+     * @return ClientManager instance for data management.
+     */
     public ClientManager getClientManager() {
         return clientManager;
     }
 
+    /**
+     * Retrieves the SurveysAggregate containing data related to surveys.
+     *
+     * @return SurveysAggregate instance representing survey data.
+     */
     public SurveysAggregate getSurveysAggregate() {
         return surveysAggregate;
     }
 
+    /**
+     * Sets the SurveysAggregate containing data related to surveys.
+     *
+     * @param surveysAggregate SurveysAggregate instance representing survey data.
+     */
     public void setSurveysAggregate(SurveysAggregate surveysAggregate) {
         this.surveysAggregate = surveysAggregate;
     }
 
+    /**
+     * Retrieves the type of comments to be displayed.
+     *
+     * @return String representing the comment type.
+     */
     public String getCommentType() {
         return commentType;
     }
 
+    /**
+     * Sets the type of comments to be displayed.
+     *
+     * @param commentType String representing the comment type.
+     */
     public void setCommentType(String commentType) {
         this.commentType = commentType;
     }
 
-    //PRIVATE ADD LISTENERS METHOD
+    //*****************PRIVATE ADD LISTENERS METHOD*****************//
 
+    /**
+     * Adds listeners to GUI components.
+     */
     private void AddListeners(){
+
+        //Close Button listener
 
         view.getCloseButton().addActionListener(new ActionListener() {
             @Override
@@ -81,13 +149,22 @@ public class CommentViewGUIController {
 
     }
 
-    //PRIVATE METHODS
+    //*****************PRIVATE METHODS*****************//
 
+    /**
+     * Extracts a list of comments from the aggregated comments string.
+     *
+     * @param commentsAggregate Aggregated comments string.
+     * @return ArrayList of comments.
+     */
     private ArrayList<String> getListComments(String commentsAggregate){
         String[] splitArray = commentsAggregate.split("\\|");
         return new ArrayList<>(Arrays.asList(splitArray));
     }
 
+    /**
+     * Sets up the CommentViewGUI and the associated comments table.
+     */
     private void setUpViewAndTable(){
         String[] columnNames = {"Operatore", "Commenti"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);

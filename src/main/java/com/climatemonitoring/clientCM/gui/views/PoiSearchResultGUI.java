@@ -14,21 +14,63 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Locale;
 
+/**
+ * Represents the window where the results of Points of Interests searches are visualized.
+ *
+ * <p>
+ * This class extends JFrame and provides a graphical user interface for displaying
+ * search results related to Points of Interests (POI). It includes a table to show
+ * the details of the search results and buttons for user interactions.
+ * </p>
+ *
+ * @author Lorenzo Cattapan 726459 (Varese)
+ * @version 1.0
+ * @see PoiSearchResultGUIController
+ */
 public class PoiSearchResultGUI extends JFrame {
 
-    //FIELDS
+    //*****************FIELDS*****************//
 
+    /**
+     * The main panel containing the elements of the POI search result window.
+     */
     private JPanel poiSearchResultPanel;
+    /**
+     * Label displaying the title of the application.
+     */
     private JLabel climatemonitoringLabel;
+    /**
+     * Label displaying information about the search results.
+     */
     private JLabel searchInfoLabel;
+    /**
+     * Table displaying the search results in a tabular format.
+     */
     private JTable searchResultTable;
+    /**
+     * Panel containing the search results.
+     */
     private JPanel searchResultPanel;
+    /**
+     * Button to navigate back to the previous screen.
+     */
     private JButton backButton;
+    /**
+     * Button to select a Point of Interest from the search results.
+     */
     private JButton selectPoiButton;
+    /**
+     * Scroll pane for the search result table.
+     */
     private JScrollPane searchResultScroll;
 
-    //CONSTRUCTOR
+    //*****************CONSTRUCTOR*****************//
 
+    /**
+     * Constructs a new instance of PoiSearchResultGUI for guest searches with the given search results.
+     *
+     * @param searchResults The list of PointOfInterest objects representing the search results.
+     */
     public PoiSearchResultGUI(ArrayList<PointOfInterest> searchResults) {
         setTitle("Climate Monitoring");
         setContentPane(poiSearchResultPanel);
@@ -40,6 +82,12 @@ public class PoiSearchResultGUI extends JFrame {
         new PoiSearchResultGUIController(this, searchResults, null);
     }
 
+    /**
+     * Constructs a new instance of PoiSearchResultGUI for a logged-in user (operator) with the given search results.
+     *
+     * @param searchResults The list of PointOfInterest objects representing the search results.
+     * @param user The User object representing the current user.
+     */
     public PoiSearchResultGUI(ArrayList<PointOfInterest> searchResults, User user) {
         setTitle("Climate Monitoring");
         setContentPane(poiSearchResultPanel);
@@ -48,68 +96,148 @@ public class PoiSearchResultGUI extends JFrame {
         new PoiSearchResultGUIController(this, searchResults, user);
     }
 
-    //GETTER AND SETTER
+    //*****************GETTER AND SETTER*****************//
 
+    /**
+     * Getter for the poiSearchResultPanel.
+     *
+     * @return The main panel of the POI search result window.
+     */
     public JPanel getPoiSearchResultPanel() {
         return poiSearchResultPanel;
     }
 
+    /**
+     * Setter for the poiSearchResultPanel.
+     *
+     * @param poiSearchResultPanel The main panel to set.
+     */
     public void setPoiSearchResultPanel(JPanel poiSearchResultPanel) {
         this.poiSearchResultPanel = poiSearchResultPanel;
     }
 
+    /**
+     * Getter for the climatemonitoringLabel.
+     *
+     * @return The JLabel representing the title label in the POI search result window.
+     */
     public JLabel getClimatemonitoringLabel() {
         return climatemonitoringLabel;
     }
 
+    /**
+     * Setter for the climatemonitoringLabel.
+     *
+     * @param climatemonitoringLabel The JLabel to set as the title label.
+     */
     public void setClimatemonitoringLabel(JLabel climatemonitoringLabel) {
         this.climatemonitoringLabel = climatemonitoringLabel;
     }
 
+    /**
+     * Getter for the searchInfoLabel.
+     *
+     * @return The JLabel displaying information about the search results.
+     */
     public JLabel getSearchInfoLabel() {
         return searchInfoLabel;
     }
 
+    /**
+     * Setter for the searchInfoLabel.
+     *
+     * @param searchInfoLabel The JLabel to set as the information label for search results.
+     */
     public void setSearchInfoLabel(JLabel searchInfoLabel) {
         this.searchInfoLabel = searchInfoLabel;
     }
 
+    /**
+     * Getter for the searchResultPanel.
+     *
+     * @return The JPanel containing the search results in the POI search result window.
+     */
     public JPanel getSearchResultPanel() {
         return searchResultPanel;
     }
 
+    /**
+     * Setter for the searchResultPanel.
+     *
+     * @param searchResultPanel The JPanel to set as the panel containing search results.
+     */
     public void setSearchResultPanel(JPanel searchResultPanel) {
         this.searchResultPanel = searchResultPanel;
     }
 
+    /**
+     * Getter for the backButton.
+     *
+     * @return The JButton representing the back button in the POI search result window.
+     */
     public JButton getBackButton() {
         return backButton;
     }
 
+    /**
+     * Setter for the backButton.
+     *
+     * @param backButton The JButton to set as the back button.
+     */
     public void setBackButton(JButton backButton) {
         this.backButton = backButton;
     }
 
+    /**
+     * Getter for the selectPoiButton.
+     *
+     * @return The JButton representing the select POI button in the POI search result window.
+     */
     public JButton getSelectPoiButton() {
         return selectPoiButton;
     }
 
+    /**
+     * Setter for the selectPoiButton.
+     *
+     * @param selectPoiButton The JButton to set as the select POI button.
+     */
     public void setSelectPoiButton(JButton selectPoiButton) {
         this.selectPoiButton = selectPoiButton;
     }
 
+    /**
+     * Getter for the searchResultTable.
+     *
+     * @return The JTable displaying search results in a tabular format.
+     */
     public JTable getSearchResultTable() {
         return searchResultTable;
     }
 
+    /**
+     * Setter for the searchResultTable.
+     *
+     * @param searchResultsTable The JTable to set as the table for displaying search results.
+     */
     public void setSearchResultTable(JTable searchResultsTable) {
         this.searchResultTable = searchResultsTable;
     }
 
+    /**
+     * Getter for the searchResultScroll.
+     *
+     * @return The JScrollPane for scrolling through the search result table.
+     */
     public JScrollPane getSearchResultScroll() {
         return searchResultScroll;
     }
 
+    /**
+     * Setter for the searchResultScroll.
+     *
+     * @param searchResultScroll The JScrollPane to set for scrolling through search results.
+     */
     public void setSearchResultScroll(JScrollPane searchResultScroll) {
         this.searchResultScroll = searchResultScroll;
     }

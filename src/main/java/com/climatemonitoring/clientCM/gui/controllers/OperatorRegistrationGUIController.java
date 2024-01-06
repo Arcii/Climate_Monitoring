@@ -14,15 +14,35 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * The `OperatorRegistrationGUIController` class serves as the controller for the Operator Registration GUI.
+ * It manages user interactions and communicates with the server side of the application through the `ClientManager`.
+ *
+ * @author Lorenzo Cattapan 726459 (Varese)
+ * @version 1.0
+ * @see OperatorRegistrationGUI
+ * @see ClientManager
+ */
 public class OperatorRegistrationGUIController {
 
-    //FIELDS
+    //*****************FIELDS*****************//
 
+    /**
+     * The associated OperatorRegistrationGUI view.
+     */
     private OperatorRegistrationGUI view;
+    /**
+     * The ClientManager singleton instance for handling network interactions.
+     */
     private final ClientManager clientManager;
 
-    //CONSTRUCTOR
+    //*****************CONSTRUCTOR*****************//
 
+    /**
+     * Constructs an instance of OperatorRegistrationGUIController.
+     *
+     * @param view The OperatorRegistrationGUI view to be associated with the controller.
+     */
     public OperatorRegistrationGUIController(OperatorRegistrationGUI view) {
         this.view = view;
         this.clientManager = ClientManager.GetClientManager();
@@ -31,42 +51,70 @@ public class OperatorRegistrationGUIController {
         AddListeners();
     }
 
-    //GETTER AND SETTER
+    //*****************GETTER AND SETTER*****************//
 
+    /**
+     * Gets the associated OperatorRegistrationGUI view.
+     *
+     * @return The OperatorRegistrationGUI view.
+     */
     public OperatorRegistrationGUI getView() {
         return view;
     }
 
+    /**
+     * Sets the associated OperatorRegistrationGUI view.
+     *
+     * @param view The OperatorRegistrationGUI view to be set.
+     */
     public void setView(OperatorRegistrationGUI view) {
         this.view = view;
     }
 
+    /**
+     * Gets the ClientManager singleton instance associated with the controller.
+     *
+     * @return The ClientManager instance.
+     */
     public ClientManager getClientManager() {
         return clientManager;
     }
 
-    //PRIVATE ADD LISTENERS METHOD
+    //*****************PRIVATE ADD LISTENERS METHOD*****************//
 
+    /**
+     * Adds listeners to the relevant components in the OperatorRegistrationGUI.
+     */
     private void AddListeners(){
 
-        //Continue button
+        //Continue Button Listener
         view.getContinueRegistrationButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
+                    // Extract user input from the view
                     String name = view.getNameField().getText().trim();
                     String surname = view.getSurnameField().getText().trim();
                     String fiscalcode = view.getFiscalCodeField().getText().trim();
                     String email = view.getEmailField().getText().trim();
                     String userid = view.getUserIdField().getText().trim();
+
+                    // Validate and process the user input
                     checkOperatorFormFields(name, surname, fiscalcode, email, userid);
+
+                    // Retrieve the list of monitoring centers from the client manager
                     ArrayList<MonitoringCenter> centersList;
                     centersList = clientManager.getCentersList();
+
+                    // Hash the password and create a new CenterSelectionGUI where the operator will select or create his Monitoring Center
                     String hashedpassword = ClientManager.hashPasswordSHA256(view.getPasswordField().getPassword());
                     CenterSelectionGUI form = new CenterSelectionGUI(new User(name, surname, email, userid, fiscalcode, hashedpassword), centersList);
+
+                    // Make the new form visible and dispose of the current view
                     form.setVisible(true);
                     view.dispose();
                 } catch (FieldFormatException exc){
+                    // Handle field format exceptions
                     System.err.println("Catching format Exception.");
                     JOptionPane.showMessageDialog(view, exc.getMessage(), "Alert", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -74,10 +122,11 @@ public class OperatorRegistrationGUIController {
             }
         });
 
-        //Back Button
+        //Back Button Listener
         view.getBackButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Navigate back to the ClientHomeGUI
                 ClientHomeGUI form = new ClientHomeGUI();
                 form.setVisible(true);
                 view.dispose();
@@ -86,9 +135,20 @@ public class OperatorRegistrationGUIController {
 
     }
 
-    //PRIVATE METHODS
+    //*****************PRIVATE METHODS*****************//
 
+    /**
+     * Validates the operator registration form fields.
+     *
+     * @param name The operator's name.
+     * @param surname The operator's surname.
+     * @param fiscalcode The operator's fiscal code.
+     * @param email The operator's email.
+     * @param userid The operator's username.
+     * @throws FieldFormatException If any field format is invalid.
+     */
     private void checkOperatorFormFields(String name, String surname, String fiscalcode, String email, String userid) throws FieldFormatException {
+        // Validate each field individually
         if(!Objects.equals(name, "") &&
                 !Objects.equals(surname, "") &&
                 !Objects.equals(fiscalcode, "") &&
@@ -96,12 +156,19 @@ public class OperatorRegistrationGUIController {
                 !Objects.equals(userid, "") &&
                 view.getPasswordField().getPassword().length != 0 &&
                 view.getConfirmPasswordField().getPassword().length != 0){
+            //Validate if the two passwords fields are equals
             if((new String(view.getPasswordField().getPassword())).equals(new String(view.getConfirmPasswordField().getPassword()))){
+                // Validate name format and length
                 if(ClientManager.isOnlyLettersString(name) && name.length() <= 30){
+                    // Validate surname format and length
                     if(ClientManager.isOnlyLettersString(surname) && surname.length() <= 30){
+                        // Validate fiscal code format and length
                         if(ClientManager.isValidFiscalCode(fiscalcode) && fiscalcode.length() == 16){
+                            // Validate email format and length
                             if(ClientManager.isValidEmail(email) && email.length() <= 80){
+                                // Validate username format and length
                                 if(ClientManager.isValidUtf8(userid) && userid.length() <= 30){
+                                    // Check if the user already exists
                                     if(!clientManager.checkUserExists(userid)) {
                                         System.err.println("Check User fields passed.");
                                     }else{

@@ -11,267 +11,653 @@ import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.util.Locale;
 
+/**
+ * The home graphical user interface (GUI) class for the Climate Monitoring application.
+ * This class represents the home screen of the client-side application, providing user interaction
+ * and displaying essential information related to climate monitoring.
+ *
+ * <p>
+ * On this page a guest can search Points of Interest by name and country or by coordinates.
+ * An Operator of a Monitoring Center can Log In or start the registration process.
+ * </p>
+ *
+ * @author Lorenzo Cattapan 726459  (Varese)
+ * @version 1.0
+ * @see com.climatemonitoring.clientCM.network.ClientManager
+ */
 public class ClientHomeGUI extends JFrame {
 
-    //FIELDS
+    //*****************FIELDS*****************
 
+    /**
+     * Panel for guest user information
+     */
     private JPanel guestUserPanel;
+    /**
+     * Application label
+     */
     private JLabel climatemonitoringLabel;
+    /**
+     * Greeting label for user
+     */
     private JLabel greetingLabel;
+    /**
+     * Panel for geographical coordinates search
+     */
     private JPanel coordinatesSearchPanel;
+    /**
+     * Label for coordinates search
+     */
     private JLabel coordinatesSearchLabel;
+    /**
+     * Panel for name-based search
+     */
     private JPanel nameSearchPanel;
+    /**
+     * Label for name-based search
+     */
     private JLabel nameSearchLabel;
+    /**
+     * Input field for latitude
+     */
     private JTextField latitudeField;
+    /**
+     * Input field for longitude
+     */
     private JTextField longitudeField;
+    /**
+     * Button for coordinates search
+     */
     private JButton coordinatesSearchButton;
+    /**
+     * Input field for location name
+     */
     private JTextField nameField;
+    /**
+     * Input field for state
+     */
     private JTextField stateField;
+    /**
+     * Button for name-based search
+     */
     private JButton namePoiSearchButton;
+    /**
+     * Label for latitude input
+     */
     private JLabel latitudeLabel;
+    /**
+     * Label for longitude input
+     */
     private JLabel longitudeLabel;
+    /**
+     * Label for location name input
+     */
     private JLabel nameLabel;
+    /**
+     * Label for state input
+     */
     private JLabel stateLabel;
+    /**
+     * Panel for user login form
+     */
     private JPanel loginFormPanel;
+    /**
+     * Label for username input
+     */
     private JLabel usernameLabel;
+    /**
+     * Input field for username
+     */
     private JTextField usernameField;
+    /**
+     * Label for password input
+     */
     private JLabel passwordLabel;
+    /**
+     * Input field for password
+     */
     private JPasswordField passwordField;
+    /**
+     * Button for user login
+     */
     private JButton loginButton;
+    /**
+     * Information label for login status
+     */
     private JLabel loginInfoLabel;
+    /**
+     * Panel for user sign-up form
+     */
     private JPanel signUpPanel;
+    /**
+     * Label for sign-up form
+     */
     private JLabel signUpLabel;
+    /**
+     * Button for user sign-up
+     */
     private JButton signUpButton;
 
-    //CONSTRUCTOR
+    //*****************CONSTRUCTOR*****************//
 
+    /**
+     * Constructor for the main graphical user interface (GUI) of the Climate Monitoring application.
+     * Initializes the GUI components, sets the title, size, and default close operation.
+     * Also, configures the initial size, state, and associates a controller with the GUI.
+     */
     public ClientHomeGUI() {
+
+        // Set the title of the application window
         setTitle("Climate Monitoring");
+
+        // Set the content pane to the guestUserPanel
         setContentPane(guestUserPanel);
+
+        // Set the default close operation when the window is closed
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Get the screen size and set the window size to cover the entire screen
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setSize(screenSize);
+
+        // Set the minimum size of the window
         setMinimumSize(new Dimension(1000, 650));
+
+        // Set the extended state to maximize the window
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        // Set the initial size of the search panels
         coordinatesSearchPanel.setSize(400, 400);
         nameSearchPanel.setSize(400, 400);
+
+        // Create an instance of the ClientHomeGUIController and associate it with this GUI
         new ClientHomeGUIController(this);
     }
 
-    //GETTER AND SETTER
+    //*****************GETTER AND SETTER*****************//
 
+    /**
+     * Getter for the guestUserPanel.
+     *
+     * @return The JPanel representing the guest user panel.
+     */
     public JPanel getGuestUserPanel() {
         return guestUserPanel;
     }
 
+    /**
+     * Setter for the guestUserPanel.
+     *
+     * @param guestUserPanel The JPanel to set as the guest user panel.
+     */
     public void setGuestUserPanel(JPanel guestUserPanel) {
         this.guestUserPanel = guestUserPanel;
     }
 
+    /**
+     * Getter for the climatemonitoringLabel.
+     *
+     * @return The JLabel representing the climatemonitoring label.
+     */
     public JLabel getClimatemonitoringLabel() {
         return climatemonitoringLabel;
     }
 
+    /**
+     * Setter for the climatemonitoringLabel.
+     *
+     * @param climatemonitoringLabel The JLabel to set as the climatemonitoring label.
+     */
     public void setClimatemonitoringLabel(JLabel climatemonitoringLabel) {
         this.climatemonitoringLabel = climatemonitoringLabel;
     }
 
+    /**
+     * Getter for the greetingLabel.
+     *
+     * @return The JLabel representing the greeting label.
+     */
     public JLabel getGreetingLabel() {
         return greetingLabel;
     }
 
+    /**
+     * Setter for the greetingLabel.
+     *
+     * @param greetingLabel The JLabel to set as the greeting label.
+     */
     public void setGreetingLabel(JLabel greetingLabel) {
         this.greetingLabel = greetingLabel;
     }
 
+    /**
+     * Getter for the coordinatesSearchPanel.
+     *
+     * @return The JPanel representing the coordinates search panel.
+     */
     public JPanel getCoordinatesSearchPanel() {
         return coordinatesSearchPanel;
     }
 
+    /**
+     * Setter for the coordinatesSearchPanel.
+     *
+     * @param coordinatesSearchPanel The JPanel to set as the coordinates search panel.
+     */
     public void setCoordinatesSearchPanel(JPanel coordinatesSearchPanel) {
         this.coordinatesSearchPanel = coordinatesSearchPanel;
     }
 
+    /**
+     * Getter for the coordinatesSearchLabel.
+     *
+     * @return The JLabel representing the coordinates search label.
+     */
     public JLabel getCoordinatesSearchLabel() {
         return coordinatesSearchLabel;
     }
 
+    /**
+     * Setter for the coordinatesSearchLabel.
+     *
+     * @param coordinatesSearchLabel The JLabel to set as the coordinates search label.
+     */
     public void setCoordinatesSearchLabel(JLabel coordinatesSearchLabel) {
         this.coordinatesSearchLabel = coordinatesSearchLabel;
     }
 
+    /**
+     * Getter for the nameSearchPanel.
+     *
+     * @return The JPanel representing the name search panel.
+     */
     public JPanel getNameSearchPanel() {
         return nameSearchPanel;
     }
 
+    /**
+     * Setter for the nameSearchPanel.
+     *
+     * @param nameSearchPanel The JPanel to set as the name search panel.
+     */
     public void setNameSearchPanel(JPanel nameSearchPanel) {
         this.nameSearchPanel = nameSearchPanel;
     }
 
+    /**
+     * Getter for the nameSearchLabel.
+     *
+     * @return The JLabel representing the name search label.
+     */
     public JLabel getNameSearchLabel() {
         return nameSearchLabel;
     }
 
+    /**
+     * Setter for the nameSearchLabel.
+     *
+     * @param nameSearchLabel The JLabel to set as the name search label.
+     */
     public void setNameSearchLabel(JLabel nameSearchLabel) {
         this.nameSearchLabel = nameSearchLabel;
     }
 
+    /**
+     * Getter for the latitudeField.
+     *
+     * @return The JTextField representing the latitude input field.
+     */
     public JTextField getLatitudeField() {
         return latitudeField;
     }
 
+    /**
+     * Setter for the latitudeField.
+     *
+     * @param latitudeField The JTextField to set as the latitude input field.
+     */
     public void setLatitudeField(JTextField latitudeField) {
         this.latitudeField = latitudeField;
     }
 
+    /**
+     * Getter for the longitudeField.
+     *
+     * @return The JTextField representing the longitude input field.
+     */
     public JTextField getLongitudeField() {
         return longitudeField;
     }
 
+    /**
+     * Setter for the longitudeField.
+     *
+     * @param longitudeField The JTextField to set as the longitude input field.
+     */
     public void setLongitudeField(JTextField longitudeField) {
         this.longitudeField = longitudeField;
     }
 
+    /**
+     * Getter for the coordinatesSearchButton.
+     *
+     * @return The JButton representing the coordinates search button.
+     */
     public JButton getCoordinatesSearchButton() {
         return coordinatesSearchButton;
     }
 
+    /**
+     * Setter for the coordinatesSearchButton.
+     *
+     * @param coordinatesSearchButton The JButton to set as the coordinates search button.
+     */
     public void setCoordinatesSearchButton(JButton coordinatesSearchButton) {
         this.coordinatesSearchButton = coordinatesSearchButton;
     }
 
+    /**
+     * Getter for the nameField.
+     *
+     * @return The JTextField representing the name input field.
+     */
     public JTextField getNameField() {
         return nameField;
     }
 
+    /**
+     * Setter for the nameField.
+     *
+     * @param nameField The JTextField to set as the name input field.
+     */
     public void setNameField(JTextField nameField) {
         this.nameField = nameField;
     }
 
+    /**
+     * Getter for the stateField.
+     *
+     * @return The JTextField representing the state input field.
+     */
     public JTextField getStateField() {
         return stateField;
     }
 
+    /**
+     * Setter for the stateField.
+     *
+     * @param stateField The JTextField to set as the state input field.
+     */
     public void setStateField(JTextField stateField) {
         this.stateField = stateField;
     }
 
+    /**
+     * Getter for the namePoiSearchButton.
+     *
+     * @return The JButton representing the name POI search button.
+     */
     public JButton getNamePoiSearchButton() {
         return namePoiSearchButton;
     }
 
+    /**
+     * Setter for the namePoiSearchButton.
+     *
+     * @param namePoiSearchButton The JButton to set as the name POI search button.
+     */
     public void setNamePoiSearchButton(JButton namePoiSearchButton) {
         this.namePoiSearchButton = namePoiSearchButton;
     }
 
+    /**
+     * Getter for the latitudeLabel.
+     *
+     * @return The JLabel representing the latitude label.
+     */
     public JLabel getLatitudeLabel() {
         return latitudeLabel;
     }
 
+    /**
+     * Setter for the latitudeLabel.
+     *
+     * @param latitudeLabel The JLabel to set as the latitude label.
+     */
     public void setLatitudeLabel(JLabel latitudeLabel) {
         this.latitudeLabel = latitudeLabel;
     }
 
+    /**
+     * Getter for the longitudeLabel.
+     *
+     * @return The JLabel representing the longitude label.
+     */
     public JLabel getLongitudeLabel() {
         return longitudeLabel;
     }
 
+    /**
+     * Setter for the longitudeLabel.
+     *
+     * @param longitudeLabel The JLabel to set as the longitude label.
+     */
     public void setLongitudeLabel(JLabel longitudeLabel) {
         this.longitudeLabel = longitudeLabel;
     }
 
+    /**
+     * Getter for the nameLabel.
+     *
+     * @return The JLabel representing the name label.
+     */
     public JLabel getNameLabel() {
         return nameLabel;
     }
 
+    /**
+     * Setter for the nameLabel.
+     *
+     * @param nameLabel The JLabel to set as the name label.
+     */
     public void setNameLabel(JLabel nameLabel) {
         this.nameLabel = nameLabel;
     }
 
+    /**
+     * Getter for the stateLabel.
+     *
+     * @return The JLabel representing the state label.
+     */
     public JLabel getStateLabel() {
         return stateLabel;
     }
 
+    /**
+     * Setter for the stateLabel.
+     *
+     * @param stateLabel The JLabel to set as the state label.
+     */
     public void setStateLabel(JLabel stateLabel) {
         this.stateLabel = stateLabel;
     }
 
+    /**
+     * Getter for the loginFormPanel.
+     *
+     * @return The JPanel representing the login form panel.
+     */
     public JPanel getLoginFormPanel() {
         return loginFormPanel;
     }
 
+    /**
+     * Setter for the loginFormPanel.
+     *
+     * @param loginFormPanel The JPanel to set as the login form panel.
+     */
     public void setLoginFormPanel(JPanel loginFormPanel) {
         this.loginFormPanel = loginFormPanel;
     }
 
+    /**
+     * Getter for the usernameLabel.
+     *
+     * @return The JLabel representing the username label.
+     */
     public JLabel getUsernameLabel() {
         return usernameLabel;
     }
 
+    /**
+     * Setter for the usernameLabel.
+     *
+     * @param usernameLabel The JLabel to set as the username label.
+     */
     public void setUsernameLabel(JLabel usernameLabel) {
         this.usernameLabel = usernameLabel;
     }
 
+    /**
+     * Getter for the usernameField.
+     *
+     * @return The JTextField representing the username input field.
+     */
     public JTextField getUsernameField() {
         return usernameField;
     }
 
+    /**
+     * Setter for the usernameField.
+     *
+     * @param usernameField The JTextField to set as the username input field.
+     */
     public void setUsernameField(JTextField usernameField) {
         this.usernameField = usernameField;
     }
 
+    /**
+     * Getter for the passwordLabel.
+     *
+     * @return The JLabel representing the password label.
+     */
     public JLabel getPasswordLabel() {
         return passwordLabel;
     }
 
+    /**
+     * Setter for the passwordLabel.
+     *
+     * @param passwordLabel The JLabel to set as the password label.
+     */
     public void setPasswordLabel(JLabel passwordLabel) {
         this.passwordLabel = passwordLabel;
     }
 
+    /**
+     * Getter for the passwordField.
+     *
+     * @return The JPasswordField representing the password input field.
+     */
     public JPasswordField getPasswordField() {
         return passwordField;
     }
 
+    /**
+     * Setter for the passwordField.
+     *
+     * @param passwordField The JPasswordField to set as the password input field.
+     */
     public void setPasswordField(JPasswordField passwordField) {
         this.passwordField = passwordField;
     }
 
+    /**
+     * Getter for the loginButton.
+     *
+     * @return The JButton representing the login button.
+     */
     public JButton getLoginButton() {
         return loginButton;
     }
 
+    /**
+     * Setter for the loginButton.
+     *
+     * @param loginButton The JButton to set as the login button.
+     */
     public void setLoginButton(JButton loginButton) {
         this.loginButton = loginButton;
     }
 
+    /**
+     * Getter for the loginInfoLabel.
+     *
+     * @return The JLabel representing the login info label.
+     */
     public JLabel getLoginInfoLabel() {
         return loginInfoLabel;
     }
 
+    /**
+     * Setter for the loginInfoLabel.
+     *
+     * @param loginInfoLabel The JLabel to set as the login info label.
+     */
     public void setLoginInfoLabel(JLabel loginInfoLabel) {
         this.loginInfoLabel = loginInfoLabel;
     }
 
+    /**
+     * Getter for the signUpPanel.
+     *
+     * @return The JPanel representing the sign-up panel.
+     */
     public JPanel getSignUpPanel() {
         return signUpPanel;
     }
 
+    /**
+     * Setter for the signUpPanel.
+     *
+     * @param signUpPanel The JPanel to set as the sign-up panel.
+     */
     public void setSignUpPanel(JPanel signUpPanel) {
         this.signUpPanel = signUpPanel;
     }
 
+    /**
+     * Getter for the signUpLabel.
+     *
+     * @return The JLabel representing the sign-up label.
+     */
     public JLabel getSignUpLabel() {
         return signUpLabel;
     }
 
+    /**
+     * Setter for the signUpLabel.
+     *
+     * @param signUpLabel The JLabel to set as the sign-up label.
+     */
     public void setSignUpLabel(JLabel signUpLabel) {
         this.signUpLabel = signUpLabel;
     }
 
+    /**
+     * Getter for the signUpButton.
+     *
+     * @return The JButton representing the sign-up button.
+     */
     public JButton getSignUpButton() {
         return signUpButton;
     }
 
+    /**
+     * Setter for the signUpButton.
+     *
+     * @param signUpButton The JButton to set as the sign-up button.
+     */
     public void setSignUpButton(JButton signUpButton) {
         this.signUpButton = signUpButton;
     }

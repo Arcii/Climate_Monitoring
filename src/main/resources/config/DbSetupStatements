@@ -1,6 +1,6 @@
 // Create the Database
 
-CREATE DATABASE climatemonitoring;
+CREATE DATABASE dbcm;
 
 //Create Database Tables
 
