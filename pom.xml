@@ -42,9 +42,6 @@
                                 </manifest>
                             </archive>
                             <excludes>${profile.excludes}</excludes>
-
-                            <outputDirectory>${project.build.directory}/client</outputDirectory>
-
                         </configuration>
                     </plugin>
 
@@ -61,9 +58,6 @@
                                 </goals>
                                 <configuration>
                                     <finalName>${project.artifactId}-${project.version}-clientCM</finalName>
-
-                                    <outputDirectory>${project.build.directory}/client</outputDirectory>
-
                                     <transformers>
                                         <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                             <mainClass>${profile.mainClass}</mainClass>
@@ -109,9 +103,6 @@
                                 </manifest>
                             </archive>
                             <excludes>${profile.excludes}</excludes>
-
-                            <outputDirectory>${project.build.directory}/server</outputDirectory>
-
                         </configuration>
                     </plugin>
 
@@ -128,9 +119,6 @@
                                 </goals>
                                 <configuration>
                                     <finalName>${project.artifactId}-${project.version}-serverCM</finalName>
-
-                                    <outputDirectory>${project.build.directory}/server</outputDirectory>
-
                                     <transformers>
                                         <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                             <mainClass>${profile.mainClass}</mainClass>
