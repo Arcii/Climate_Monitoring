@@ -34,11 +34,7 @@ Requisiti di Sistema
 
 Installazione
 
-    Clonare il repository:
-
-    bash
-
-git clone https://github.com/tuonome/climate-monitoring.git
+Clonare la repository.
 
 Seguire le istruzioni riportate nel Manuale Utente e/o nel Manuale Tecnico.
 
