@@ -4,10 +4,10 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * The `MonitoringCenter` class represents a Climate Monitoring Center in the Climate Monitoring application.
- * Each center is associated with a unique identifier (`centerid`) and includes information such as its name,
+ * The <code>MonitoringCenter</code> class represents a Climate Monitoring Center in the Climate Monitoring application.
+ * Each center is associated with a unique identifier (<code>centerid</code>) and includes information such as its name,
  * address, address number, CAP (Postal Code), city, and province.
- * This class implements the Serializable interface to support serialization.
+ * This class implements the <code>Serializable</code> interface to support serialization.
  *
  * <p>
  * The class provides constructors for creating monitoring centers with different sets of parameters.
@@ -15,19 +15,19 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * The `MonitoringCenter` class also implements custom `equals` and `toString` methods for object comparison
- * and string representation, respectively. The `equals` method compares centers based on their unique identifier (`centerid`).
+ * The <code>MonitoringCenter</code> class also implements custom <code>equals</code> and <code>toString</code> methods for object comparison
+ * and string representation, respectively. The <code>equals</code> method compares centers based on their unique identifier (<code>centerid</code>).
  * </p>
  *
  * <p>
  * Note: This class is an integral part of the Climate Monitoring application and is utilized on both the client and server sides.
  * It is used to represent Climate Monitoring Centers where each user, acting as an operator, is associated with a specific center.
- * The `MonitoringCenter` class plays a crucial role in the overall architecture, facilitating the submission of surveys containing
+ * The <code>MonitoringCenter</code> class plays a crucial role in the overall architecture, facilitating the submission of surveys containing
  * climatic data and comments for each Point of Interest within the associated center.
  * </p>
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @serial 1L
  */
 public class MonitoringCenter implements Serializable {

@@ -3,7 +3,7 @@
  * ({@link com.climatemonitoring.shared.RemoteDatabaseServiceInterface}) used for communication between client and server.
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see com.climatemonitoring.shared.RemoteDatabaseServiceInterface
  * @see java.rmi.Remote
  */

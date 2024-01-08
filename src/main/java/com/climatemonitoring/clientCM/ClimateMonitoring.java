@@ -4,15 +4,15 @@ import com.climatemonitoring.clientCM.gui.views.ClientHomeGUI;
 import com.climatemonitoring.clientCM.network.ClientManager;
 
 /**
- * The `ClimateMonitoring` class serves as the entry point and main class for
+ * The <code>ClimateMonitoring</code> class serves as the entry point and main class for
  * the client side of the Climate Monitoring application. It initializes the
- * necessary components, such as the singleton `ClientManager` for network communication
- * and the main graphical user interface (GUI) represented by the `ClientHomeGUI`.
+ * necessary components, such as the singleton <code>ClientManager</code> for network communication
+ * and the main graphical user interface (GUI) represented by the <code>ClientHomeGUI</code>.
  *
  * <p>
- * The main method creates an instance of the singleton `ClientManager` using the
- * static method `GetClientManager()` to manage the client-side networking
- * operations. It also initializes and displays the main GUI window (`ClientHomeGUI`)
+ * The main method creates an instance of the singleton <code>ClientManager</code> using the
+ * static method <code>GetClientManager()</code> to manage the client-side networking
+ * operations. It also initializes and displays the main GUI window (<code>ClientHomeGUI</code>)
  * for the Climate Monitoring application.
  * </p>
  *
@@ -23,7 +23,7 @@ import com.climatemonitoring.clientCM.network.ClientManager;
  *
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see ClientManager
  * @see ClientHomeGUI
  */
@@ -31,8 +31,8 @@ public class ClimateMonitoring {
 
     /**
      * The main method that serves as the entry point for the Climate Monitoring
-     * client application. It initializes the  singleton `ClientManager` for network
-     * communication and the main graphical user interface (`ClientHomeGUI`).
+     * client application. It initializes the  singleton <code>ClientManager</code> for network
+     * communication and the main graphical user interface (<code>ClientHomeGUI</code>).
      *
      * @param args Command-line arguments (not used).
      */

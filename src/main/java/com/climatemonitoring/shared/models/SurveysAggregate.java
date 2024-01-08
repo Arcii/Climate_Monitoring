@@ -5,9 +5,9 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
- * The 'SurveyAggregate' class represents the aggregate information of one or more Surveys for a specific PointOfInterest.
+ * The <code>SurveyAggregate</code> class represents the aggregate information of one or more Surveys for a specific Point Of Interest.
  * It is used when a Guest or a User(operator) wants to visualize the climatic data of a Point of Interest.
- * This class implements the Serializable interface to support serialization.
+ * This class implements the <code>Serializable</code> interface to support serialization.
  *
  * <p>
  * The class provides constructors for creating surveys aggregate objects with different sets of parameters.
@@ -19,7 +19,7 @@ import java.sql.Timestamp;
  *</p>
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @serial 1L
  * @see Survey
  */

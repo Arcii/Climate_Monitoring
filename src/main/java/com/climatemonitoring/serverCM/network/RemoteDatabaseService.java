@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 /**
- * The `RemoteDatabaseService` class is an implementation of the Java RMI interface
- * `RemoteDatabaseServiceInterface`. It extends `UnicastRemoteObject` to facilitate
+ * The <code>RemoteDatabaseService</code> class is an implementation of the Java RMI interface
+ * <code>RemoteDatabaseServiceInterface</code>. It extends <code>UnicastRemoteObject</code> to facilitate
  * remote method invocation. This class provides remote communication methods for
  * various database operations related to points of interest, surveys, monitoring
  * centers, user registration, login, and other functionalities.
@@ -32,13 +32,13 @@ import java.util.Locale;
  * </p>
  *
  * <p>
- * The class creates and utilizes the only instance of DbManager (that implements a Singleton pattern) to get a database connection through
+ * The class creates and utilizes the only instance of <code>DbManager</code> (that implements a Singleton pattern) to get a database connection through
  * the database connection pool managed in the DbManager class. The database connection details, such as username and password,
- * are provided during the instantiation of this class, ensuring that all the remote invocations are managed using the single instance of DbManager.
+ * are provided during the instantiation of this class, ensuring that all the remote invocations are managed using the single instance of <code>DbManager</code>.
  * </p>
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see UnicastRemoteObject
  * @see com.climatemonitoring.shared.RemoteDatabaseServiceInterface
  * @see DbManager
@@ -63,6 +63,7 @@ public class RemoteDatabaseService extends UnicastRemoteObject implements Remote
      */
     public RemoteDatabaseService(String username, String password) throws RemoteException {
         super();
+        //Creating and saving the DbManager singleton
         this.dbManager = DbManager.GetDbManager(username, password);
     }
 

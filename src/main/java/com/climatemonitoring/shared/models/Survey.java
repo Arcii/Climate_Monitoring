@@ -5,8 +5,8 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
- * The 'Survey' class models a survey containing climatic data inserted by users (operators) of a climate center for a specific point of interest monitored by the user's center.
- * This class implements the Serializable interface to support serialization.
+ * The <code>Survey</code> class models a survey containing climatic data inserted by users (operators) of a climate center for a specific point of interest monitored by the user's center.
+ * This class implements the <code>Serializable</code> interface to support serialization.
  *
  * <p>
  * The class provides constructors for creating surveys with different sets of parameters.
@@ -14,8 +14,8 @@ import java.sql.Timestamp;
  * </p>
  *
  * <p>
- * The `Survey` class also implements custom `equals` and `toString` methods for object comparison
- * and string representation, respectively. The `equals` method compares centers based on their unique identifier (`dataid`).
+ * The <code>Survey</code> class also implements custom <code>equals</code> and <code>toString</code> methods for object comparison
+ * and string representation, respectively. The <code>equals</code> method compares centers based on their unique identifier (<code>dataid</code>).
  * </p>
  *
  * <p>
@@ -23,7 +23,7 @@ import java.sql.Timestamp;
  * </p>
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @serial 1L
  * @see SurveysAggregate
  */

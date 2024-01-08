@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Allows the operator to search and add POIs for the new Monitoring Center.
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see PoiSearchForRegistrationGUIController
  */
 public class PoiSearchForRegistrationGUI extends JFrame {

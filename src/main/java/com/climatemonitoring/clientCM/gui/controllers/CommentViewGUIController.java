@@ -16,11 +16,11 @@ import java.util.Objects;
 import static com.climatemonitoring.clientCM.network.ClientManager.GetClientManager;
 
 /**
- * Controller class for managing the behavior of the CommentViewGUI.
- * This class handles the interaction between the CommentViewGUI and the ClientManager.
+ * Controller class for managing the behavior of the <code>CommentViewGUI</code> .
+ * This class handles the interaction between the <code>CommentViewGUI</code>  and the <code>ClientManager</code> .
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see CommentViewGUI
  * @see ClientManager
  */

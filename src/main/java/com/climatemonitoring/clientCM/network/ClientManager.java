@@ -24,12 +24,12 @@ import static java.lang.Math.*;
 import static java.lang.Math.sqrt;
 
 /**
- * The `ClientManager` class manages RMI communication with the server and provides utility
+ * The <code>ClientManager</code> class manages RMI communication with the server and provides utility
  * methods for the client side of the Climate Monitoring application.
  *
  * <p>
  * This class implements the Singleton pattern to ensure that only one instance of the
- * `ClientManager` is created for the entire client application. It handles the initialization
+ * <code>ClientManager</code> is created for the entire client application. It handles the initialization
  * of the RMI service connection to the server and provides methods for various operations
  * such as searching for geographical areas, managing user registration, and interacting with
  * the remote database service.
@@ -41,7 +41,7 @@ import static java.lang.Math.sqrt;
  * </p>
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see RemoteDatabaseServiceInterface
  */
 public class ClientManager {

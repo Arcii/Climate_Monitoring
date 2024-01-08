@@ -17,11 +17,11 @@ import java.util.Locale;
 
 /**
  * This class represents the GUI view where the aggregate data for a Point Of Interest (POI) is displayed.
- * It extends the JFrame class and is associated with the PoiDataGUIController for handling user interactions.
- * The GUI displays information related to SurveysAggregate for a specific PointOfInterest.
+ * It extends the <code>JFrame</code> class and is associated with the <code>PoiDataGUIController</code> for handling user interactions.
+ * The GUI displays information related to <code>SurveysAggregate</code> for a specific PointOfInterest.
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see PoiDataGUIController
  */
 public class PoiDataGUI extends JFrame {

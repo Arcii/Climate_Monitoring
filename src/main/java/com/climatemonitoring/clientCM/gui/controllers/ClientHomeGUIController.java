@@ -15,15 +15,15 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 /**
- * The controller class for the ClientHomeGUI view.
+ * The controller class for the <code>ClientHomeGUI</code>  view.
  *
  * <p>
- * This class handles user interactions and events related to the ClientHomeGUI.
- * It communicates with the ClientManager for performing various operations.
+ * This class handles user interactions and events related to the <code>ClientHomeGUI</code> .
+ * It communicates with the <code>ClientManager</code>  for performing various operations.
  * </p>
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see ClientHomeGUI
  */
 public class ClientHomeGUIController {

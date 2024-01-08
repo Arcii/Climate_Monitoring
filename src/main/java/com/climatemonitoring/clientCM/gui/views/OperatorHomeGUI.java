@@ -14,11 +14,11 @@ import java.util.Locale;
 
 /**
  * Represents the graphical user interface (GUI) view class for the home screen of a logged-in operator.
- * The OperatorHomeGUI provides various panels and components for searching points of interest (POIs), adding surveys, and managing data.
- * It is controlled by the OperatorHomeGUIController.
+ * The <code>OperatorHomeGUI</code> provides various panels and components for searching points of interest (POIs), adding surveys, and managing data.
+ * It is controlled by the <code>OperatorHomeGUIController</code>.
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see OperatorHomeGUIController
  */
 public class OperatorHomeGUI extends JFrame {

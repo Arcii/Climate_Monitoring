@@ -4,9 +4,9 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * The PointOfInterest class represents a location or point of interest that is monitored by Climate Monitoring Centers.
- * Users, who are operators of these centers, can add climatic data through surveys for each PointOfInterest.
- * This class implements the Serializable interface to support serialization.
+ * The <code>PointOfInterest</code> class represents a location or point of interest that is monitored by Climate Monitoring Centers.
+ * Users, who are operators of these centers, can add climatic data through surveys for each <code>PointOfInterest</code>.
+ * This class implements the <code>Serializable</code>  interface to support serialization.
  *
  * <p>
  * The class provides constructors for creating points of interest with different sets of parameters.
@@ -14,8 +14,8 @@ import java.io.Serializable;
  * </p>
  *
  * <p>
- * The `PointOfInterest` class also implements custom `equals` and `toString` methods for object comparison
- * and string representation, respectively. The `equals` method compares points based on their unique identifier (`poi_id`).
+ * The <code>PointOfInterest</code> class also implements custom <code>equals</code> and <code>toString</code> methods for object comparison
+ * and string representation, respectively. The `equals` method compares points based on their unique identifier (<code>poi_id</code>).
  * </p>
  *
  * <p>
@@ -23,7 +23,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @serial 1L
  */
 public class PointOfInterest implements Serializable {

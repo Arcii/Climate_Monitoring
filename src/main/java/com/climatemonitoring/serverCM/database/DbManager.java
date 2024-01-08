@@ -17,7 +17,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 /**
- * The `DbManager` class is responsible for managing the connection pool and
+ * The <code>DbManager</code> class is responsible for managing the connection pool and
  * executing various database operations on a PostgreSQL database. It follows
  * the Singleton design pattern to ensure a single instance is created for the
  * entire application, providing a centralized point for managing the database
@@ -32,7 +32,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
  * </p>
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see PredefinedQuery
  * @see com.climatemonitoring.serverCM.network.RemoteDatabaseService
  */
@@ -41,7 +41,7 @@ public class DbManager {
     //*****************FIELDS*****************//
 
     /**
-     * Singleton instance of the DbManager
+     * Singleton instance of the <code>DbManager</code>
      */
     private static DbManager controller;
     /**

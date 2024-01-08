@@ -3,7 +3,7 @@
  * {@link com.climatemonitoring.clientCM.utils.FieldFormatException}
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see com.climatemonitoring.clientCM.utils.FieldFormatException
  */
 package com.climatemonitoring.clientCM.utils;

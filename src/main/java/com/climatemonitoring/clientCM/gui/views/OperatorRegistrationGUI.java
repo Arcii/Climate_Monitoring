@@ -13,12 +13,12 @@ import java.awt.*;
 import java.util.Locale;
 
 /**
- * OperatorRegistrationGUI class represents the graphical user interface for the Operator registration process.
+ * <code>OperatorRegistrationGUI</code> class represents the graphical user interface for the Operator registration process.
  * It allows new operators to register by providing necessary information such as name, surname, fiscal code, email, username, and password.
  * The class includes fields for user input, labels, buttons, and a controller to handle user interactions.
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see OperatorRegistrationGUIController
  */
 public class OperatorRegistrationGUI extends JFrame {

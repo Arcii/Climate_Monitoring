@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 /**
- * The `CenterRegistrationGUI` class represents the graphical user interface (GUI) view
+ * The <code>CenterRegistrationGUI</code> class represents the graphical user interface (GUI) view
  * for registering a new Monitoring Center. Users can input information such as the name,
  * address, and geographical coordinates for the new center. Additionally, users can
  * select and add points of interest (POI) associated with the center.
  *
  * @author Lorenzo Cattapan 726459  (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see CenterRegistrationGUIController
  */
 public class CenterRegistrationGUI extends JFrame {

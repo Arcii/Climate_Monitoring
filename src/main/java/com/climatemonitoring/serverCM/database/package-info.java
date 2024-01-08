@@ -8,7 +8,7 @@
  * </p>
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see com.climatemonitoring.serverCM.database.PredefinedQuery
  * @see com.climatemonitoring.serverCM.database.DbManager
  */

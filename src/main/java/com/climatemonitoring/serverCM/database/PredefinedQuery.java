@@ -7,7 +7,7 @@ import java.util.Hashtable;
  * Utility class for storing predefined SQL queries used in the Climate Monitoring application for easy access.
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see DbManager
  */
 public class PredefinedQuery {

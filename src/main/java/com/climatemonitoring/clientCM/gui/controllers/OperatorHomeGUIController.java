@@ -19,11 +19,11 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 /**
- * Controller class for the OperatorHomeGUI view.
- * It communicates with the ClientManager for performing various operations.
+ * Controller class for the <code>OperatorHomeGUI</code> view.
+ * It communicates with the <code>ClientManager</code> for performing various operations.
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see OperatorHomeGUI
  */
 public class OperatorHomeGUIController {

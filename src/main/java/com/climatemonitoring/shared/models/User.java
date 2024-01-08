@@ -7,20 +7,20 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 /**
- * The `User` class represents a registered operator in the Climate Monitoring application.
+ * The <code>User</code> class represents a registered operator in the Climate Monitoring application.
  * Each user is associated with a Climate Monitoring Center and has the ability to submit
  * climate surveys for specific points of interest within the center to a database.
  *
  * <p>
- * This class implements the Serializable interface to enable object serialization.
+ * This class implements the <code>Serializable</code> interface to enable object serialization.
  * </p>
  *
  * <p>
- * The `User` class encapsulates information such as the user's name, surname, email,
+ * The <code>User</code> class encapsulates information such as the user's name, surname, email,
  * unique identifier, fiscal code, hashed password, and the center ID to which the user is associated.
  * It provides methods to set and retrieve user information, as well as secure password handling
  * through hashing using the SHA-256 algorithm. The class also includes a method to check passwords securely.
- * Additionally, custom `equals` and `toString` methods are implemented for object comparison
+ * Additionally, custom <code>equals</code> and <code>toString</code> methods are implemented for object comparison
  * and string representation, respectively.
  * </p>
  *
@@ -30,7 +30,7 @@ import java.util.Objects;
  * </p>
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @serial 1L
  */
 public class User implements Serializable {

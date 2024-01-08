@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 /**
- * The `OperatorRegistrationGUIController` class serves as the controller for the Operator Registration GUI.
- * It manages user interactions and communicates with the server side of the application through the `ClientManager`.
+ * The <code>OperatorRegistrationGUIController</code> class serves as the controller for the Operator <code>Registration GUI</code>.
+ * It manages user interactions and communicates with the server side of the application through the <code>ClientManager</code>.
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see OperatorRegistrationGUI
  * @see ClientManager
  */

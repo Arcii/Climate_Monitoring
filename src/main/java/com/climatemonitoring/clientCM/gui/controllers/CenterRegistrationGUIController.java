@@ -18,11 +18,11 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 /**
- * Controller class for the CenterRegistrationGUI view.
- * Handles user interactions and manages data flow between the view and the ClientManager.
+ * Controller class for the <code>CenterRegistrationGUI</code> view.
+ * Handles user interactions and manages data flow between the view and the <code>ClientManager</code>.
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see ClientManager
  */
 public class CenterRegistrationGUIController {
@@ -386,6 +386,7 @@ public class CenterRegistrationGUIController {
      * @throws FieldFormatException If any form field is invalid.
      */
     private void checkCenterFormFields(String name, String address, String addressnumber, String cap, String city, String province) throws FieldFormatException {
+        //Validate each input field individually
         if(Objects.equals(name, "") ||
                 Objects.equals(address, "") ||
                 Objects.equals(addressnumber, "") ||
@@ -395,26 +396,32 @@ public class CenterRegistrationGUIController {
             System.err.println("Registration Center Form fields not filled.");
             throw new FieldFormatException("Prima di continuare con la registrazione devi inserire tutti i campi.");
         }else {
+            //Validate name input
             if (!ClientManager.isOnlyLettersAndSpacesString(name) && name.length() <= 50) {
                 System.err.println("Center name format not valid.");
                 throw new FieldFormatException("Il Nome del centro contiene caratteri non validi, deve essere una stringa di sole lettere.");
             } else {
+                //Validate address input
                 if (!ClientManager.isValidUtf8(address) && address.length() <= 50) {
                     System.err.println("Center Address format not UTF-8 valid.");
                     throw new FieldFormatException("L'indirizzo del centro contiene caratteri non validi, deve essere una stringa UTF-8 valida.");
                 } else {
+                    //Validate city input
                     if (!ClientManager.isOnlyLettersAndSpacesString(city) && city.length() <= 30) {
                         System.err.println("Center city format not valid.");
                         throw new FieldFormatException("La città del centro contiene caratteri non validi, deve essere una stringa di lettere.");
                     } else {
+                        //Validate province input
                         if (!ClientManager.isOnlyLettersString(province) && province.length() <= 30) {
                             System.err.println("Center province format not valid.");
                             throw new FieldFormatException("La province del centro contiene caratteri non validi deve essere una stringa di lettere senza spazi.");
                         } else {
+                            //Validate addressnumber input
                             if (!ClientManager.isOnlyNumbersString(addressnumber) && Integer.parseInt(addressnumber)<=1000) {
                                 System.err.println("Center address number format not valid.");
                                 throw new FieldFormatException("Il numero civico ha un formato non oorretto, deve essere un numero intero (MAX accettato 1000).");
                             } else {
+                                //Validate cap input
                                 if (!ClientManager.isValidCap(cap)) {
                                     System.err.println("Center cap format not valid.");
                                     throw new FieldFormatException("Il Cap ha un formato non corretto, deve essere un numero intero di 5 cifre.");

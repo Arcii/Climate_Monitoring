@@ -12,10 +12,10 @@ import java.util.ArrayList;
 
 /**
  * Controller class for the Point of Interest (POI) search and creation GUI during Monitoring Center registration.
- * Manages interactions between the PoiSearchForRegistrationGUI view and the underlying data model.
+ * Manages interactions between the <code>PoiSearchForRegistrationGUI</code> view and the underlying data model.
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see PoiSearchForRegistrationGUI
  */
 public class PoiSearchForRegistrationGUIController {

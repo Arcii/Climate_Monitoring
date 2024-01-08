@@ -14,12 +14,12 @@ import java.util.ArrayList;
  *
  * <p>
  * This interface extends the Remote interface, indicating its use in RMI (Remote Method Invocation).
- * The class 'RemoteDatabaseService' implements this interface and is included in the com.climatemonitoring.serverCM
+ * The class <code>RemoteDatabaseService</code> implements this interface and is included in the {@link com.climatemonitoring.serverCM}
  * module.
  * </p>
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see java.rmi.Remote
  * @see com.climatemonitoring.serverCM.network.RemoteDatabaseService
  */

@@ -15,11 +15,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
- * The `CenterSelectionGUIController` class serves as the controller for the `CenterSelectionGUI` view.
- * It manages user interactions and communicates with the server through the `ClientManager`.
+ * The <code>CenterSelectionGUIController</code> class serves as the controller for the <code>CenterSelectionGUI</code> view.
+ * It manages user interactions and communicates with the server through the <code>ClientManager</code>.
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see CenterSelectionGUI
  */
 public class CenterSelectionGUIController {

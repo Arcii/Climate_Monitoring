@@ -16,7 +16,7 @@ import java.util.Locale;
  * GUI window for visualizing comments related to a Point of Interest (POI).
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see CommentViewGUIController
  */
 public class CommentViewGUI extends JFrame {

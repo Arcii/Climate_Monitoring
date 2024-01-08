@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 /**
- * The `CenterSelectionGUI` class represents the view where the user selects or chooses to create
+ * The <code>CenterSelectionGUI</code> class represents the view where the user selects or chooses to create
  * their climate monitoring center. It displays a list of available monitoring centers and provides
  * options for the user to complete the registration process or register a new center.
  *
@@ -25,7 +25,7 @@ import java.util.Locale;
  * </p>
  *
  * @author Lorenzo Cattapan 726459  (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see CenterSelectionGUIController
  */
 public class CenterSelectionGUI extends JFrame {

@@ -16,11 +16,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
- * Controller class for managing the interaction between the PoiSearchResultGUI view and the underlying data.
+ * Controller class for managing the interaction between the <code>PoiSearchResultGUI</code> view and the underlying data.
  * Handles the display of search results, user actions, and navigation.
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see PoiSearchResultGUI
  */
 public class PoiSearchResultGUIController {

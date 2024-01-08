@@ -5,14 +5,14 @@ package com.climatemonitoring.clientCM.utils;
  * This exception is thrown when there is an issue with the format of a field.
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  */
 public class FieldFormatException extends Exception{
 
     /**
-     * Constructs a new instance of FieldFormatException with the specified detail message.
+     * Constructs a new instance of <code>FieldFormatException</code> with the specified detail message.
      *
-     * @param message The detail message, which is saved for later retrieval by the getMessage() method.
+     * @param message The detail message, which is saved for later retrieval by the <code>getMessage()</code> method.
      */
     public FieldFormatException(String message){
         super(message);

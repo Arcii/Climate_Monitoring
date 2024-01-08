@@ -18,13 +18,13 @@ import java.util.Locale;
  * Represents the window where the results of Points of Interests searches are visualized.
  *
  * <p>
- * This class extends JFrame and provides a graphical user interface for displaying
+ * This class extends <code>JFrame</code> and provides a graphical user interface for displaying
  * search results related to Points of Interests (POI). It includes a table to show
  * the details of the search results and buttons for user interactions.
  * </p>
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see PoiSearchResultGUIController
  */
 public class PoiSearchResultGUI extends JFrame {

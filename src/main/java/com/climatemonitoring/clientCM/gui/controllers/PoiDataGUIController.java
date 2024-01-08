@@ -15,12 +15,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
- * Controller class for the PoiDataGUI view.
+ * Controller class for the <code>PoiDataGUI</code> view.
  * Manages the interaction between the PoiDataGUI view and the underlying data model.
  * Handles button actions and updates the view based on the data model.
  *
  * @author Lorenzo Cattapan 726459 (Varese)
- * @version 1.0
+ * @version 0.9.0
  * @see PoiDataGUI
  * @see ClientManager
  */
